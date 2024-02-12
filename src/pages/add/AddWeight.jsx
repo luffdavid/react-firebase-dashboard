@@ -1,8 +1,12 @@
 import React from 'react'
+import Sidebar from '../../components/sidebar/Sidebar'
+import Navbar from '../../components/navbar/Navbar'
 
 const AddWeight = () => {
   return (
-    <div>AddWeight</div>
+    <div className="home">
+      HistoryWorkouts
+    </div>
   )
 }
 

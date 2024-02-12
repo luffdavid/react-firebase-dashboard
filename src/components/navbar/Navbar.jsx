@@ -9,14 +9,19 @@ import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { Avatar } from "@mui/material";
 
-const Navbar = () => {
+const Navbar = ({profileData}) => {
   const { dispatch } = useContext(DarkModeContext);
-  const {currentUser} = useContext(AuthContext)
-  console.log(currentUser);
+  console.log(profileData)
   return (
     <div className="navbar">
-      Eingeloggt als {currentUser.email}
+      {profileData ? (
+                        <div>
+                            <p>Eingeloggt als: {profileData.username}</p>
+                        </div> )
+                        : 
+                        ("loading")}
       <div className="wrapper">
         {/* <div className="search">
           <input type="text" placeholder="Search..." />
@@ -48,11 +53,9 @@ const Navbar = () => {
             <ListOutlinedIcon className="icon" />
           </div>
           <div className="item">
-            <img
-              src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
+            <Avatar
               className="avatar"
-            />
+            >{profileData?.displayName.charAt(0).toUpperCase()}</Avatar>
           </div>
         </div>
       </div>

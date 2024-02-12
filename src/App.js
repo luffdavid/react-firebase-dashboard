@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import Profile from "./pages/profile/Profile";
@@ -13,31 +13,65 @@ import Login from "./pages/login/Login";
 import New from "./pages/signup/New";
 import { userInputs } from "./formSource"; 
 import "./style/dark.scss";
+import Navbar from "./components/navbar/Navbar";
+import { doc, getDoc } from "@firebase/firestore";
+import { db } from "./firebase";
+import Sidebar from "./components/sidebar/Sidebar";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
+  const [profileData, setProfileData] = useState(null);
 
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
 
+
+  useEffect(() => {
+    const getProfileDetails = async () => {
+        const docRef = doc(db, "users", currentUser.uid);
+        const docSnap = await getDoc(docRef);
+        
+        if (docSnap.exists()) {
+            console.log("Document data:", docSnap.data());
+            setProfileData(docSnap.data()); // Setzen Sie den Zustand auf die Profildaten
+        } else {
+            console.log("No such document!");
+        }
+    };
+
+    if (currentUser) {
+        getProfileDetails();
+    }
+
+    return () => {
+        // Cleanup
+    };
+}, [currentUser]);
+
   return (
-    <div className={darkMode ? "app dark" : "app"}>
+    <div className={darkMode ? "app dark" : "app"}>            
       <BrowserRouter>
+      <div className="home">
+            <Sidebar />
+            <div className="homeContainer">
+                <Navbar profileData={profileData}/>    
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<New inputs={userInputs} />} />
           <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
-          <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
+          <Route path="/profile" element={<RequireAuth><Profile   profileData={profileData} /></RequireAuth>} />
           <Route path="/add/weight" element={<RequireAuth><AddWeight /></RequireAuth>} />
           <Route path="/add/workout" element={<RequireAuth><AddWorkout /></RequireAuth>} />
           <Route path="/history/workouts" element={<RequireAuth><HistoryWorkouts /></RequireAuth>} />
           <Route path="/history/weight" element={<RequireAuth><HistoryWeights /></RequireAuth>} />
           <Route path="/analyze/progress" element={<RequireAuth><Progress /></RequireAuth>} />
         </Routes>
+        </div>
+      </div>
       </BrowserRouter>
-    </div>
+      </div>
   );
 }
 

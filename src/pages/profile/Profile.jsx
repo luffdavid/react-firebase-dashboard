@@ -1,41 +1,9 @@
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
-import { doc, getDoc } from "firebase/firestore";
+
 import { AuthContext } from "../../context/AuthContext";
-import { useContext, useEffect, useState } from "react"; // useState hinzugefügt
-import { db } from "../../firebase";
+import { useContext, useEffect, useState } from "react"; 
 
-const Profile = () => {
-    const { currentUser } = useContext(AuthContext);
-    const [profileData, setProfileData] = useState(null); // Zustand hinzugefügt
-
-    useEffect(() => {
-        const getProfileDetails = async () => {
-            const docRef = doc(db, "users", currentUser.uid);
-            const docSnap = await getDoc(docRef);
-            
-            if (docSnap.exists()) {
-                console.log("Document data:", docSnap.data());
-                setProfileData(docSnap.data()); // Setzen Sie den Zustand auf die Profildaten
-            } else {
-                console.log("No such document!");
-            }
-        };
-
-        if (currentUser) {
-            getProfileDetails();
-        }
-
-        return () => {
-            // Cleanup
-        };
-    }, [currentUser]);
-
+const Profile = ({ profileData }) => {
     return (
-        <div className="home">
-            <Sidebar />
-            <div className="homeContainer">
-                <Navbar />
                 <div>
                     {profileData ? (
                         <div>
@@ -52,8 +20,6 @@ const Profile = () => {
                         <p>Loading...</p>
                     )}
                 </div>
-            </div>
-        </div>
     );
 };
 
