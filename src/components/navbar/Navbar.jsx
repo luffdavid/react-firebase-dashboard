@@ -8,21 +8,24 @@ import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutline
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
-
+  const {currentUser} = useContext(AuthContext)
+  console.log(currentUser);
   return (
     <div className="navbar">
+      Eingeloggt als {currentUser.email}
       <div className="wrapper">
-        <div className="search">
+        {/* <div className="search">
           <input type="text" placeholder="Search..." />
           <SearchOutlinedIcon />
-        </div>
+        </div> */}
         <div className="items">
           <div className="item">
             <LanguageOutlinedIcon className="icon" />
-            English
+            Language
           </div>
           <div className="item">
             <DarkModeOutlinedIcon

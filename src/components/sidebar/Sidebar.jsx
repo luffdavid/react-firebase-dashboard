@@ -11,78 +11,92 @@ import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
 import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
+import { getAuth, signOut } from "firebase/auth";
 
 const Sidebar = () => {
+
+
   const { dispatch } = useContext(DarkModeContext);
+  const navigate = useNavigate();  
+  const handleLogout  = (e) => {
+    e.preventDefault()
+    dispatch({type:"LOGOUT"})
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      localStorage.removeItem("user");
+      navigate("/login");
+    }).catch((error) => {
+      console.error(error);
+    });
+  }
+  
   return (
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">lamadmin</span>
+          <span className="logo">ME-Train</span>
         </Link>
       </div>
       <hr />
       <div className="center">
         <ul>
-          <p className="title">MAIN</p>
+          <p className="title">START</p>
+          <Link to="/" style={{ textDecoration: "none" }}>
           <li>
             <DashboardIcon className="icon" />
             <span>Dashboard</span>
           </li>
-          <p className="title">LISTS</p>
-          <Link to="/users" style={{ textDecoration: "none" }}>
+          </Link>
+          <p className="title">HISTORY</p>
+          <Link to="/history/workouts" style={{ textDecoration: "none" }}>
             <li>
               <PersonOutlineIcon className="icon" />
-              <span>Users</span>
+              <span>Workouts</span>
             </li>
           </Link>
-          <Link to="/products" style={{ textDecoration: "none" }}>
+          <Link to="/history/weight" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
-              <span>Products</span>
+              <span>Weight</span>
             </li>
           </Link>
-          <li>
-            <CreditCardIcon className="icon" />
-            <span>Orders</span>
-          </li>
-          <li>
-            <LocalShippingIcon className="icon" />
-            <span>Delivery</span>
-          </li>
-          <p className="title">USEFUL</p>
+          
+          <p className="title">ADD</p>
+          <Link to="/add/workout" style={{ textDecoration: "none" }}>
           <li>
             <InsertChartIcon className="icon" />
-            <span>Stats</span>
+            <span>Workouts</span>
           </li>
+          </Link>
+          <Link to="/add/weight" style={{ textDecoration: "none" }}>
           <li>
             <NotificationsNoneIcon className="icon" />
-            <span>Notifications</span>
+            <span>Weight measurement</span>
           </li>
-          <p className="title">SERVICE</p>
+          </Link>
+          <p className="title">ANALYTICS</p>
+          <Link to="/analyze/progress" style={{ textDecoration: "none" }}>
           <li>
             <SettingsSystemDaydreamOutlinedIcon className="icon" />
-            <span>System Health</span>
+            <span>Your Progress</span>
           </li>
-          <li>
-            <PsychologyOutlinedIcon className="icon" />
-            <span>Logs</span>
-          </li>
-          <li>
-            <SettingsApplicationsIcon className="icon" />
-            <span>Settings</span>
-          </li>
-          <p className="title">USER</p>
+          </Link>
+          <p className="title">PROFILE AND SETTINGS</p>
+          <Link to="/profile" style={{ textDecoration: "none" }}>
           <li>
             <AccountCircleOutlinedIcon className="icon" />
             <span>Profile</span>
           </li>
+          </Link>
           <li>
+            <button  onClick={handleLogout}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
+            </button>
+           
           </li>
         </ul>
       </div>

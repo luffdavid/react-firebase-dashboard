@@ -1,6 +1,4 @@
 import "./new.scss";
-import Sidebar from "../../components/sidebar/Sidebar";
-import Navbar from "../../components/navbar/Navbar";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useEffect, useState } from "react";
 import {
@@ -13,7 +11,7 @@ import {
 import { auth, db, storage } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
@@ -81,7 +79,7 @@ const New = ({ inputs, title }) => {
         ...data,
         timeStamp: serverTimestamp(),
       });
-      navigate(-1)
+      navigate("/login")
     } catch (err) {
       console.log(err);
     }
@@ -89,9 +87,8 @@ const New = ({ inputs, title }) => {
 
   return (
     <div className="new">
-      <Sidebar />
+     SIGNUP
       <div className="newContainer">
-        <Navbar />
         <div className="top">
           <h1>{title}</h1>
         </div>
@@ -136,6 +133,7 @@ const New = ({ inputs, title }) => {
               </button>
             </form>
           </div>
+          schon einen ACcount? Hier gehts zum <Link to="/login">Login</Link>
         </div>
       </div>
     </div>

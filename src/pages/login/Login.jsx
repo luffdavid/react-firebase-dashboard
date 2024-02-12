@@ -2,7 +2,7 @@ import { useContext, useState } from "react"
 import "./login.scss"
 import { signInWithEmailAndPassword} from "firebase/auth";
 import {auth} from "../../firebase";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {AuthContext} from "../../context/AuthContext";
 
 const Login = () => {
@@ -39,6 +39,7 @@ const Login = () => {
         <span>Wrong email or pw</span>
         )}
       </form>
+      Noch kein Account? Hier gehts zum <Link to="/signup">Signup</Link>
     </div>
   )
 }

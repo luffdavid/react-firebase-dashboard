@@ -15,9 +15,9 @@ const Widget = ({ type }) => {
   switch (type) {
     case "user":
       data = {
-        title: "USERS",
+        title: "ALL WORKOUTS",
         isMoney: false,
-        link: "See all users",
+        link: "See workout history",
         icon: (
           <PersonOutlinedIcon
             className="icon"
@@ -31,9 +31,9 @@ const Widget = ({ type }) => {
       break;
     case "order":
       data = {
-        title: "ORDERS",
+        title: "LAST WORKOUT",
         isMoney: false,
-        link: "View all orders",
+        link: "View last workout",
         icon: (
           <ShoppingCartOutlinedIcon
             className="icon"
@@ -47,9 +47,9 @@ const Widget = ({ type }) => {
       break;
     case "earning":
       data = {
-        title: "EARNINGS",
+        title: "WORKOUTS THIS MONTH",
         isMoney: true,
-        link: "View net earnings",
+        link: "View workouts this month",
         icon: (
           <MonetizationOnOutlinedIcon
             className="icon"
@@ -60,7 +60,7 @@ const Widget = ({ type }) => {
       break;
     case "balance":
       data = {
-        title: "BALANCE",
+        title: "CURRENT WEIGHT",
         isMoney: true,
         link: "See details",
         icon: (
