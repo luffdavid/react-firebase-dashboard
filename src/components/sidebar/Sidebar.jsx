@@ -15,15 +15,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 import { getAuth, signOut } from "firebase/auth";
-
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
+import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
+import { PRIMARY } from "../reusable/Main";
 const Sidebar = () => {
 
 
   const { dispatch } = useContext(DarkModeContext);
   const navigate = useNavigate();  
   const handleLogout  = (e) => {
-    e.preventDefault()
-    dispatch({type:"LOGOUT"})
+    window.location.reload();
+  dispatch({type:"LOGOUT"})
     const auth = getAuth();
     signOut(auth).then(() => {
       localStorage.removeItem("user");
@@ -37,7 +40,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
-          <span className="logo">ME-Train</span>
+          <span className="logo" style={{color:PRIMARY}}>ME-Train</span>
         </Link>
       </div>
       <hr />
@@ -53,13 +56,13 @@ const Sidebar = () => {
           <p className="title">HISTORY</p>
           <Link to="/history/workouts" style={{ textDecoration: "none" }}>
             <li>
-              <PersonOutlineIcon className="icon" />
+              <FitnessCenterIcon  className="icon" />
               <span>Workouts</span>
             </li>
           </Link>
           <Link to="/history/weight" style={{ textDecoration: "none" }}>
             <li>
-              <StoreIcon className="icon" />
+              <MonitorWeightIcon className="icon" />
               <span>Weight</span>
             </li>
           </Link>
@@ -67,20 +70,20 @@ const Sidebar = () => {
           <p className="title">ADD</p>
           <Link to="/add/workout" style={{ textDecoration: "none" }}>
           <li>
-            <InsertChartIcon className="icon" />
+            <FitnessCenterIcon className="icon" />
             <span>Workouts</span>
           </li>
           </Link>
           <Link to="/add/weight" style={{ textDecoration: "none" }}>
           <li>
-            <NotificationsNoneIcon className="icon" />
+            <MonitorWeightIcon className="icon" />
             <span>Weight measurement</span>
           </li>
           </Link>
           <p className="title">ANALYTICS</p>
           <Link to="/analyze/progress" style={{ textDecoration: "none" }}>
           <li>
-            <SettingsSystemDaydreamOutlinedIcon className="icon" />
+            <QueryStatsIcon className="icon" />
             <span>Your Progress</span>
           </li>
           </Link>
@@ -91,12 +94,9 @@ const Sidebar = () => {
             <span>Profile</span>
           </li>
           </Link>
-          <li>
-            <button  onClick={handleLogout}>
+          <li onClick={handleLogout}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
-            </button>
-           
           </li>
         </ul>
       </div>
