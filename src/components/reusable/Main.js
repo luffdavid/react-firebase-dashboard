@@ -1,1 +1,1 @@
-const PRIMARY = "#6439FF"
+export const PRIMARY = "#6439FF"

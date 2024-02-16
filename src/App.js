@@ -20,19 +20,14 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
 import {PRIMARY} from "./components/reusable/Main"
 function App() {
-  const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'));
-  const handleDarkModeToggle = () => {
-    setDarkMode(!darkMode);
-  };
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const { darkMode } = useContext(DarkModeContext);
   const theme = React.useMemo(
     () =>
       createTheme({
         palette: {
           mode: darkMode ? 'dark' : 'light',
           primary: {
-             //main: '#131313',
-            main: "#6439FF",
+            main: darkMode ? '#815eff' : "#6439FF",
           },
           type: 'light',
           background: {
@@ -77,7 +72,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-    <div>            
+     <div className={darkMode ? "app dark" : "app"}>          
       <BrowserRouter>
       <div className="home">
             {currentUser ? <Sidebar /> : <></>}
