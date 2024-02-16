@@ -1,6 +1,4 @@
-import "./new.scss";
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import {
   addDoc,
   collection,
@@ -12,18 +10,28 @@ import { auth, db, storage } from "../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { Link, useNavigate } from "react-router-dom";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Grid,
+  Box,
+  CircularProgress,
+} from "@mui/material";
+import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [data, setData] = useState({});
   const [per, setPerc] = useState(null);
-  const navigate = useNavigate()
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const uploadFile = () => {
       const name = new Date().getTime() + file.name;
 
-      console.log(name);
       const storageRef = ref(storage, file.name);
       const uploadTask = uploadBytesResumable(storageRef, file);
 
@@ -32,18 +40,7 @@ const New = ({ inputs, title }) => {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
           setPerc(progress);
-          switch (snapshot.state) {
-            case "paused":
-              console.log("Upload is paused");
-              break;
-            case "running":
-              console.log("Upload is running");
-              break;
-            default:
-              break;
-          }
         },
         (error) => {
           console.log(error);
@@ -58,8 +55,6 @@ const New = ({ inputs, title }) => {
     file && uploadFile();
   }, [file]);
 
-  console.log(data);
-
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -69,6 +64,7 @@ const New = ({ inputs, title }) => {
 
   const handleAdd = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await createUserWithEmailAndPassword(
         auth,
@@ -79,64 +75,95 @@ const New = ({ inputs, title }) => {
         ...data,
         timeStamp: serverTimestamp(),
       });
-      navigate("/login")
+      navigate("/login");
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="new">
-     SIGNUP
-      <div className="newContainer">
-        <div className="top">
-          <h1>{title}</h1>
-        </div>
-        <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
-          </div>
-          <div className="right">
-            <form onSubmit={handleAdd}>
-              <div className="formInput">
-                <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon" />
-                </label>
+    <Container maxWidth="xs">
+      <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Typography component="h1" variant="h5">
+          Sign up
+        </Typography>
+        <Typography variant="h5" component="h1" gutterBottom>
+          {title}
+        </Typography>
+        <Box component="div" sx={{ mt: 1 }}>
+          <Grid>
+            <Grid>
+              {inputs.map((input) => (
+                <TextField
+                  key={input.id}
+                  fullWidth
+                  id={input.id}
+                  label={input.label}
+                  variant="outlined"
+                  margin="normal"
+                  autoFocus
+                  type={input.type}
+                  placeholder={input.placeholder}
+                  onChange={handleInput}
+                  required
+                />
+              ))}
+               <Grid>
+              <label htmlFor="file">
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  component="span"
+                  startIcon={<DriveFolderUploadOutlinedIcon />}
+                >
+                  Upload Profile-Image
+                </Button>
                 <input
                   type="file"
                   id="file"
                   onChange={(e) => setFile(e.target.files[0])}
                   style={{ display: "none" }}
                 />
-              </div>
-
-              {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
-                  <label>{input.label}</label>
-                  <input
-                    id={input.id}
-                    type={input.type}
-                    placeholder={input.placeholder}
-                    onChange={handleInput}
+              </label>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  mt: 1,
+                }}
+              >
+                {file && (
+                  <img
+                    src={URL.createObjectURL(file)}
+                    alt="Uploaded File"
+                    style={{ maxWidth: "100%", height: "auto" }}
                   />
-                </div>
-              ))}
-              <button disabled={per !== null && per < 100} type="submit">
-                Send
-              </button>
-            </form>
-          </div>
-          schon einen ACcount? Hier gehts zum <Link to="/login">Login</Link>
-        </div>
-      </div>
-    </div>
+                )}
+              </Box>
+            </Grid>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+                disabled={loading || (per !== null && per < 100)}
+                onClick={handleAdd}
+              >
+                {loading ? <CircularProgress size={24} /> : "Register"}
+              </Button>
+              <Typography variant="body2" align="center">
+                Already have an account?{" "}
+                <Link to="/login" variant="body2">
+                  Login
+                </Link>
+              </Typography>
+            </Grid>
+          </Grid>
+        </Box>
+      </Box>
+    </Container>
   );
 };
 

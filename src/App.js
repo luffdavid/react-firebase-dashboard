@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import Profile from "./pages/profile/Profile";
@@ -17,10 +17,35 @@ import Navbar from "./components/navbar/Navbar";
 import { doc, getDoc } from "@firebase/firestore";
 import { db } from "./firebase";
 import Sidebar from "./components/sidebar/Sidebar";
-
+import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
+import {PRIMARY} from "./components/reusable/Main"
 function App() {
-  const { darkMode } = useContext(DarkModeContext);
-  const { currentUser } = useContext(AuthContext);
+  const [darkMode, setDarkMode] = useState(useMediaQuery('(prefers-color-scheme: dark)'));
+  const handleDarkModeToggle = () => {
+    setDarkMode(!darkMode);
+  };
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: darkMode ? 'dark' : 'light',
+          primary: {
+             //main: '#131313',
+            main: "#6439FF",
+          },
+          type: 'light',
+          background: {
+            default: darkMode ? '#131313' : 'rgb(242,241,246);',
+          },
+        },
+      }),
+      
+    [darkMode],
+  );
+
+
+  const {currentUser } = useContext(AuthContext);
   const [profileData, setProfileData] = useState(null);
 
   const RequireAuth = ({ children }) => {
@@ -51,12 +76,14 @@ function App() {
 }, [currentUser]);
 
   return (
-    <div className={darkMode ? "app dark" : "app"}>            
+    <ThemeProvider theme={theme}>
+    <div>            
       <BrowserRouter>
       <div className="home">
-            <Sidebar />
+            {currentUser ? <Sidebar /> : <></>}
             <div className="homeContainer">
-                <Navbar profileData={profileData}/>    
+            {currentUser ? <Navbar profileData={profileData}/>  : <></>}
+                   
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<New inputs={userInputs} />} />
@@ -72,6 +99,7 @@ function App() {
       </div>
       </BrowserRouter>
       </div>
+      </ThemeProvider>
   );
 }
 
