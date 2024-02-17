@@ -80,7 +80,7 @@ const New = ({ inputs }) => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="sm" sx={{minHeight:'100vh'}}>
       <Box sx={{ marginTop: 8, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <Box component="form" onSubmit={handleAdd} sx={{ mt: 1, mb:10, padding:'10px', WebkitBoxShadow:'4px 4px 10px 1px rgba(0, 0, 0, 0.47)', boxShadow:'2px 4px 10px 1px rgba(201, 201, 201, 0.47)', borderRadius:'10px' }}>
         <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>
