@@ -1,17 +1,17 @@
 import { FormControl, InputLabel, Select, MenuItem, TextField, Button, Typography, Grid } from "@mui/material";
-
+import "../../components/reusable/Reusable.scss"
 const AddWorkout = () => {
   return (
     <div style={{marginLeft:'3%'}}>
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" >
         <b>Add Workout</b>
       </Typography>
-      <div style={{width:'80%', display:'flex', justifyContent:'center'}}>
-      
+      <div className="widget-reusable" style={{width:'80%', display:'flex', justifyContent:'center'}}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
         <Grid item xs={12}>
-          <TextField fullWidth id="title" label="Title" />
+          <TextField 
+          fullWidth id="title" label="Title" />
         </Grid>
         </Grid>
         <Grid item xs={12} sm={6}>

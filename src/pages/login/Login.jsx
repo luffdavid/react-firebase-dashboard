@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { Typography, TextField, Button, Container, Box, Link as MuiLink } from "@mui/material";
 import "../../components/widget/widget.scss"
 import { PRIMARY } from "../../components/reusable/Main";
-
+import "../../components/reusable/Reusable.scss"
 const Login = ({darkmode}) => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
@@ -34,7 +34,7 @@ const Login = ({darkmode}) => {
     <div style={{height:'100vh'}}>
        <Container>
       <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Box  component="form" onSubmit={handleLogin} sx={{ mt: 1, padding:'10px', WebkitBoxShadow:'4px 4px 10px 1px rgba(0, 0, 0, 0.47)', boxShadow:'2px 4px 10px 1px rgba(201, 201, 201, 0.47)', borderRadius:'10px' }}>
+        <Box className="widget-reusable" component="form" onSubmit={handleLogin} sx={{ mt: 1}}>
         <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>
           Sign in to <span style={{color:PRIMARY}}>ME-TRAIN</span>
         </Typography>

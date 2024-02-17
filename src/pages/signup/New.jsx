@@ -21,7 +21,7 @@ import {
 } from "@mui/material";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { PRIMARY } from "../../components/reusable/Main";
-
+import "../../components/reusable/Reusable.scss"
 const New = ({ inputs }) => {
   const [file, setFile] = useState(null);
   const [data, setData] = useState({});
@@ -82,7 +82,7 @@ const New = ({ inputs }) => {
   return (
     <Container maxWidth="sm" sx={{minHeight:'100vh'}}>
       <Box sx={{ marginTop: 8, display: "flex", flexDirection: "column", alignItems: "center" }}>
-        <Box component="form" onSubmit={handleAdd} sx={{ mt: 1, mb:10, padding:'10px', WebkitBoxShadow:'4px 4px 10px 1px rgba(0, 0, 0, 0.47)', boxShadow:'2px 4px 10px 1px rgba(201, 201, 201, 0.47)', borderRadius:'10px' }}>
+        <Box className="widget-reusable" component="form" onSubmit={handleAdd} sx={{ mt: 1, mb:10}}>
         <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>
           Create a new account for <span style={{color:PRIMARY}}>ME-TRAIN</span>
         </Typography>

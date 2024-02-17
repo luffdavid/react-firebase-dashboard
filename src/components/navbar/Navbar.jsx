@@ -16,12 +16,6 @@ const Navbar = ({profileData}) => {
   console.log(profileData)
   return (
     <div className="navbar">
-      {profileData ? (
-                        <div>
-                            <p>Eingeloggt als: {profileData.username}</p>
-                        </div> )
-                        : 
-                        ("loading")}
       <div className="wrapper">
         {/* <div className="search">
           <input type="text" placeholder="Search..." />
