@@ -25,15 +25,17 @@ const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const navigate = useNavigate();  
   const handleLogout  = (e) => {
-    window.location.reload();
-  dispatch({type:"LOGOUT"})
+    dispatch({type:"LOGOUT"})
     const auth = getAuth();
     signOut(auth).then(() => {
       localStorage.removeItem("user");
       navigate("/login");
+
     }).catch((error) => {
       console.error(error);
     });
+    window.location.reload();
+  
   }
   
   return (

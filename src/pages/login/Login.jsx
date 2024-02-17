@@ -4,7 +4,8 @@ import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Typography, TextField, Button, Container, Box, Link as MuiLink } from "@mui/material";
-import {PRIMARY} from "../../components/reusable/Main"
+import "../../components/widget/widget.scss"
+import { PRIMARY } from "../../components/reusable/Main";
 
 const Login = ({darkmode}) => {
   const [error, setError] = useState(false);
@@ -33,10 +34,10 @@ const Login = ({darkmode}) => {
     <div style={{height:'100vh'}}>
        <Container>
       <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography component="h1" variant="h5">
-          Sign in
+        <Box  component="form" onSubmit={handleLogin} sx={{ mt: 1, padding:'10px', WebkitBoxShadow:'4px 4px 10px 1px rgba(0, 0, 0, 0.47)', boxShadow:'2px 4px 10px 1px rgba(201, 201, 201, 0.47)', borderRadius:'10px' }}>
+        <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>
+          Sign in to <span style={{color:PRIMARY}}>ME-TRAIN</span>
         </Typography>
-        <Box component="form" onSubmit={handleLogin} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
