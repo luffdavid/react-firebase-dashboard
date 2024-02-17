@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { Typography, TextField, Button, Container, Box, Link as MuiLink } from "@mui/material";
 import {PRIMARY} from "../../components/reusable/Main"
 
-const Login = () => {
+const Login = ({darkmode}) => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +30,8 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="xs">
+    <div style={{height:'100vh'}}>
+       <Container>
       <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Typography component="h1" variant="h5">
           Sign in
@@ -79,6 +80,8 @@ const Login = () => {
         </Typography>
       </Box>
     </Container>
+    </div>
+   
   );
 };
 
