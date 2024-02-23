@@ -197,7 +197,7 @@ const AddWorkout = () => {
       </Grid>
     </Box>
     {success && (
-      <AddSuccess type={"Workout"} />
+      <AddSuccess type={"Workout saved!"} />
     )}
     </div>
   );

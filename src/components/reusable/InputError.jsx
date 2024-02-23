@@ -5,7 +5,7 @@ const InputError = ({title }) => {
   return (
     <div>
         <Alert severity="error">
-            Error: {title}
+            {title}
         </Alert>
     </div>
   )

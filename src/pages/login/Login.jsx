@@ -3,29 +3,34 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { Typography, TextField, Button, Container, Box, Link as MuiLink } from "@mui/material";
+import { Typography, TextField, Button, Container, Box, Link as MuiLink, CircularProgress } from "@mui/material";
 import "../../components/widget/widget.scss"
 import { PRIMARY } from "../../components/reusable/Main";
 import "../../components/reusable/Reusable.scss"
+import InputError from "../../components/reusable/InputError";
 const Login = ({darkmode}) => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const { dispatch } = useContext(AuthContext);
 
   const handleLogin = (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        setIsLoading(false);
+        setError(null);
         dispatch({ type: "LOGIN", payload: user });
         navigate("/");
       })
       .catch((error) => {
         setError(true);
+        setIsLoading(false);
         console.error("Error signing in:", error.message);
       });
   };
@@ -68,10 +73,13 @@ const Login = ({darkmode}) => {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
             color="primary"
+            disabled={isLoading} 
           >
-            Sign In
+            {isLoading ? <CircularProgress size={24} /> : "Sign in"}
           </Button>
-          {error && <Typography variant="body2" color="error">Wrong email or password</Typography>}
+          {error && 
+          <InputError title={"Wrong email or password"} /> }
+
           <Typography variant="body2" sx={{ mt: 2, textAlign:'center'}}>
           {"Don't have an account? "}
           <MuiLink component={Link} to="/signup" variant="body2">

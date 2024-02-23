@@ -23,11 +23,16 @@ import {
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { PRIMARY } from "../../components/reusable/Main";
 import "../../components/reusable/Reusable.scss"
+import AddSuccess from "../../components/reusable/AddSuccess";
+import InputError from "../../components/reusable/InputError";
 const New = ({ inputs }) => {
   const [file, setFile] = useState(null);
   const [data, setData] = useState({});
   const [uploadProgress, setUploadProgress] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,6 +62,20 @@ const New = ({ inputs }) => {
     uploadFile();
   }, [file]);
 
+  const getFirebaseAuthErrorMessage = (errorCode) => {
+    switch (errorCode) {
+      case 'auth/invalid-email':
+        return 'Invalid email address!';
+      case "auth/email-already-in-use":
+        return 'Email already in use!';
+      case 'auth/weak-password':
+        return 'The password is too weak (At least 6 characters).';
+      default:
+        return 'An unknown  error occurred!';
+    }
+  };
+
+  
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
@@ -72,9 +91,19 @@ const New = ({ inputs }) => {
         ...data,
         timeStamp: serverTimestamp(),
       });
-      navigate("/login");
+      setSuccess(true);
+      setError(null);
+      setTimeout(() => {
+        setSuccess(false)
+      }, 4000)
+      setTimeout(() => {
+        navigate("/login");
+      }, 4000)
+    
     } catch (err) {
-      console.log(err);
+      const humanReadableError = getFirebaseAuthErrorMessage(err.code);
+      setError(humanReadableError);
+
     } finally {
       setLoading(false);
     }
@@ -135,6 +164,12 @@ const New = ({ inputs }) => {
           >
             {loading ? <CircularProgress size={24} /> : "Sign up"}
           </Button>
+          {error && (
+            <InputError title={error} /> )}
+{success && (
+  <AddSuccess type={"Your account has been created! You will be redirected to Login"}/>
+)}
+
           <Typography variant="body2" sx={{textAlign:'center'}}>
           {"Already have an account? "}
           <MuiLink component={Link} to="/login" variant="body2">

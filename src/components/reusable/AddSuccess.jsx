@@ -24,7 +24,7 @@ const AddSuccess = ({ type }) => {
       onClose={() => setIsVisible(false)}
       message={
         <span>
-          {`${type} saved! `}
+          {`${type} `}
          
         </span>
       }
