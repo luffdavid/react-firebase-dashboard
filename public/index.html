@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="darkLogo.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="Me-Train 2.0 Web-app" />
 
-<head>
-  <meta charset="utf-8" />
-  <meta name="description" content="Web site created using create-react-app" />
-  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Me-train 2.0">
-  <link rel="apple-touch-icon" href="icon.png">
+    <link rel="apple-touch-icon" href="darkLogo.jpg" />
+   <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
   <style>
     * {
       font-family: 'Nunito', sans-serif;
@@ -21,6 +24,13 @@
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <script>
+    // Vfullscreen mode safari
+    window.addEventListener("load", function() {
+      setTimeout(function(){
+        window.scrollTo(0, 1);
+      }, 0);
+    });
+  </script>
 </body>
-
 </html>
