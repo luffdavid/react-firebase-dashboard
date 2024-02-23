@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Snackbar } from '@mui/material';
+import { Alert, Snackbar } from '@mui/material';
 import { SUCCESS } from './Main';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
 
@@ -18,23 +18,21 @@ const AddSuccess = ({ type }) => {
   }, []);
 
   return (
-    <Snackbar
-      open={isVisible}
-      autoHideDuration={10000} // Zeit in Millisekunden, wie lange die Snackbar sichtbar sein soll
-      onClose={() => setIsVisible(false)}
-      message={
-        <span>
-          {`${type} `}
-         
-        </span>
-      }
-      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-      ContentProps={{
-        sx: {
-          background: SUCCESS
-        }
-      }}
-    />
+    <Snackbar 
+     open={isVisible}
+     autoHideDuration={10000}
+     onClose={() => setIsVisible(false)}
+     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+     >
+        <Alert
+          severity="success"
+          onClose={() => setIsVisible(false)}
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+         {type}
+        </Alert>
+    </Snackbar>
   );
 }
 
