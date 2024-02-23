@@ -132,7 +132,7 @@ const New = ({ inputs }) => {
             disabled={loading || (uploadProgress !== null && uploadProgress < 100)}
             sx={{ mt: 3, mb: 2 }}
           >
-            {loading ? <CircularProgress size={24} /> : "Register"}
+            {loading ? <CircularProgress size={24} /> : "Sign up"}
           </Button>
           <Typography variant="body2" align="center">
             Already have an account?{" "}

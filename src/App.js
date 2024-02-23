@@ -80,8 +80,8 @@ function App() {
             {currentUser ? <Navbar profileData={profileData}/>  : <></>}
                    
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<New inputs={userInputs} />} />
+          <Route path="/login"  element={!currentUser ? <Login/> : <Navigate to="/" />} />
+          <Route path="/signup" element={!currentUser ? <New inputs={userInputs} /> : <Navigate to="/" />} />
           <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
           <Route path="/profile" element={<RequireAuth><Profile   profileData={profileData} /></RequireAuth>} />
           <Route path="/add/weight" element={<RequireAuth><AddWeight /></RequireAuth>} />
