@@ -72,13 +72,14 @@ const Login = ({darkmode}) => {
             Sign In
           </Button>
           {error && <Typography variant="body2" color="error">Wrong email or password</Typography>}
-        </Box>
-        <Typography variant="body2" sx={{ mt: 2 }}>
+          <Typography variant="body2" sx={{ mt: 2, textAlign:'center'}}>
           {"Don't have an account? "}
           <MuiLink component={Link} to="/signup" variant="body2">
             Sign Up
           </MuiLink>
         </Typography>
+        </Box>
+        
       </Box>
     </Container>
     </div>

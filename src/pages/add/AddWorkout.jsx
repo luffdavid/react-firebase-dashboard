@@ -1,4 +1,4 @@
-import { FormControl, InputLabel, Select, MenuItem, TextField, Button, Typography, Grid, Box } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, TextField, Button, Typography, Grid, Box, CircularProgress } from "@mui/material";
 import "../../components/reusable/Reusable.scss"
 import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -10,23 +10,30 @@ import {
   setDoc,
 } from "firebase/firestore";
 import { auth, db, storage } from "../../firebase";
+import InputError from "../../components/reusable/InputError";
+import AddSuccess from "../../components/reusable/AddSuccess";
 const AddWorkout = () => {
 
   const {currentUser } = useContext(AuthContext);
   const [titleInput, setTitleInput] = useState(null);
-  const [dateInput, setDateInput] = useState(null);
+  const [dateInput, setDateInput] = useState("")
   const [startTimeInput, setStartTimeInput] = useState(null);
   const [endTimeInput, setEndTimeInput] = useState(null);
   const [exercisesAndWeightInput, setExercisesAndWeightInput] = useState(null);
   const [locationInput, setLocationInput] = useState(null);
   const [notesInput, setNotesInput] = useState(null);
+  const [error, setError] = useState(null); 
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleAdd = async (e) => {
     e.preventDefault();
-
-    // Erzeuge ein passendes Datum für Firestore
+    if(!isValidateInput()) {
+      return;
+    } else {
+      setIsLoading(true);
     const startDateTimeISO = new Date(`${dateInput}T${startTimeInput}:00`).toISOString();
-    const endDateTimeISO = new Date(`${dateInput}T${endTimeInput}:00`).toISOString();
+    const endDateTimeISO = new Date(`${dateInput}T${endTimeInput}:00`).toISOString(); 
 
     // Daten, die gespeichert werden sollen
     const workoutData = {
@@ -38,9 +45,7 @@ const AddWorkout = () => {
       location: locationInput,
       notes: notesInput,
       uid: currentUser.uid,
-
     };
-
     try {
        // Holen Sie die Referenz auf das Benutzerdokument
        const userDocRef = doc(db, "users", currentUser.uid);
@@ -56,11 +61,41 @@ const AddWorkout = () => {
       setExercisesAndWeightInput("");
       setLocationInput("");
       setNotesInput("");
+      setError(null); // Fehlerzustand zurücksetzen
+      setIsLoading(false);
+      setSuccess(true);
+      setTimeout(() => {
+        setSuccess(false)
+      }, 3000)
     } catch (error) {
       console.error("Fehler beim Hinzufügen des Workouts: ", error);
+      setError("Fehler beim Hinzufügen des Workouts: " + error.message); // Fehlermeldung setzen
+      setIsLoading(false);
     }
+  }
   };
 
+  //validating the input, e.g. date cannot be in past
+  const isValidateInput = () =>  {
+    const currentDate = new Date(Date.now()).toISOString();
+    const selectedDate = new Date(dateInput).toISOString();
+    const startDateTimeISO = new Date(`${dateInput}T${startTimeInput}:00`).toISOString();
+    const endDateTimeISO = new Date(`${dateInput}T${endTimeInput}:00`).toISOString(); 
+ 
+    // Überprüfe, ob das Datum in der Zukunft liegt
+    if (selectedDate > currentDate) {
+        setError('Workout date cannot be in the past.');
+        return false;
+    }
+    //starttime after oder equal  endtime?
+    if (startDateTimeISO >= endDateTimeISO) {
+      setError('Starttime of your workout cannot be after endtime. ');
+      return false;
+  }   
+
+    setError(null); // Fehlerzustand zurücksetzen, wenn keine Fehler vorhanden sind
+    return true; // Alle Validierungen bestanden
+}
 
   return (
     <div style={{marginLeft:'3%'}}>
@@ -144,12 +179,26 @@ const AddWorkout = () => {
           <Button 
           variant="contained"
            color="primary"
-           type="submit">
+           type="submit"
+           disabled={isLoading}
+           sx={{position:'relative'}}
+           >
+            {isLoading ? <CircularProgress size={24} />  : ''}
             Add Workout
           </Button>
         </Grid>
+        {error && ( // Fehlermeldung anzeigen, wenn ein Fehler vorhanden ist
+          <Grid item xs={12}>
+            <Typography variant="body2" color="error">
+              <InputError title={error} />
+            </Typography>
+          </Grid>
+        )}
       </Grid>
     </Box>
+    {success && (
+      <AddSuccess type={"Workout"} />
+    )}
     </div>
   );
 };

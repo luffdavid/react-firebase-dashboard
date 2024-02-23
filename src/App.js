@@ -29,6 +29,9 @@ function App() {
           primary: {
             main: darkMode ? '#815eff' : "#6439FF",
           },
+          // error: {
+          //   main: '#CF6679', // Ändere diese Farbe entsprechend deiner Präferenz
+          // },
           type: 'light',
           background: {
             default: darkMode ? '#131313' : 'rgb(242,241,246);',

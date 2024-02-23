@@ -18,6 +18,7 @@ import {
   Grid,
   Box,
   CircularProgress,
+  Link as MuiLink
 } from "@mui/material";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { PRIMARY } from "../../components/reusable/Main";
@@ -134,13 +135,14 @@ const New = ({ inputs }) => {
           >
             {loading ? <CircularProgress size={24} /> : "Sign up"}
           </Button>
-          <Typography variant="body2" align="center">
-            Already have an account?{" "}
-            <Link to="/login" variant="body2">
-              Login
-            </Link>
-          </Typography>
+          <Typography variant="body2" sx={{textAlign:'center'}}>
+          {"Already have an account? "}
+          <MuiLink component={Link} to="/login" variant="body2">
+          Login
+          </MuiLink>
+        </Typography>
         </Box>
+        
       </Box>
     </Container>
   );

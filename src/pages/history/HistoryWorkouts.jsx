@@ -1,12 +1,12 @@
-// HistoryWorkouts.js
-
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Typography } from '@mui/material';
-import { AuthContext } from '../../context/AuthContext';
 import { getWorkouts } from '../../services/api/workoutService';
+import { AuthContext } from '../../context/AuthContext';
+import { useWorkoutContext } from '../../context/workouts/WorkoutContext';
+
 const HistoryWorkouts = () => {
     const { currentUser } = useContext(AuthContext);
-    const [workouts, setWorkouts] = useState([]);
+    const { workouts, setWorkouts } = useWorkoutContext();
 
     useEffect(() => {
         const fetchWorkouts = async () => {
@@ -14,8 +14,10 @@ const HistoryWorkouts = () => {
             setWorkouts(workoutsData);
         };
 
-        fetchWorkouts();
-    }, [currentUser.uid]);
+        if (workouts.length === 0) { // Nur abrufen, wenn die Workouts noch nicht vorhanden sind
+            fetchWorkouts();
+        }
+    }, [currentUser.uid, workouts.length, setWorkouts]);
 
     return (
         <div style={{ marginLeft: '3%' }}>
