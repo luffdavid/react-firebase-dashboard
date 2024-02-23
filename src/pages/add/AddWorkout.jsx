@@ -38,12 +38,16 @@ const AddWorkout = () => {
       location: locationInput,
       notes: notesInput,
       uid: currentUser.uid,
+
     };
 
     try {
-      // Speichert das workoutData Objekt in der Firestore Collection 'workouts'
-      const docRef = await addDoc(collection(db, "workouts"), workoutData);
-      console.log("Document written with ID: ", docRef.id);
+       // Holen Sie die Referenz auf das Benutzerdokument
+       const userDocRef = doc(db, "users", currentUser.uid);
+
+      // Speichert das workoutData Objekt in der Firestore SubCollection von user: 'workouts' 
+  const workoutDocRef = await addDoc(collection(userDocRef, "workouts"), workoutData);
+  console.log("Document written with ID: ", workoutDocRef.id);
       // Optional: Zurücksetzen der Eingabefelder nach dem Hinzufügen
       setTitleInput("");
       setDateInput("");

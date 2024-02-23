@@ -6,7 +6,8 @@ const HistoryWeights = () => {
   return (
     <div className="home">
     <div className="homeContainer">
-      HistoryWorkouts
+      History of your Weight measurements
+
     </div>
   </div>
   )
