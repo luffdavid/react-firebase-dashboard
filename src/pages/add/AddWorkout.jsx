@@ -12,11 +12,17 @@ import {
 import { auth, db, storage } from "../../firebase";
 import InputError from "../../components/reusable/InputError";
 import AddSuccess from "../../components/reusable/AddSuccess";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { TimePicker } from '@mui/x-date-pickers/TimePicker';
+import dayjs from "dayjs";
+import { DatePicker } from "@mui/x-date-pickers";
+
 const AddWorkout = () => {
 
   const {currentUser } = useContext(AuthContext);
   const [titleInput, setTitleInput] = useState(null);
-  const [dateInput, setDateInput] = useState("")
+  const [dateInput, setDateInput] = useState(null)
   const [startTimeInput, setStartTimeInput] = useState(null);
   const [endTimeInput, setEndTimeInput] = useState(null);
   const [exercisesAndWeightInput, setExercisesAndWeightInput] = useState(null);
@@ -83,7 +89,7 @@ const AddWorkout = () => {
     const endDateTimeISO = new Date(`${dateInput}T${endTimeInput}:00`).toISOString(); 
  
     // Überprüfe, ob das Datum in der Zukunft liegt
-    if (selectedDate > currentDate) {
+    if (dayjs(selectedDate).isAfter(currentDate)) {
         setError('Workout date cannot be in the past.');
         return false;
     }
@@ -107,47 +113,58 @@ const AddWorkout = () => {
         <Grid item xs={12} sm={6}>
         <Grid item xs={12}>
           <TextField 
-          fullWidth 
-          id="title"
-           label="Title"
-           required
-           value={titleInput}
-           onChange={(e) => setTitleInput(e.target.value)} />
+                fullWidth 
+                id="title"
+                label="Title"
+                required
+                value={titleInput}
+                onChange={(e) => setTitleInput(e.target.value)} />
         </Grid>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField 
-          fullWidth
-          id="date"
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
           label="Date"
-          type="date"
-          required
-          InputLabelProps={{ shrink: true }}
           value={dateInput} 
           onChange={(e) => setDateInput(e.target.value)}
+          slotProps={{
+            textField: {
+              required: true,
+            },
+          }}
           />
+        </LocalizationProvider>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField 
-          fullWidth
-          id="start-time"
-          label="Start Time"
-          type="time"
-          required
-          InputLabelProps={{ shrink: true }}
-          value={startTimeInput} 
-          onChange={(e) => setStartTimeInput(e.target.value)} />
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <TimePicker
+            label="Start time"
+            required
+            value={startTimeInput} 
+            onChange={(e) => setStartTimeInput(e.target.value)} 
+            slotProps={{
+              textField: {
+                required: true,
+              },
+            }}
+            />
+        </LocalizationProvider>
+        
         </Grid>
         <Grid item xs={12} sm={6}>
-          <TextField 
-          fullWidth 
-          id="end-time"
-          label="End Time"
-           type="time"
-           required
-            InputLabelProps={{ shrink: true }}
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <TimePicker
+            label="End time"
+            required
             value={endTimeInput} 
-            onChange={(e) => setEndTimeInput(e.target.value)} /> 
+            onChange={(e) => setEndTimeInput(e.target.value)}
+            slotProps={{
+              textField: {
+                required: true,
+              },
+            }} /> 
+        </LocalizationProvider>
+           
         </Grid>
         <Grid item xs={12}>
           <TextField 

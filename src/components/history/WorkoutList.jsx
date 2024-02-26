@@ -5,6 +5,7 @@ import {PRIMARY} from "../reusable/Main"
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import dayjs from 'dayjs';
 
 const WorkoutList = ({workouts}) => {
   return (
@@ -39,7 +40,7 @@ const WorkoutList = ({workouts}) => {
                             component="span"
                             variant="body2"
                             >
-                                {workout.date} <br />
+                                {dayjs(workout.date).format('DD/MM/YYYY')} <br />
                                 {workout.start} <br />
                                 {workout.end} <br />
                             </Typography>
