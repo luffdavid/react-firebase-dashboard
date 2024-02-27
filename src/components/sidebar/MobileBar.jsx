@@ -16,12 +16,10 @@ export default function Navbar() {
   React.useEffect(() => {
     if (currentPath === '/') {
       setValue('Dashboard');
-    } else if (currentPath === '/history/workouts') {
-      setValue('History');
-    } else if (currentPath === '/add/workout') {
-      setValue('Add');
-    } else if (currentPath === '/analyze/progress') {
+    } else if (currentPath.startsWith('/progress')) {
       setValue('Progress');
+    } else if (currentPath.startsWith('/add')) {
+      setValue('Add');
     } else if (currentPath === '/profile') {
       setValue('Profile');
     }
@@ -42,9 +40,9 @@ export default function Navbar() {
         />
              <BottomNavigationAction
                 component={Link}
-                to="/history/workouts"
-                label="History"
-                value="History"
+                to="/progress/workouts"
+                label="Progress"
+                value="Progress"
                 icon={<FitnessCenterIcon />}
         />
             <BottomNavigationAction
@@ -53,13 +51,6 @@ export default function Navbar() {
                 label="Add"
                 value="Add"
                 icon={<AddCircleOutlineOutlinedIcon />}
-        />
-            <BottomNavigationAction
-                component={Link}
-                to="/analyze/progress"
-                label="Progress"
-                value="Progress"
-                icon={<QueryStatsIcon /> }
         />
              <BottomNavigationAction
                 component={Link}

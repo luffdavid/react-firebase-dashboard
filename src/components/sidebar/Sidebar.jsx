@@ -41,11 +41,11 @@ const logout = useLogout()
                  </li>
               </MuiLink>
 
-          <p className="title">HISTORY</p>
+          <p className="title">PROGRESS</p>
               <MuiLink component={Link} to="/history/workouts" style={{ textDecoration: "none" }}>
                   <li>
                     <FitnessCenterIcon  className="icon" />
-                    <span>Workout-Log</span>
+                    <span>Your Progress</span>
                   </li>
               </MuiLink>
           
@@ -54,14 +54,6 @@ const logout = useLogout()
                   <li>
                     <AddCircleOutlineOutlinedIcon className="icon" />
                     <span>Workouts</span>
-                </li>
-              </MuiLink>
-
-          <p className="title">ANALYTICS</p>
-              <MuiLink component={Link} to="/analyze/progress" style={{ textDecoration: "none" }}>
-                <li>
-                  <QueryStatsIcon className="icon" />
-                  <span>Your Progress</span>
                 </li>
               </MuiLink>
           

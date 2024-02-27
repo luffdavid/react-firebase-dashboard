@@ -5,10 +5,9 @@ import { AuthContext } from "./context/AuthContext";
 import Profile from "./pages/profile/Profile";
 import AddWeight from "./pages/add/AddWeight";
 import AddWorkout from "./pages/add/AddWorkout";
-import HistoryWorkouts from "./pages/history/HistoryWorkouts";
-import HistoryWeights from "./pages/history/HistoryWeights";
-import Progress from "./pages/analytics/Progress";
-import Home from "./pages/start/Home";
+import HistoryWorkouts from "./pages/progress/HistoryWorkouts";
+import HistoryWeights from "./pages/progress/HistoryWeights";
+import Home from "./pages/dashboard/Home";
 import Login from "./pages/login/Login";
 import New from "./pages/signup/New";
 import { userInputs } from "./formSource"; 
@@ -103,11 +102,10 @@ function App() {
           <Route path="/signup" element={!currentUser ? <New inputs={userInputs} /> : <Navigate to="/" />} />
           <Route path="/" element={<RequireAuth><Home profileData={profileData}/></RequireAuth>} />
           <Route path="/profile" element={<RequireAuth><Profile   profileData={profileData} /></RequireAuth>} />
-          <Route path="/add/weight" element={<RequireAuth><AddWeight /></RequireAuth>} />
           <Route path="/add/workout" element={<RequireAuth><AddWorkout /></RequireAuth>} />
-          <Route path="/history/workouts" element={<RequireAuth><HistoryWorkouts /></RequireAuth>} />
-          <Route path="/history/weight" element={<RequireAuth><HistoryWeights /></RequireAuth>} />
-          <Route path="/analyze/progress" element={<RequireAuth><Progress /></RequireAuth>} />
+          
+          <Route path="/progress/workouts" element={<RequireAuth><HistoryWorkouts /></RequireAuth>} />
+          <Route path="/progress/weight" element={<RequireAuth><HistoryWeights /></RequireAuth>} />
         </Routes>
         </div>
       </div>
