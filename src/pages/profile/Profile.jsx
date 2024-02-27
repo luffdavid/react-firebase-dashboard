@@ -2,13 +2,12 @@
 import { Typography } from "@mui/material";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useEffect, useState } from "react"; 
+import PageHeaderMain from "../../components/heading/PageHeaderMain";
 
 const Profile = ({ profileData }) => {
     return (
         <div className="page">
-        <Typography variant="h4" >
-          <b>Profile</b>
-        </Typography>
+            <PageHeaderMain pageName={"Profile"} />
                     {profileData ? (
                         <div>
                             <p>Name: {profileData.displayName}</p>

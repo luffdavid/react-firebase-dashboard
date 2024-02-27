@@ -23,17 +23,7 @@ import ResponsiveNavigation from "./components/sidebar/ResponsiveNavigation";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const isTabletOrBigger = useMediaQuery('(min-width: 768px)');
-
-  // useEffect(() => {
-  //   // Setze die Inline-Stile für das body-Element
-  //   document.body.style.backgroundColor = darkMode ? '#131313' : 'rgb(242,241,246);'
-  //   // Um die Inline-Stile zu entfernen:
-  //   // document.body.style.backgroundColor = '';
-  //   return () => {
-  //     // Entferne die Inline-Stile, wenn die Komponente unmontiert wird
-  //     document.body.style.backgroundColor = '';
-  //   };
-  // }, []);
+  
   const theme = React.useMemo(
     () =>
       createTheme({

@@ -96,7 +96,14 @@
   left: 0;
   background-color: #fff; // Hintergrundfarbe der Sidebar
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Schatten
+  a {
+    color:#888; // Ändern Sie hier die Farbe des Links
+    text-decoration: none;
 
+    &:hover {
+      color: #555; // Ändern Sie hier die Farbe des Links bei Hover
+    }
+  }
   .top {
     padding: 20px;
     text-align: center;

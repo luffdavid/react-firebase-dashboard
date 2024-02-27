@@ -17,6 +17,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers";
+import PageHeaderMain from "../../components/heading/PageHeaderMain";
 
 const AddWorkout = () => {
 
@@ -101,9 +102,7 @@ const AddWorkout = () => {
 
   return (
     <div className="page">
-      <Typography variant="h4" >
-        <b>Add Workout</b>
-      </Typography>
+      <PageHeaderMain pageName={"Add"} />
       <Box className="widget-reusable" component="form" onSubmit={handleAdd} style={{width:'80%', display:'flex', justifyContent:'center'}}>
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>

@@ -4,6 +4,7 @@ import { getWorkouts } from '../../services/api/workoutService';
 import { AuthContext } from '../../context/AuthContext';
 import { useWorkoutContext } from '../../context/workouts/WorkoutContext';
 import WorkoutList from '../../components/history/WorkoutList';
+import PageHeaderMain from "../../components/heading/PageHeaderMain"
 
 const HistoryWorkouts = () => {
     const { currentUser } = useContext(AuthContext);
@@ -21,10 +22,7 @@ const HistoryWorkouts = () => {
 
     return (
         <div className="page">
-            <Typography variant="h4">
-                <b>History of your Workouts</b>
-            </Typography>
-            
+            <PageHeaderMain pageName={"Your Progress"} />
             <WorkoutList workouts= {workouts} />
         </div>
     );

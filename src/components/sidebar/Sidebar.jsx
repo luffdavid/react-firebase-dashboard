@@ -10,7 +10,7 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { PRIMARY } from "../reusable/Main";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import { useMediaQuery, Link as MuiLink} from "@mui/material";
+import { useMediaQuery} from "@mui/material";
 import  {useLogout } from "../../services/api/userService";
 
 const Sidebar = () => {
@@ -25,45 +25,44 @@ const logout = useLogout()
   return (
       <div className="sidebar">
       <div className="top">
-      <MuiLink component={Link}to="/" style={{ textDecoration: "none" }}>
+      <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo" style={{color:PRIMARY}}>workoutTracker</span>
-        </MuiLink>
+        </Link>
       </div>
-      <hr />
       
       <div className="center">
         <ul>
           <p className="title">START</p>
-              <MuiLink  component={Link} to="/" style={{ textDecoration: "none" }}>
+              <Link   to="/" style={{ textDecoration: "none" }}>
                  <li>
                     <DashboardIcon className="icon" />
                       <span>Dashboard</span>
                  </li>
-              </MuiLink>
+              </Link>
 
           <p className="title">PROGRESS</p>
-              <MuiLink component={Link} to="/history/workouts" style={{ textDecoration: "none" }}>
+              <Link  to="/progress/workouts" style={{ textDecoration: "none" }}>
                   <li>
                     <FitnessCenterIcon  className="icon" />
                     <span>Your Progress</span>
                   </li>
-              </MuiLink>
+              </Link>
           
           <p className="title">ADD</p>
-              <MuiLink component={Link} to="/add/workout" style={{ textDecoration: "none" }}>
+              <Link  to="/add/workout" style={{ textDecoration: "none" }}>
                   <li>
                     <AddCircleOutlineOutlinedIcon className="icon" />
                     <span>Workouts</span>
                 </li>
-              </MuiLink>
+              </Link>
           
           <p className="title">PROFILE AND SETTINGS</p>
-            <MuiLink component={Link} to="/profile" style={{ textDecoration: "none" }}>
+            <Link  to="/profile" style={{ textDecoration: "none" }}>
               <li>
                   <AccountCircleOutlinedIcon className="icon" />
                   <span>Profile</span>
               </li>
-            </MuiLink>
+            </Link>
           
           <li onClick={handleLogout}>
             <ExitToAppIcon className="icon" />
