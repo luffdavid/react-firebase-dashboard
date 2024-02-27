@@ -1,110 +1,84 @@
 import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
-import LocalShippingIcon from "@mui/icons-material/LocalShipping";
-import CreditCardIcon from "@mui/icons-material/CreditCard";
-import StoreIcon from "@mui/icons-material/Store";
-import InsertChartIcon from "@mui/icons-material/InsertChart";
-import SettingsApplicationsIcon from "@mui/icons-material/SettingsApplications";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
-import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
-import SettingsSystemDaydreamOutlinedIcon from "@mui/icons-material/SettingsSystemDaydreamOutlined";
-import PsychologyOutlinedIcon from "@mui/icons-material/PsychologyOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 import { getAuth, signOut } from "firebase/auth";
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { PRIMARY } from "../reusable/Main";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import { useMediaQuery } from "@mui/material";
-import MobileBar from './MobileBar'
+import { useMediaQuery, Link as MuiLink} from "@mui/material";
+import  {useLogout } from "../../services/api/userService";
 
 const Sidebar = () => {
 
-  const isTabletOrBigger = useMediaQuery('(min-width: 768px)');
-  const { dispatch } = useContext(DarkModeContext);
-  const navigate = useNavigate();  
+const logout = useLogout()
 
   // Logout user and redirect to login
   const handleLogout  = (e) => {
-    dispatch({type:"LOGOUT"})
-    const auth = getAuth();
-    signOut(auth).then(() => {
-      localStorage.removeItem("user");
-      navigate("/login");
-
-    }).catch((error) => {
-      console.error(error);
-    });
-    window.location.reload();
-  
+    logout();
   }
   
   return (
-    <>
-    {isTabletOrBigger ? (
       <div className="sidebar">
       <div className="top">
-        <Link to="/" style={{ textDecoration: "none" }}>
+      <MuiLink component={Link}to="/" style={{ textDecoration: "none" }}>
           <span className="logo" style={{color:PRIMARY}}>workoutTracker</span>
-        </Link>
+        </MuiLink>
       </div>
       <hr />
       
       <div className="center">
         <ul>
           <p className="title">START</p>
-              <Link to="/" style={{ textDecoration: "none" }}>
+              <MuiLink  component={Link} to="/" style={{ textDecoration: "none" }}>
                  <li>
                     <DashboardIcon className="icon" />
                       <span>Dashboard</span>
                  </li>
-              </Link>
+              </MuiLink>
 
           <p className="title">HISTORY</p>
-              <Link to="/history/workouts" style={{ textDecoration: "none" }}>
+              <MuiLink component={Link} to="/history/workouts" style={{ textDecoration: "none" }}>
                   <li>
                     <FitnessCenterIcon  className="icon" />
                     <span>Workout-Log</span>
                   </li>
-              </Link>
+              </MuiLink>
           
           <p className="title">ADD</p>
-              <Link to="/add/workout" style={{ textDecoration: "none" }}>
+              <MuiLink component={Link} to="/add/workout" style={{ textDecoration: "none" }}>
                   <li>
                     <AddCircleOutlineOutlinedIcon className="icon" />
                     <span>Workouts</span>
                 </li>
-              </Link>
+              </MuiLink>
 
           <p className="title">ANALYTICS</p>
-              <Link to="/analyze/progress" style={{ textDecoration: "none" }}>
+              <MuiLink component={Link} to="/analyze/progress" style={{ textDecoration: "none" }}>
                 <li>
                   <QueryStatsIcon className="icon" />
                   <span>Your Progress</span>
                 </li>
-              </Link>
+              </MuiLink>
           
           <p className="title">PROFILE AND SETTINGS</p>
-            <Link to="/profile" style={{ textDecoration: "none" }}>
+            <MuiLink component={Link} to="/profile" style={{ textDecoration: "none" }}>
               <li>
                   <AccountCircleOutlinedIcon className="icon" />
                   <span>Profile</span>
               </li>
-            </Link>
+            </MuiLink>
           
           <li onClick={handleLogout}>
             <ExitToAppIcon className="icon" />
-            <span>Logout</span>
+            <span style={{color:'red'}}>Logout</span>
           </li>
-        </ul>
-      </div>
-
-      <div className="bottom">
+          {/* <li>
+            <div className="bottom">
         <div
           className="colorOption"
           onClick={() => dispatch({ type: "LIGHT" })}
@@ -114,13 +88,13 @@ const Sidebar = () => {
           onClick={() => dispatch({ type: "DARK" })}
         ></div>
       </div>
+          </li> */}
+        </ul>
+      </div>
+
+      
     </div>
-    ) : (
-      <MobileBar />
-    )}
-    </>
-    
-  );
+    );
 };
 
 export default Sidebar;

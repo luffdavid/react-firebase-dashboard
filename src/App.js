@@ -20,6 +20,7 @@ import Sidebar from "./components/sidebar/Sidebar";
 import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
 import {PRIMARY} from "./components/reusable/Main"
 import MobileBar from "./components/sidebar/MobileBar";
+import ResponsiveNavigation from "./components/sidebar/ResponsiveNavigation";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const isTabletOrBigger = useMediaQuery('(min-width: 768px)');
@@ -92,7 +93,7 @@ function App() {
       <BrowserRouter>
       <div className="">
         {/* //home */}
-             {currentUser ? <Sidebar /> : <></>} 
+             {currentUser ? <ResponsiveNavigation  /> : <></>} 
             {/* {currentUser ? <MobileBar/> : <></>} */}
             <div className="homeContainer">
             {currentUser ? <Navbar profileData={profileData}/>  : <></>}

@@ -54,5 +54,11 @@
     height: 100vh;
     max-width: 100%;
     margin-left: 5%;
+
+    // = isTabletOrBigger
+    @media (min-width: 768px) {
+      height: 100vh;
+      max-width: 100%;
+      margin-left: 290px;
   }
-  
+}
