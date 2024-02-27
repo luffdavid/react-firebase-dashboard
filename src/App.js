@@ -23,20 +23,17 @@ import MobileBar from "./components/sidebar/MobileBar";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const isTabletOrBigger = useMediaQuery('(min-width: 768px)');
-  const [pageClass, setPageClass] = useState(isTabletOrBigger ? 'wide' : 'narrow');
-
-  // const handleMediaQueryChange = (matches) => {
-  //   setPageClass(matches ? 'wide' : 'narrow');
-  // };
 
   // useEffect(() => {
-  //   const mediaQuery = window.matchMedia('(min-width: 768px)');
-  //   mediaQuery.addEventListener('change', handleMediaQueryChange);
+  //   // Setze die Inline-Stile für das body-Element
+  //   document.body.style.backgroundColor = darkMode ? '#131313' : 'rgb(242,241,246);'
+  //   // Um die Inline-Stile zu entfernen:
+  //   // document.body.style.backgroundColor = '';
   //   return () => {
-  //     mediaQuery.removeEventListener('change', handleMediaQueryChange);
+  //     // Entferne die Inline-Stile, wenn die Komponente unmontiert wird
+  //     document.body.style.backgroundColor = '';
   //   };
   // }, []);
-
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -90,19 +87,20 @@ function App() {
 }, [currentUser]);
 
   return (
-     <div className={darkMode ? "app dark" : "app"}>
     <ThemeProvider theme={theme}>
+     <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
-      <div className="home">
-            {/* {currentUser ? <Sidebar /> : <></>} */}
-            {currentUser ? <Sidebar /> : <></>}
+      <div className="">
+        {/* //home */}
+             {currentUser ? <Sidebar /> : <></>} 
+            {/* {currentUser ? <MobileBar/> : <></>} */}
             <div className="homeContainer">
             {currentUser ? <Navbar profileData={profileData}/>  : <></>}
                    
         <Routes>
           <Route path="/login"  element={!currentUser ? <Login/> : <Navigate to="/" />} />
           <Route path="/signup" element={!currentUser ? <New inputs={userInputs} /> : <Navigate to="/" />} />
-          <Route path="/" element={<RequireAuth><Home /></RequireAuth>} />
+          <Route path="/" element={<RequireAuth><Home profileData={profileData}/></RequireAuth>} />
           <Route path="/profile" element={<RequireAuth><Profile   profileData={profileData} /></RequireAuth>} />
           <Route path="/add/weight" element={<RequireAuth><AddWeight /></RequireAuth>} />
           <Route path="/add/workout" element={<RequireAuth><AddWorkout /></RequireAuth>} />
@@ -113,9 +111,8 @@ function App() {
         </div>
       </div>
       </BrowserRouter>
-      </ThemeProvider>
       </div>
-      
+      </ThemeProvider>
   );
 }
 

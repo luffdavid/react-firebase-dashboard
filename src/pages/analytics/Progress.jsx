@@ -1,13 +1,14 @@
 import React from 'react'
-import Sidebar from '../../components/sidebar/Sidebar'
-import Navbar from '../../components/navbar/Navbar'
+import { Typography } from '@mui/material'
+import QueryStatsIcon from '@mui/icons-material/QueryStats';
 
 const Progress = () => {
   return (
-<div className="home">
-
-        HistoryWorkouts
-      </div>
+    <div className="page">
+      <Typography variant="h4" >
+        <b>Your Progress</b>
+      </Typography>
+    </div>
 
   )
 }

@@ -20,7 +20,7 @@ const HistoryWorkouts = () => {
     }, [currentUser.uid, workouts.length, setWorkouts]);
 
     return (
-        <div style={{ marginLeft: '3%' }}>
+        <div className="page">
             <Typography variant="h4">
                 <b>History of your Workouts</b>
             </Typography>

@@ -100,7 +100,7 @@ const AddWorkout = () => {
 }
 
   return (
-    <div style={{marginLeft:'3%'}}>
+    <div className="page">
       <Typography variant="h4" >
         <b>Add Workout</b>
       </Typography>
