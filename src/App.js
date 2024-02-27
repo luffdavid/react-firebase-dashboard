@@ -19,8 +19,24 @@ import { db } from "./firebase";
 import Sidebar from "./components/sidebar/Sidebar";
 import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
 import {PRIMARY} from "./components/reusable/Main"
+import MobileBar from "./components/sidebar/MobileBar";
 function App() {
   const { darkMode } = useContext(DarkModeContext);
+  const isTabletOrBigger = useMediaQuery('(min-width: 768px)');
+  const [pageClass, setPageClass] = useState(isTabletOrBigger ? 'wide' : 'narrow');
+
+  // const handleMediaQueryChange = (matches) => {
+  //   setPageClass(matches ? 'wide' : 'narrow');
+  // };
+
+  // useEffect(() => {
+  //   const mediaQuery = window.matchMedia('(min-width: 768px)');
+  //   mediaQuery.addEventListener('change', handleMediaQueryChange);
+  //   return () => {
+  //     mediaQuery.removeEventListener('change', handleMediaQueryChange);
+  //   };
+  // }, []);
+
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -74,10 +90,11 @@ function App() {
 }, [currentUser]);
 
   return (
+     <div className={darkMode ? "app dark" : "app"}>
     <ThemeProvider theme={theme}>
-     <div className={darkMode ? "app dark" : "app"}>          
       <BrowserRouter>
       <div className="home">
+            {/* {currentUser ? <Sidebar /> : <></>} */}
             {currentUser ? <Sidebar /> : <></>}
             <div className="homeContainer">
             {currentUser ? <Navbar profileData={profileData}/>  : <></>}
@@ -96,8 +113,9 @@ function App() {
         </div>
       </div>
       </BrowserRouter>
-      </div>
       </ThemeProvider>
+      </div>
+      
   );
 }
 

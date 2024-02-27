@@ -22,15 +22,18 @@ const AddWorkout = () => {
 
   const {currentUser } = useContext(AuthContext);
   const [titleInput, setTitleInput] = useState(null);
-  const [dateInput, setDateInput] = useState(null)
-  const [startTimeInput, setStartTimeInput] = useState(null);
-  const [endTimeInput, setEndTimeInput] = useState(null);
+  const [dateInput, setDateInput] = useState(dayjs())
+  const [startTimeInput, setStartTimeInput] = useState(dayjs().subtract(1, 'hour'));
+  const [endTimeInput, setEndTimeInput] = useState(dayjs());
   const [exercisesAndWeightInput, setExercisesAndWeightInput] = useState(null);
   const [locationInput, setLocationInput] = useState(null);
   const [notesInput, setNotesInput] = useState(null);
   const [error, setError] = useState(null); 
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  console.log("date:" + dayjs(dateInput).format())
+  console.log("starttime:" + dayjs(startTimeInput).format())
+  console.log("endtime:" + dayjs(endTimeInput).format())
 
   const handleAdd = async (e) => {
     e.preventDefault();
@@ -38,15 +41,12 @@ const AddWorkout = () => {
       return;
     } else {
       setIsLoading(true);
-    const startDateTimeISO = new Date(`${dateInput}T${startTimeInput}:00`).toISOString();
-    const endDateTimeISO = new Date(`${dateInput}T${endTimeInput}:00`).toISOString(); 
-
     // Daten, die gespeichert werden sollen
     const workoutData = {
       title: titleInput,
-      date: dateInput,
-      start: startDateTimeISO,
-      end: endDateTimeISO,
+      date: dateInput.format('L'),
+      start: dayjs(startTimeInput).format('LT'),
+      end: endTimeInput.format('LT'),
       exercisesAndWeight: exercisesAndWeightInput,
       location: locationInput,
       notes: notesInput,
@@ -61,9 +61,9 @@ const AddWorkout = () => {
   console.log("Document written with ID: ", workoutDocRef.id);
       // Optional: Zurücksetzen der Eingabefelder nach dem Hinzufügen
       setTitleInput("");
-      setDateInput("");
-      setStartTimeInput("");
-      setEndTimeInput("");
+      setDateInput(dayjs());
+      setStartTimeInput(dayjs().subtract(1, 'hour'));
+      setEndTimeInput(dayjs())
       setExercisesAndWeightInput("");
       setLocationInput("");
       setNotesInput("");
@@ -83,18 +83,14 @@ const AddWorkout = () => {
 
   //validating the input, e.g. date cannot be in past
   const isValidateInput = () =>  {
-    const currentDate = new Date(Date.now()).toISOString();
-    const selectedDate = new Date(dateInput).toISOString();
-    const startDateTimeISO = new Date(`${dateInput}T${startTimeInput}:00`).toISOString();
-    const endDateTimeISO = new Date(`${dateInput}T${endTimeInput}:00`).toISOString(); 
- 
-    // Überprüfe, ob das Datum in der Zukunft liegt
-    if (dayjs(selectedDate).isAfter(currentDate)) {
+    // Check if date is in the past
+    if (dayjs(dateInput).isAfter(dayjs()) 
+        || dayjs(startTimeInput).isAfter(dayjs()) 
+        || dayjs(endTimeInput).isAfter(dayjs())) {
         setError('Workout date cannot be in the past.');
         return false;
-    }
-    //starttime after oder equal  endtime?
-    if (startDateTimeISO >= endDateTimeISO) {
+    } 
+    if(dayjs(startTimeInput).isAfter(dayjs(endTimeInput))) {
       setError('Starttime of your workout cannot be after endtime. ');
       return false;
   }   

@@ -19,11 +19,17 @@ import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import QueryStatsIcon from '@mui/icons-material/QueryStats';
 import { PRIMARY } from "../reusable/Main";
+import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
+import { useMediaQuery } from "@mui/material";
+import MobileBar from './MobileBar'
+
 const Sidebar = () => {
 
-
+  const isTabletOrBigger = useMediaQuery('(min-width: 768px)');
   const { dispatch } = useContext(DarkModeContext);
   const navigate = useNavigate();  
+
+  // Logout user and redirect to login
   const handleLogout  = (e) => {
     dispatch({type:"LOGOUT"})
     const auth = getAuth();
@@ -39,69 +45,65 @@ const Sidebar = () => {
   }
   
   return (
-    <div className="sidebar">
+    <>
+    {isTabletOrBigger ? (
+      <div className="sidebar">
       <div className="top">
         <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo" style={{color:PRIMARY}}>workoutTracker</span>
         </Link>
       </div>
       <hr />
+      
       <div className="center">
         <ul>
           <p className="title">START</p>
-          <Link to="/" style={{ textDecoration: "none" }}>
-          <li>
-            <DashboardIcon className="icon" />
-            <span>Dashboard</span>
-          </li>
-          </Link>
+              <Link to="/" style={{ textDecoration: "none" }}>
+                 <li>
+                    <DashboardIcon className="icon" />
+                      <span>Dashboard</span>
+                 </li>
+              </Link>
+
           <p className="title">HISTORY</p>
-          <Link to="/history/workouts" style={{ textDecoration: "none" }}>
-            <li>
-              <FitnessCenterIcon  className="icon" />
-              <span>Workouts</span>
-            </li>
-          </Link>
-          <Link to="/history/weight" style={{ textDecoration: "none" }}>
-            <li>
-              <MonitorWeightIcon className="icon" />
-              <span>Weight</span>
-            </li>
-          </Link>
+              <Link to="/history/workouts" style={{ textDecoration: "none" }}>
+                  <li>
+                    <FitnessCenterIcon  className="icon" />
+                    <span>Workout-Log</span>
+                  </li>
+              </Link>
           
           <p className="title">ADD</p>
-          <Link to="/add/workout" style={{ textDecoration: "none" }}>
-          <li>
-            <FitnessCenterIcon className="icon" />
-            <span>Workouts</span>
-          </li>
-          </Link>
-          <Link to="/add/weight" style={{ textDecoration: "none" }}>
-          <li>
-            <MonitorWeightIcon className="icon" />
-            <span>Weight measurement</span>
-          </li>
-          </Link>
+              <Link to="/add/workout" style={{ textDecoration: "none" }}>
+                  <li>
+                    <AddCircleOutlineOutlinedIcon className="icon" />
+                    <span>Workouts</span>
+                </li>
+              </Link>
+
           <p className="title">ANALYTICS</p>
-          <Link to="/analyze/progress" style={{ textDecoration: "none" }}>
-          <li>
-            <QueryStatsIcon className="icon" />
-            <span>Your Progress</span>
-          </li>
-          </Link>
+              <Link to="/analyze/progress" style={{ textDecoration: "none" }}>
+                <li>
+                  <QueryStatsIcon className="icon" />
+                  <span>Your Progress</span>
+                </li>
+              </Link>
+          
           <p className="title">PROFILE AND SETTINGS</p>
-          <Link to="/profile" style={{ textDecoration: "none" }}>
-          <li>
-            <AccountCircleOutlinedIcon className="icon" />
-            <span>Profile</span>
-          </li>
-          </Link>
+            <Link to="/profile" style={{ textDecoration: "none" }}>
+              <li>
+                  <AccountCircleOutlinedIcon className="icon" />
+                  <span>Profile</span>
+              </li>
+            </Link>
+          
           <li onClick={handleLogout}>
             <ExitToAppIcon className="icon" />
             <span>Logout</span>
           </li>
         </ul>
       </div>
+
       <div className="bottom">
         <div
           className="colorOption"
@@ -113,6 +115,11 @@ const Sidebar = () => {
         ></div>
       </div>
     </div>
+    ) : (
+      <MobileBar />
+    )}
+    </>
+    
   );
 };
 
