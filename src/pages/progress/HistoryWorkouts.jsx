@@ -23,7 +23,10 @@ const HistoryWorkouts = () => {
     return (
         <div className="page">
             <PageHeaderMain pageName={"Your Progress"} />
-            <WorkoutList workouts= {workouts} />
+            <div style={{marginTop:'30px'}}>
+                <WorkoutList workouts= {workouts} />
+            </div>
+            
         </div>
     );
 };

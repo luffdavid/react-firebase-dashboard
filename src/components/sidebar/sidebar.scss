@@ -95,7 +95,9 @@
   top: 0;
   left: 0;
   background-color: #fff; // Hintergrundfarbe der Sidebar
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); // Schatten
+  // box-shadow: 0 0 10px #6439FF; // Schatten
+  border-right: 1px solid rgb(227, 227, 227);
+  border-radius: 25px;
   a {
     color:#888; // Ändern Sie hier die Farbe des Links
     text-decoration: none;
@@ -107,7 +109,7 @@
   .top {
     padding: 20px;
     text-align: center;
-    border-bottom: 1px solid #ccc; // Trennlinie
+    // border-bottom: 1px solid #ccc; // Trennlinie
     .logo {
       font-size: 20px;
       font-weight: bold;

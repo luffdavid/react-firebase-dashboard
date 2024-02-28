@@ -17,8 +17,7 @@ const Sidebar = () => {
 
 const logout = useLogout()
 
-  // Logout user and redirect to login
-  const handleLogout  = (e) => {
+  const handleLogout  = () => {
     logout();
   }
   

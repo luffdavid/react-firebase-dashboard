@@ -16,7 +16,7 @@ import Navbar from "./components/navbar/Navbar";
 import { doc, getDoc } from "@firebase/firestore";
 import { db } from "./firebase";
 import Sidebar from "./components/sidebar/Sidebar";
-import { ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
+import { CssBaseline, ThemeProvider, createTheme, useMediaQuery } from "@mui/material";
 import {PRIMARY} from "./components/reusable/Main"
 import MobileBar from "./components/sidebar/MobileBar";
 import ResponsiveNavigation from "./components/sidebar/ResponsiveNavigation";
@@ -78,6 +78,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
      <div className={darkMode ? "app dark" : "app"}>
       <BrowserRouter>
       <div className="">
@@ -85,7 +86,7 @@ function App() {
              {currentUser ? <ResponsiveNavigation  /> : <></>} 
             {/* {currentUser ? <MobileBar/> : <></>} */}
             <div className="homeContainer">
-            {currentUser ? <Navbar profileData={profileData}/>  : <></>}
+            {currentUser ? <Navbar profileData={profileData} isDarkMode={darkMode}/>  : <></>}
                    
         <Routes>
           <Route path="/login"  element={!currentUser ? <Login/> : <Navigate to="/" />} />

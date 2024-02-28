@@ -6,12 +6,13 @@ import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlin
 import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
 import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
 import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { Avatar } from "@mui/material";
 
-const Navbar = ({profileData}) => {
+const Navbar = ({profileData, isDarkMode}) => {
   const { dispatch } = useContext(DarkModeContext);
   console.log(profileData)
   return (
@@ -22,17 +23,26 @@ const Navbar = ({profileData}) => {
           <SearchOutlinedIcon />
         </div> */}
         <div className="items">
-          <div className="item">
+          {/* <div className="item">
             <LanguageOutlinedIcon className="icon" />
             Language
-          </div>
+          </div> */}
           <div className="item">
-            <DarkModeOutlinedIcon
+            {!isDarkMode ? (
+              <DarkModeOutlinedIcon
               className="icon"
               onClick={() => dispatch({ type: "TOGGLE" })}
             />
+            ) : (
+              <LightModeOutlinedIcon
+              className="icon"
+              onClick={() => dispatch({ type: "TOGGLE" })}
+              />
+
+            )}
+            
           </div>
-          <div className="item">
+          {/* <div className="item">
             <FullscreenExitOutlinedIcon className="icon" />
           </div>
           <div className="item">
@@ -45,7 +55,7 @@ const Navbar = ({profileData}) => {
           </div>
           <div className="item">
             <ListOutlinedIcon className="icon" />
-          </div>
+          </div> */}
           <div className="item">
             <Avatar
               className="avatar"
