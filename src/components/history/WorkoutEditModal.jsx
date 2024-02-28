@@ -1,5 +1,5 @@
 import { FitnessCenterTwoTone } from '@mui/icons-material';
-import { Avatar , Backdrop, Box, Button, Fade, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
+import { Avatar , Backdrop, Box, Button, Fade, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, TextField, Typography } from '@mui/material';
 import React from  'react';
 import { PRIMARY } from '../reusable/Main';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,14 +10,14 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
 import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 
-const WorkoutModal = ({open, handleClose, workout}) => {
+const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}) => {
   return (
     <div>
         <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
+        open={editOpen}
+        onClose={handleEditClose}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -26,7 +26,7 @@ const WorkoutModal = ({open, handleClose, workout}) => {
           },
         }}
       >
-        <Fade in={open}>
+        <Fade in={editOpen}>
           <Box sx={{
               borderRadius:'25px',
               position:'absolute',
@@ -45,7 +45,7 @@ const WorkoutModal = ({open, handleClose, workout}) => {
             {workout && (
                 <>
                   <Typography variant='h4'>
-                    Details for your Workout <span style={{color:PRIMARY}}>
+                    Edit your workout <span style={{color:PRIMARY}}>
                     {workout.title}
                     </span>
                   </Typography>
@@ -61,13 +61,11 @@ const WorkoutModal = ({open, handleClose, workout}) => {
             <EventOutlinedIcon  />
           </Avatar>
         </ListItemAvatar >
-        <ListItemText primary="Date" secondary={workout?.date ? (
-    <>
-      {workout.date}
-    </>
-  ) : (
-    <>Not provided</>
-  )} />     
+        <TextField  
+        label="Date"
+        defaultValue={workout?.date ? workout.date : "Not provided"} 
+        />
+
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -75,13 +73,10 @@ const WorkoutModal = ({open, handleClose, workout}) => {
       <LocationOnOutlinedIcon />
     </Avatar>
   </ListItemAvatar>
-  <ListItemText primary="Location" secondary={workout?.location ? (
-    <>
-      {workout.location}
-    </>
-  ) : (
-    <>Not provided</>
-  )} />
+  <TextField  
+        label="Location"
+        defaultValue={workout?.location ? workout.location : "Not provided"} 
+        />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -89,13 +84,10 @@ const WorkoutModal = ({open, handleClose, workout}) => {
       <FitnessCenterTwoTone />
     </Avatar>
   </ListItemAvatar>
-  <ListItemText primary="Exercises and Weight" secondary={workout?.exercisesAndWeight ? (
-    <>
-      {workout.exercisesAndWeight}
-    </>
-  ) : (
-    <>Not provided</>
-  )} />     
+  <TextField  
+        label="Exercises and Weight"
+        defaultValue={workout?.exercisesAndWeight ? workout.exercisesAndWeight : "Not provided"} 
+        />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -103,19 +95,19 @@ const WorkoutModal = ({open, handleClose, workout}) => {
             <NotesOutlinedIcon  />
           </Avatar>
         </ListItemAvatar >
-        <ListItemText primary="Notes" secondary={workout?.notes ? (
-    <>
-      {workout.notes}
-    </>
-  ) : (
-    <>Not provided</>
-  )} />     
+        <TextField  
+        label="Notes"
+        defaultValue={workout?.notes ? workout.notes : "Not provided"} 
+        />
       </ListItem>
     </List>
     <div style={{ position: 'absolute', bottom: '20px',right:'10px', width: '100%', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}> 
   <Button variant='contained'
    color='error'
-   onClick= {()=> handleClose()}>Close this view</Button>
+   onClick= {()=> handleEditClose()}>Close this view</Button>
+   <Button variant='contained'
+   color='primary'
+   onClick= {()=> handleSaveChanges()}>Save  changes</Button>
 </div>
 
     </Typography>
@@ -129,4 +121,4 @@ const WorkoutModal = ({open, handleClose, workout}) => {
   )
 }
 
-export default WorkoutModal
+export default WorkoutEditModal

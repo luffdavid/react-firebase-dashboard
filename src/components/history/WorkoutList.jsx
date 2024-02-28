@@ -10,14 +10,19 @@ import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
 import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 import WorkoutModal from './WorkoutModal';
+import WorkoutEditModal from './WorkoutEditModal';
 
 
 const WorkoutList = ({ workouts }) => {
   const [open, setOpen] = React.useState(false);
-  const [isEditMode, setIsEditMode] = React.useState(false);
+  const [editOpen, setEditOpen] = React.useState(false);
   const [workout, setWorkout] = React.useState(null);
   const handleOpen = (workout) => {
   setOpen(true);
+  setWorkout(workout);
+}
+const handleEdit = (workout) => {
+  setEditOpen(true);
   setWorkout(workout);
 }
   const handleClose = () =>{ 
@@ -25,10 +30,17 @@ const WorkoutList = ({ workouts }) => {
   setWorkout(null)
 };
 
-const handleEditClick = () =>{ 
-  setIsEditMode(true);
+const handleEditClose = () =>{ 
+  setEditOpen(false);
 setWorkout(null)
 };
+const handleSaveChanges = () =>{ 
+  setEditOpen(false);
+  //TO IMPLEMENT
+};
+
+
+
   // Sortiere die Workouts nach dem Datum absteigend (neuestes zuerst)
   const sortedWorkouts = workouts.sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
@@ -62,6 +74,11 @@ setWorkout(null)
                             sx={{ cursor: 'pointer' }}
                             onClick= {()=> handleOpen(workout)}
                              />
+                      </IconButton>
+                      <IconButton>
+                        <EditOutlinedIcon 
+                        sx={{ cursor: 'pointer' }}
+                        onClick={() => handleEdit(workout)} />
                       </IconButton>
                       <IconButton>
                         <DeleteIcon sx={{ cursor: 'pointer' }} />
@@ -106,8 +123,8 @@ setWorkout(null)
       </Grid>
       {/* MODAL */}
       <div>
-
-        <WorkoutModal  open={open} handleClose={handleClose} workout={workout} isEditMode={isEditMode} handleEditClick={handleEditClick} />
+        <WorkoutModal  open={open} handleClose={handleClose} workout={workout} />
+        <WorkoutEditModal editOpen={editOpen} handleEditClose={handleEditClose} handleSaveChanges={handleSaveChanges} workout={workout} />
     </div>
     </div>
   );
