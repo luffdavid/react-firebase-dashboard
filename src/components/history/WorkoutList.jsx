@@ -1,17 +1,21 @@
 import { FitnessCenterTwoTone } from '@mui/icons-material';
-import { Avatar, Backdrop, Box, Fade, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
-import React from 'react';
+import { Avatar , Backdrop, Box, Button, Fade, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
+import React from  'react';
 import { PRIMARY } from '../reusable/Main';
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import dayjs from 'dayjs';
-import WorkoutModal from '../history/WorkoutModal'
+import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
+import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
+import WorkoutModal from './WorkoutModal';
+
 
 const WorkoutList = ({ workouts }) => {
   const [open, setOpen] = React.useState(false);
+  const [isEditMode, setIsEditMode] = React.useState(false);
   const [workout, setWorkout] = React.useState(null);
-  console.log(workouts)
   const handleOpen = (workout) => {
   setOpen(true);
   setWorkout(workout);
@@ -19,6 +23,11 @@ const WorkoutList = ({ workouts }) => {
   const handleClose = () =>{ 
     setOpen(false);
   setWorkout(null)
+};
+
+const handleEditClick = () =>{ 
+  setIsEditMode(true);
+setWorkout(null)
 };
   // Sortiere die Workouts nach dem Datum absteigend (neuestes zuerst)
   const sortedWorkouts = workouts.sort((a, b) => {
@@ -55,18 +64,15 @@ const WorkoutList = ({ workouts }) => {
                              />
                       </IconButton>
                       <IconButton>
-                        <EditOutlinedIcon sx={{ cursor: 'pointer' }} />
-                      </IconButton>
-                      <IconButton>
                         <DeleteIcon sx={{ cursor: 'pointer' }} />
                       </IconButton>
                     </>
                   }>
                   <ListItemAvatar>
-                    <Avatar sx={{ bgcolor: PRIMARY }}>
-                      <FitnessCenterTwoTone />
+                    <Avatar sx={{backgroundColor:PRIMARY}}>
+                      <FitnessCenterTwoTone  />
                     </Avatar>
-                  </ListItemAvatar>
+                  </ListItemAvatar >
                   <ListItemText
                     primary={
                       <>
@@ -98,54 +104,10 @@ const WorkoutList = ({ workouts }) => {
           </div>
         ))}
       </Grid>
+      {/* MODAL */}
       <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={{
-              position:'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '70%',
-              height:'90%',
-              bgcolor: 'background.paper',
-              border: '2px solid #000',
-              boxShadow: 24,
-              p: 4}}
-              >
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-           
-              {workout && (
-                <>
-                   Details for {workout.title}
-                </>
-              )}
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-             {workout && (
-              <>
-              Date: {workout.date} <br />
-              from {workout.start} to {workout.end} <br />
-              Exercises and Weight:{workout.exercisesAndWeight} <br/>
-              Location: {workout.location} <br />
-              Notes: {workout.notes} <br />
-              </>)}
-            </Typography>
-          </Box>
-        </Fade>
-      </Modal>
+
+        <WorkoutModal  open={open} handleClose={handleClose} workout={workout} isEditMode={isEditMode} handleEditClick={handleEditClick} />
     </div>
     </div>
   );
