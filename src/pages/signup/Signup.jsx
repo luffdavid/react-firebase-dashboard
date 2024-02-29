@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  addDoc,
-  collection,
   doc,
   serverTimestamp,
   setDoc,
@@ -21,11 +19,12 @@ import {
   Link as MuiLink
 } from "@mui/material";
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
-import { PRIMARY } from "../../components/reusable/Main";
-import "../../components/reusable/Reusable.scss"
-import AddSuccess from "../../components/reusable/AddSuccess";
-import InputError from "../../components/reusable/InputError";
-const New = ({ inputs }) => {
+import { PRIMARY } from "../../components/general/Constants";
+import "../../components/general/Reusable.scss";
+import AddSuccess from "../../components/add/AddSuccess";
+import InputError from "../../components/general/InputError";
+const Signup = ({ inputs }) => {
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
   const [data, setData] = useState({});
   const [uploadProgress, setUploadProgress] = useState(null);
@@ -33,9 +32,10 @@ const New = ({ inputs }) => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
 
-  const navigate = useNavigate();
+ 
 
   useEffect(() => {
+    //uploads a profileImageFile to the server
     const uploadFile = () => {
       if (file) {
         const name = new Date().getTime() + file.name;
@@ -75,13 +75,13 @@ const New = ({ inputs }) => {
     }
   };
 
-  
   const handleInput = (e) => {
     const id = e.target.id;
     const value = e.target.value;
     setData((prev) => ({ ...prev, [id]: value }));
   };
 
+  //create new user
   const handleAdd = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -166,21 +166,20 @@ const New = ({ inputs }) => {
           </Button>
           {error && (
             <InputError title={error} /> )}
-{success && (
-  <AddSuccess type={"Your account has been created! You will be redirected to Login"}/>
-)}
-
-          <Typography variant="body2" sx={{textAlign:'center'}}>
-          {"Already have an account? "}
-          <MuiLink component={Link} to="/login" variant="body2">
-          Login
-          </MuiLink>
-        </Typography>
+          {success && (
+            <AddSuccess type={"Your account has been created! You will be redirected to Login"}/>
+          )}
+          
+            <Typography variant="body2" sx={{textAlign:'center'}}>
+              {"Already have an account? "}
+              <MuiLink component={Link} to="/login" variant="body2">
+                Login
+              </MuiLink>
+            </Typography>
         </Box>
-        
       </Box>
     </Container>
   );
 };
 
-export default New;
+export default Signup;

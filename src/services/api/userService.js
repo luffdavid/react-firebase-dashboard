@@ -21,6 +21,5 @@ export const useLogout = () => {
 
     window.location.reload();
   }
-
   return logout;
 }

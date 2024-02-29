@@ -4,10 +4,10 @@ import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Typography, TextField, Button, Container, Box, Link as MuiLink, CircularProgress } from "@mui/material";
-import "../../components/widget/widget.scss"
-import { PRIMARY } from "../../components/reusable/Main";
-import "../../components/reusable/Reusable.scss"
-import InputError from "../../components/reusable/InputError";
+import "../../components/general/widget/widget.scss"
+import "../../components/general/Reusable.scss"
+import { PRIMARY } from "../../components/general/Constants";
+import InputError from "../../components/general/InputError";
 const Login = ({darkmode}) => {
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");

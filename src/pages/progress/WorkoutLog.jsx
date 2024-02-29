@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react';
-import { Typography } from '@mui/material';
 import { getWorkouts } from '../../services/api/workoutService';
-import { AuthContext } from '../../context/AuthContext';
-import { useWorkoutContext } from '../../context/workouts/WorkoutContext';
-import WorkoutList from '../../components/history/WorkoutList';
-import PageHeaderMain from "../../components/heading/PageHeaderMain"
 
-const HistoryWorkouts = () => {
+import { useWorkoutContext } from '../../context/workouts/WorkoutContext';
+import WorkoutList from '../../components/progress/WorkoutList';
+import PageHeaderMain from "../../components/general/heading/PageHeaderMain"
+import { AuthContext } from '../../context/AuthContext';
+
+const WorkoutLog = () => {
     const { currentUser } = useContext(AuthContext);
     const { workouts, setWorkouts } = useWorkoutContext();
 
@@ -26,9 +26,8 @@ const HistoryWorkouts = () => {
             <div style={{marginTop:'30px'}}>
                 <WorkoutList workouts= {workouts} />
             </div>
-            
         </div>
     );
 };
 
-export default HistoryWorkouts;
+export default WorkoutLog;

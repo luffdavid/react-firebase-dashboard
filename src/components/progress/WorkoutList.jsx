@@ -1,52 +1,48 @@
-import { FitnessCenterTwoTone } from '@mui/icons-material';
-import { Avatar , Backdrop, Box, Button, Fade, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
+import { Avatar, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
 import React from  'react';
-import { PRIMARY } from '../reusable/Main';
+import { PRIMARY } from '../general/Constants';
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import dayjs from 'dayjs';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
-import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 import WorkoutModal from './WorkoutModal';
-import WorkoutEditModal from './WorkoutEditModal';
+import { FitnessCenterTwoTone } from '@mui/icons-material';
+import WorkoutEditModal from '../progress/WorkoutEditModal';
 
 
 const WorkoutList = ({ workouts }) => {
   const [open, setOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
   const [workout, setWorkout] = React.useState(null);
+  
   const handleOpen = (workout) => {
-  setOpen(true);
-  setWorkout(workout);
-}
+      setOpen(true);
+      setWorkout(workout);
+  }
 const handleEdit = (workout) => {
-  setEditOpen(true);
-  setWorkout(workout);
+      setEditOpen(true);
+      setWorkout(workout);
 }
   const handleClose = () =>{ 
-    setOpen(false);
-  setWorkout(null)
+      setOpen(false);
+      setWorkout(null)
 };
 
 const handleEditClose = () =>{ 
-  setEditOpen(false);
-setWorkout(null)
+    setEditOpen(false);
+    setWorkout(null)
 };
 const handleSaveChanges = () =>{ 
-  setEditOpen(false);
+    setEditOpen(false);
   //TO IMPLEMENT
 };
 
-
-
-  // Sortiere die Workouts nach dem Datum absteigend (neuestes zuerst)
+  // Sort workouts 
   const sortedWorkouts = workouts.sort((a, b) => {
     return new Date(b.date) - new Date(a.date);
   });
 
-  // Gruppiere die Workouts nach Monaten
+  // Group workouts by month
   const groupedWorkoutsByMonth = {};
   sortedWorkouts.forEach((workout) => {
     const monthYear = dayjs(workout.date).format('MMMM YYYY');

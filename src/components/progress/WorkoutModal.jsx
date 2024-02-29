@@ -1,23 +1,19 @@
 import { FitnessCenterTwoTone } from '@mui/icons-material';
-import { Avatar , Backdrop, Box, Button, Fade, Grid, IconButton, List, ListItem, ListItemAvatar, ListItemText, Modal, TextField, Typography } from '@mui/material';
+import { Avatar , Backdrop, Box, Button, Fade,List, ListItem, ListItemAvatar, ListItemText, Modal, Typography } from '@mui/material';
 import React from  'react';
-import { PRIMARY } from '../reusable/Main';
-import DeleteIcon from '@mui/icons-material/Delete';
-import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
-import dayjs from 'dayjs';
+import { PRIMARY } from '../general/Constants';
 import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
 import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
 import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
 
-const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}) => {
+const WorkoutModal = ({open, handleClose, workout}) => {
   return (
     <div>
         <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
-        open={editOpen}
-        onClose={handleEditClose}
+        open={open}
+        onClose={handleClose}
         closeAfterTransition
         slots={{ backdrop: Backdrop }}
         slotProps={{
@@ -26,7 +22,7 @@ const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}
           },
         }}
       >
-        <Fade in={editOpen}>
+        <Fade in={open}>
           <Box sx={{
               borderRadius:'25px',
               position:'absolute',
@@ -45,7 +41,7 @@ const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}
             {workout && (
                 <>
                   <Typography variant='h4'>
-                    Edit your workout <span style={{color:PRIMARY}}>
+                    Details for workout <span style={{color:PRIMARY}}>
                     {workout.title}
                     </span>
                   </Typography>
@@ -61,11 +57,13 @@ const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}
             <EventOutlinedIcon  />
           </Avatar>
         </ListItemAvatar >
-        <TextField  
-        label="Date"
-        defaultValue={workout?.date ? workout.date : "Not provided"} 
-        />
-
+        <ListItemText primary="Date" secondary={workout?.date ? (
+    <>
+      {workout.date}
+    </>
+  ) : (
+    <>Not provided</>
+  )} />     
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -73,10 +71,13 @@ const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}
       <LocationOnOutlinedIcon />
     </Avatar>
   </ListItemAvatar>
-  <TextField  
-        label="Location"
-        defaultValue={workout?.location ? workout.location : "Not provided"} 
-        />
+  <ListItemText primary="Location" secondary={workout?.location ? (
+    <>
+      {workout.location}
+    </>
+  ) : (
+    <>Not provided</>
+  )} />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -84,10 +85,13 @@ const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}
       <FitnessCenterTwoTone />
     </Avatar>
   </ListItemAvatar>
-  <TextField  
-        label="Exercises and Weight"
-        defaultValue={workout?.exercisesAndWeight ? workout.exercisesAndWeight : "Not provided"} 
-        />
+  <ListItemText primary="Exercises and Weight" secondary={workout?.exercisesAndWeight ? (
+    <>
+      {workout.exercisesAndWeight}
+    </>
+  ) : (
+    <>Not provided</>
+  )} />     
       </ListItem>
       <ListItem>
         <ListItemAvatar>
@@ -95,19 +99,19 @@ const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}
             <NotesOutlinedIcon  />
           </Avatar>
         </ListItemAvatar >
-        <TextField  
-        label="Notes"
-        defaultValue={workout?.notes ? workout.notes : "Not provided"} 
-        />
+        <ListItemText primary="Notes" secondary={workout?.notes ? (
+    <>
+      {workout.notes}
+    </>
+  ) : (
+    <>Not provided</>
+  )} />     
       </ListItem>
     </List>
     <div style={{ position: 'absolute', bottom: '20px',right:'10px', width: '100%', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}> 
   <Button variant='contained'
    color='error'
-   onClick= {()=> handleEditClose()}>Close this view</Button>
-   <Button variant='contained'
-   color='primary'
-   onClick= {()=> handleSaveChanges()}>Save  changes</Button>
+   onClick= {()=> handleClose()}>Close this view</Button>
 </div>
 
     </Typography>
@@ -121,4 +125,4 @@ const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}
   )
 }
 
-export default WorkoutEditModal
+export default WorkoutModal

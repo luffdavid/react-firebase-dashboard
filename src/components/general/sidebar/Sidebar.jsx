@@ -2,20 +2,14 @@ import "./sidebar.scss";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import { Link, useNavigate } from "react-router-dom";
-import { DarkModeContext } from "../../context/darkModeContext";
-import { useContext } from "react";
-import { getAuth, signOut } from "firebase/auth";
+import { Link } from "react-router-dom";
 import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
-import QueryStatsIcon from '@mui/icons-material/QueryStats';
-import { PRIMARY } from "../reusable/Main";
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined';
-import { useMediaQuery} from "@mui/material";
-import  {useLogout } from "../../services/api/userService";
+import { useLogout } from "../../../services/api/userService";
+import { PRIMARY } from "../Constants";
 
 const Sidebar = () => {
-
-const logout = useLogout()
+  const logout = useLogout()
 
   const handleLogout  = () => {
     logout();
