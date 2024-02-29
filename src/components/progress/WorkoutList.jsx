@@ -5,7 +5,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import dayjs from 'dayjs';
-import WorkoutModal from './WorkoutModal';
+import WorkoutModall from './WorkoutModall';
 import { FitnessCenterTwoTone } from '@mui/icons-material';
 import WorkoutEditModal from '../progress/WorkoutEditModal';
 
@@ -19,6 +19,10 @@ const WorkoutList = ({ workouts }) => {
       setOpen(true);
       setWorkout(workout);
   }
+  const handleClickOpen = (workout) =>  {
+    setOpen(true);
+    setWorkout(workout);
+  };
 const handleEdit = (workout) => {
       setEditOpen(true);
       setWorkout(workout);
@@ -68,7 +72,7 @@ const handleSaveChanges = () =>{
                       <IconButton>
                         <OpenInNewOutlinedIcon 
                             sx={{ cursor: 'pointer' }}
-                            onClick= {()=> handleOpen(workout)}
+                            onClick= {()=> handleClickOpen(workout)}
                              />
                       </IconButton>
                       <IconButton>
@@ -119,7 +123,7 @@ const handleSaveChanges = () =>{
       </Grid>
       {/* MODAL */}
       <div>
-        <WorkoutModal  open={open} handleClose={handleClose} workout={workout} />
+        <WorkoutModall  open={open} handleClose={handleClose} workout={workout} />
         <WorkoutEditModal editOpen={editOpen} handleEditClose={handleEditClose} handleSaveChanges={handleSaveChanges} workout={workout} />
     </div>
     </div>
