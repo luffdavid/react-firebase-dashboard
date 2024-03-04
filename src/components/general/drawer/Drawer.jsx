@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import AddWorkoutForm from './AddWorkoutForm';
+
 
 const drawerBleeding = 56;
 
@@ -24,7 +24,7 @@ const StyledBox = styled('div')(({ theme }) => ({
 const Puller = styled('div')(({ theme }) => ({
   width: 30,
   height: 6,
-  backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
+  backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[700],
   borderRadius: 3,
   position: 'absolute',
   top: 8,
@@ -32,7 +32,7 @@ const Puller = styled('div')(({ theme }) => ({
 }));
 
 
-function SwipeableEdgeDrawer() {
+function SwipeableEdgeDrawer({drawerTitle, drawerContent}) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen) => () => {
@@ -71,8 +71,8 @@ function SwipeableEdgeDrawer() {
             }}
           >
             <Puller />
-            <Typography sx={{ p: 2, color: 'text.primary' }}>
-                Add a new workout
+            <Typography variant='h4' sx={{ p: 2, color: 'text.primary'  }}>
+                {drawerTitle}
             </Typography>
           </StyledBox>
           <StyledBox
@@ -83,7 +83,7 @@ function SwipeableEdgeDrawer() {
               overflow: 'auto',
             }}
           >
-           <AddWorkoutForm />
+          {drawerContent}
           </StyledBox>
         </SwipeableDrawer>
       </Root>

@@ -1,12 +1,12 @@
 import PageHeaderMain from "../../components/general/heading/PageHeaderMain";
-import AddWorkoutForm from "../../components/add/AddWorkoutForm";
 import { Button } from "@mui/material";
-import AddDrawer from "../../components/add/AddDrawer"
+import Drawer from '../../components/general/drawer/Drawer'
+import AddWorkoutForm from "../../components/add/AddWorkoutForm";
 const Add = () => {
   return (
     <div className="page">
       <PageHeaderMain pageName={"Add"} />
-      <AddDrawer />
+     <Drawer drawerTitle={"Add a new workout"} drawerContent={<AddWorkoutForm />} />
     </div>
   )
 }
