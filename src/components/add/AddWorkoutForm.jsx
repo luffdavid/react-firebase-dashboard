@@ -16,6 +16,7 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers";
 import PageHeaderMain from "../../components/general/heading/PageHeaderMain";
+import { useNavigate } from "react-router-dom";
 
 
 const AddWorkoutForm = () => {
@@ -30,7 +31,8 @@ const AddWorkoutForm = () => {
   const [error, setError] = useState(null); 
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  
+  const navigate = useNavigate();
+
   const handleAdd = async (e) => {
     e.preventDefault();
     if(!isValidateInput()) {
@@ -62,9 +64,10 @@ const AddWorkoutForm = () => {
           setIsLoading(false);
           setSuccess(true);
           setTimeout(() => {
-            setSuccess(false)
-            window.location.reload();
-          }, 2000)
+            setSuccess(false);
+            navigate("/progress/workouts");
+          }, 3000)
+        
         
         } catch (error) {
           setError("Error adding workout: " + error.message);

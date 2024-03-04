@@ -25,7 +25,7 @@ const AddSuccess = ({ type }) => {
           severity="success"
           onClose={() => setIsVisible(false)}
           variant="filled"
-          sx={{ width: '100%' }}
+          sx={{ width: '100%', zIndex:'10' }}
         >
          {type}
         </Alert>

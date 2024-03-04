@@ -32,13 +32,9 @@ const Puller = styled('div')(({ theme }) => ({
 }));
 
 
-
-  // This is used only for the example
-//   const container = window !== undefined ? () => window().document.body : undefined;
-
-function SwipeableEdgeDrawer(props) {
+function SwipeableEdgeDrawer() {
     const [open, setOpen] = React.useState(false);
-  
+
     const toggleDrawer = (newOpen) => () => {
       setOpen(newOpen);
     };
