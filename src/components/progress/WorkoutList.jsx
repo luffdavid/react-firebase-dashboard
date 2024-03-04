@@ -124,7 +124,7 @@ const handleSaveChanges = () =>{
       {/* MODAL */}
       <div>
         <WorkoutModall  open={open} handleClose={handleClose} workout={workout} />
-        <WorkoutEditModal editOpen={editOpen} handleEditClose={handleEditClose} handleSaveChanges={handleSaveChanges} workout={workout} />
+        {/* <WorkoutEditModal editOpen={editOpen} handleEditClose={handleEditClose} handleSaveChanges={handleSaveChanges} workout={workout} /> */}
     </div>
     </div>
   );

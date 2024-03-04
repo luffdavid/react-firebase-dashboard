@@ -39,7 +39,7 @@ const WorkoutModall = ({ open, handleClose, workout }) => {
           aria-describedby="scroll-dialog-description"
           sx={{
           "& .MuiDialog-paper": {
-            borderRadius: "10px",
+            borderRadius: "1y0px",
             backgroundColor: darkMode ? 'black' : 'white' 
         },
         }}

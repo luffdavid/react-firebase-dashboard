@@ -14,7 +14,7 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import Signup from "./pages/signup/Signup";
 import { userInputs } from "./formSource";
 import ResponsiveNavigation from "./components/general/sidebar/ResponsiveNavigation";
-import Navbar from "./components/general/sidebar/MobileBar";
+import Navbar from "./components/general/navbar/Navbar";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -64,7 +64,7 @@ function App() {
         <div className="">
              {currentUser ? <ResponsiveNavigation  /> : <></>} 
               <div className="homeContainer">
-                {currentUser ? <Navbar profileData={profileData} isDarkMode={darkMode}/>  : <></>}
+                {currentUser ? <Navbar  profileData={profileData} isDarkMode={darkMode}/>  : <></>}
                 <Routes>
                   <Route path="/login"  element={!currentUser ? <Login/> : <Navigate to="/" />} />
                   <Route path="/signup" element={!currentUser ? <Signup inputs={userInputs} /> : <Navigate to="/" />} />

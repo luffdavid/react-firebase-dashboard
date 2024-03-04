@@ -1,120 +1,144 @@
-import { FitnessCenterTwoTone } from '@mui/icons-material';
-import { Avatar , Backdrop, Box, Button, Fade,  List, ListItem, ListItemAvatar, Modal, TextField, Typography } from '@mui/material';
-import React from  'react';
-import { PRIMARY } from '../general/Constants';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
-import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
+// import * as React from 'react';
+// import Button from '@mui/material/Button';
+// import Dialog from '@mui/material/Dialog';
+// import DialogActions from '@mui/material/DialogActions';
+// import DialogContent from '@mui/material/DialogContent';
+// import DialogContentText from '@mui/material/DialogContentText';
+// import DialogTitle from '@mui/material/DialogTitle';
+// import { PRIMARY } from '../general/Constants';
+// import { Avatar, Box, List, ListItem, ListItemAvatar, ListItemText, TextField, Typography } from '@mui/material';
+// import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
+// import EventOutlinedIcon from '@mui/icons-material/EventOutlined';
+// import NotesOutlinedIcon from '@mui/icons-material/NotesOutlined';
+// import { FitnessCenterTwoTone } from '@mui/icons-material';
+// import { DarkModeContext } from '../../context/darkModeContext';
 
-const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}) => {
-  return (
-    <div>
-        <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        open={editOpen}
-        onClose={handleEditClose}
-        closeAfterTransition
-        slots={{ backdrop: Backdrop }}
-        slotProps={{
-          backdrop: {
-            timeout: 500,
-          },
-        }}
-      >
-        <Fade in={editOpen}>
-          <Box sx={{
-              borderRadius:'25px',
-              position:'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              width: '90%',
-              height:'60%',
-              bgcolor: 'background.paper',
-              border: 'none',
-              boxShadow: 24,
-              p: 4}}
-              >
-            <Typography id="transition-modal-title" variant="h6" component="h2">
-           
-            {workout && (
-                <>
-                  <Typography variant='h4'>
-                    Edit your workout <span style={{color:PRIMARY}}>
-                    {workout.title}
-                    </span>
-                  </Typography>
-                </>
-              )}              
+// const WorkoutEditModal = ({editOpen, handleEditClose, handleSaveChanges,workout}) => {
+//   const scroll = "paper";
+//   const { darkMode } = React.useContext(DarkModeContext);
 
-            </Typography>
-            <Typography id="transition-modal-description" sx={{ mt: 2 }}>
-            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar sx={{backgroundColor:PRIMARY}}>
-            <EventOutlinedIcon  />
-          </Avatar>
-        </ListItemAvatar >
-        <TextField  
-        label="Date"
-        defaultValue={workout?.date ? workout.date : "Not provided"} 
-        />
+//   const descriptionElementRef = React.useRef(null);
+//   React.useEffect(() => {
+//     if (editOpen) {
+//       const { current: descriptionElement } = descriptionElementRef;
+//       if (descriptionElement !== null) {
+//         descriptionElement.focus();
+//       }
+//     }
+//   }, [editOpen]);
 
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-    <Avatar sx={{backgroundColor: PRIMARY}}>
-      <LocationOnOutlinedIcon />
-    </Avatar>
-  </ListItemAvatar>
-  <TextField  
-        label="Location"
-        defaultValue={workout?.location ? workout.location : "Not provided"} 
-        />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-    <Avatar sx={{backgroundColor: PRIMARY}}>
-      <FitnessCenterTwoTone />
-    </Avatar>
-  </ListItemAvatar>
-  <TextField  
-        label="Exercises and Weight"
-        defaultValue={workout?.exercisesAndWeight ? workout.exercisesAndWeight : "Not provided"} 
-        />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar sx={{backgroundColor:PRIMARY}}>
-            <NotesOutlinedIcon  />
-          </Avatar>
-        </ListItemAvatar >
-        <TextField  
-        label="Notes"
-        defaultValue={workout?.notes ? workout.notes : "Not provided"} 
-        />
-      </ListItem>
-    </List>
-    <div style={{ position: 'absolute', bottom: '20px',right:'10px', width: '100%', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}> 
-  <Button variant='contained'
-   color='error'
-   onClick= {()=> handleEditClose()}>Close this view</Button>
-   <Button variant='contained'
-   color='primary'
-   onClick= {()=> handleSaveChanges()}>Save  changes</Button>
-</div>
-
-    </Typography>
-
-    
+//   return (
+//     <>
+//     {workout && (
+//         <React.Fragment>
+//         <Dialog
+//           open={editOpen}
+//           onClose={handleEditClose}
+//           scroll={scroll}
+//           aria-labelledby="scroll-dialog-title"
+//           aria-describedby="scroll-dialog-description"
+//           sx={{
+//           "& .MuiDialog-paper": {
+//             borderRadius: "1y0px",
+//             backgroundColor: darkMode ? 'black' : 'white' 
+//         },
+//         }}
+         
+//         >
+//           <DialogTitle id="scroll-dialog-title">
+//           <Typography variant='h4'>
+//                     Edit workout <span style={{color:PRIMARY}}>
+//                     {workout.title}
+//                     </span>
+//                   </Typography>
+//           </DialogTitle>
+//           <DialogContent dividers={scroll === 'paper'}>
+//             <DialogContentText
+//               id="scroll-dialog-description"
+//               ref={descriptionElementRef}
+//               tabIndex={-1}
+//             >
+//                 <Typography id="transition-modal-description" sx={{ mt: 2 }}>
+//             <List sx={{ width: '100%', maxWidth: 360 }}>
+//       <ListItem>
+//         <ListItemAvatar>
+//           <Avatar sx={{backgroundColor:PRIMARY}}>
+//             <EventOutlinedIcon  />
+//           </Avatar>
+//         </ListItemAvatar >
+//         {workout?.date ? (
+//           <>
+//           <TextField
+//         defaultValue={workout.date}
+//         label="Date"
+//         />
+//           </>
+//         ) : (
+//           <>Not provided</>
+//         )} 
+     
+//       </ListItem>
+//       <ListItem>
+//         <ListItemAvatar>
+//     <Avatar sx={{backgroundColor: PRIMARY}}>
+//       <LocationOnOutlinedIcon />
+//     </Avatar>
+//   </ListItemAvatar>
+//   {workout?.location ? (
+//     <>
+//     <TextField
+//       label="Location"
+//     defaultValue={workout?.location? (
+//       <>
+//       {workout.location}</>
+//       : (
+//         "Not provided"
+//       )
+//     )}
   
-          </Box>
-        </Fade>
-      </Modal>
-    </div>
-  )
-}
-
-export default WorkoutEditModal
+//     />
+//     </>
+//       </ListItem>
+//       <ListItem>
+//         <ListItemAvatar>
+//     <Avatar sx={{backgroundColor: PRIMARY}}>
+//       <FitnessCenterTwoTone />
+//     </Avatar>
+//   </ListItemAvatar>
+//   <ListItemText primary="Exercises and Weight" secondary={workout?.exercisesAndWeight ? (
+//     <>
+//       {workout.exercisesAndWeight}
+//     </>
+//   ) : (
+//     <>Not provided</>
+//   )} />     
+//       </ListItem>
+//       <ListItem>
+//         <ListItemAvatar>
+//           <Avatar sx={{backgroundColor:PRIMARY}}>
+//             <NotesOutlinedIcon  />
+//           </Avatar>
+//         </ListItemAvatar >
+//         <ListItemText primary="Notes" secondary={workout?.notes ? (
+//     <>
+//       {workout.notes}
+//     </>
+//   ) : (
+//     <>Not provided</>
+//   )} />     
+//       </ListItem>
+//     </List>
+// </Typography>
+//             </DialogContentText>
+//           </DialogContent>
+//           <DialogActions>
+//             <Button onClick={handleEditClose} variant='contained' color='error'>Close</Button>
+//           </DialogActions>
+//         </Dialog>
+//       </React.Fragment>
+//     )}
+//     </>
+    
+//   );
+// }
+// export default WorkoutEditModal; 

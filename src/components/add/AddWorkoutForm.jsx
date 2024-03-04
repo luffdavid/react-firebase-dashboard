@@ -93,7 +93,7 @@ const AddWorkoutForm = () => {
         className="widget-reusable"
         component="form"
         onSubmit={handleAdd}
-        style={{width:'80%', display:'flex', justifyContent:'center'}}
+        style={{marginTop:'2%',width:'100%', display:'flex', justifyContent:'center'}}
       >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
