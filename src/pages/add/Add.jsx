@@ -2,11 +2,14 @@ import PageHeaderMain from "../../components/general/heading/PageHeaderMain";
 import { Button } from "@mui/material";
 import Drawer from '../../components/general/drawer/Drawer'
 import AddWorkoutForm from "../../components/add/AddWorkoutForm";
+import { useState } from "react";
 const Add = () => {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="page">
       <PageHeaderMain pageName={"Add"} />
-     <Drawer drawerTitle={"Add a new workout"} drawerContent={<AddWorkoutForm />} />
+         <Drawer drawerTitle={"Add a new workout"} drawerContent={<AddWorkoutForm />} drawerOpenButton={"Add a new workout"} />
+    
     </div>
   )
 }

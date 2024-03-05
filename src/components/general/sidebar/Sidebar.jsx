@@ -57,10 +57,6 @@ const Sidebar = () => {
               </li>
             </Link>
           
-          <li onClick={handleLogout}>
-            <ExitToAppIcon className="icon" />
-            <span style={{color:'red'}}>Logout</span>
-          </li>
           {/* <li>
             <div className="bottom">
         <div

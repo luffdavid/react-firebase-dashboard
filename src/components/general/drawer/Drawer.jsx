@@ -32,7 +32,7 @@ const Puller = styled('div')(({ theme }) => ({
 }));
 
 
-function SwipeableEdgeDrawer({drawerTitle, drawerContent}) {
+function Drawer({drawerTitle, drawerContent, drawerOpenButton}) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen) => () => {
@@ -51,7 +51,7 @@ function SwipeableEdgeDrawer({drawerTitle, drawerContent}) {
           }}
         />
         <Box>
-          <Button variant="contained" onClick={toggleDrawer(true)}>Add a new workout</Button>
+          <Button variant="contained" onClick={toggleDrawer(true)}>{drawerOpenButton}</Button>
         </Box>
         <SwipeableDrawer
           anchor="bottom"
@@ -71,7 +71,7 @@ function SwipeableEdgeDrawer({drawerTitle, drawerContent}) {
             }}
           >
             <Puller />
-            <Typography variant='h4' sx={{ p: 2, color: 'text.primary'  }}>
+            <Typography variant='h4' sx={{ p: 2, color: 'text.primary'}}>
                 {drawerTitle}
             </Typography>
           </StyledBox>
@@ -90,8 +90,8 @@ function SwipeableEdgeDrawer({drawerTitle, drawerContent}) {
     );
   }
   
-  SwipeableEdgeDrawer.propTypes = {
+  Drawer.propTypes = {
     window: PropTypes.func,
   };
   
-  export default SwipeableEdgeDrawer;
+  export default Drawer;
