@@ -8,37 +8,32 @@ import dayjs from 'dayjs';
 import WorkoutModall from './WorkoutModall';
 import { FitnessCenterTwoTone } from '@mui/icons-material';
 import WorkoutEditModal from '../progress/WorkoutEditModal';
+import DeleteWorkoutModal from './DeleteWorkoutModal';
 
 
 const WorkoutList = ({ workouts }) => {
   const [open, setOpen] = React.useState(false);
+  const [deleteOpen, setDeleteOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
   const [workout, setWorkout] = React.useState(null);
   
-  const handleOpen = (workout) => {
-      setOpen(true);
-      setWorkout(workout);
-  }
+
   const handleClickOpen = (workout) =>  {
     setOpen(true);
     setWorkout(workout);
   };
-const handleEdit = (workout) => {
-      setEditOpen(true);
-      setWorkout(workout);
-}
+
+  const handleDeleteClickOpen = (workout) => {
+    setDeleteOpen(true);
+    setWorkout(workout);
+  }
   const handleClose = () =>{ 
       setOpen(false);
       setWorkout(null)
 };
-
-const handleEditClose = () =>{ 
-    setEditOpen(false);
-    setWorkout(null)
-};
-const handleSaveChanges = () =>{ 
-    setEditOpen(false);
-  //TO IMPLEMENT
+const handleDeleteClose = () =>{ 
+  setDeleteOpen(false);
+  setWorkout(null)
 };
 
   // Sort workouts 
@@ -62,7 +57,7 @@ const handleSaveChanges = () =>{
         {Object.keys(groupedWorkoutsByMonth).map((monthYear) => (
           <div key={monthYear}>
             <Typography variant="h5" gutterBottom>{monthYear}</Typography>
-            <List>
+            <List sx={{width:'80%'}}>
               {groupedWorkoutsByMonth[monthYear].map((workout) => (
                 <>
                  <ListItem
@@ -76,12 +71,9 @@ const handleSaveChanges = () =>{
                              />
                       </IconButton>
                       <IconButton>
-                        <EditOutlinedIcon 
-                        sx={{ cursor: 'pointer' }}
-                        onClick={() => handleEdit(workout)} />
-                      </IconButton>
-                      <IconButton>
-                        <DeleteIcon sx={{ cursor: 'pointer' }} />
+                        <DeleteIcon 
+                        sx={{ cursor: 'pointer' }} 
+                        onClick = {()=> handleDeleteClickOpen(workout)} />
                       </IconButton>
                     </>
                   }>
@@ -124,7 +116,7 @@ const handleSaveChanges = () =>{
       {/* MODAL */}
       <div>
         <WorkoutModall  open={open} handleClose={handleClose} workout={workout} />
-        {/* <WorkoutEditModal editOpen={editOpen} handleEditClose={handleEditClose} handleSaveChanges={handleSaveChanges} workout={workout} /> */}
+        <DeleteWorkoutModal open={deleteOpen} handleClose={handleDeleteClose} workout={workout} />
     </div>
     </div>
   );

@@ -21,7 +21,7 @@ const ProfileDataList = ({profileData}) => {
   return (
     <div>
         <List
-                        sx={{borderTopLeftRadius:'15px',borderTopRightRadius:'15px',width: '80%', bgcolor: 'background.paper' }}
+        sx={{borderTopLeftRadius:'15px',borderTopRightRadius:'15px',width: '80%', bgcolor: 'background.paper' }}
                     >
                           <ListSubheader sx={{borderRadius:'15px'}}>Personal Information</ListSubheader>
                         <ListItem>
