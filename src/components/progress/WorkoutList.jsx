@@ -9,6 +9,7 @@ import WorkoutModall from './WorkoutModall';
 import { FitnessCenterTwoTone } from '@mui/icons-material';
 import WorkoutEditModal from '../progress/WorkoutEditModal';
 import DeleteWorkoutModal from './DeleteWorkoutModal';
+import MainDrawer from '../general/drawer/MainDrawer';
 
 
 const WorkoutList = ({ workouts }) => {
@@ -57,7 +58,7 @@ const handleDeleteClose = () =>{
         {Object.keys(groupedWorkoutsByMonth).map((monthYear) => (
           <div key={monthYear}>
             <Typography variant="h5" gutterBottom>{monthYear}</Typography>
-            <List sx={{width:'80%'}}>
+            <List sx={{width:'88%'}}>
               {groupedWorkoutsByMonth[monthYear].map((workout) => (
                 <>
                  <ListItem

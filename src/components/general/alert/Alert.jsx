@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Alert, Snackbar } from '@mui/material';
 
-const AddSuccess = ({ type }) => {
+const Alertt = ({ type, severity }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const AddSuccess = ({ type }) => {
      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
      >
         <Alert
-          severity="success"
+          severity={severity}
           onClose={() => setIsVisible(false)}
           variant="filled"
           sx={{ width: '100%', zIndex:'10' }}
@@ -33,4 +33,4 @@ const AddSuccess = ({ type }) => {
   );
 }
 
-export default AddSuccess;
+export default Alertt;

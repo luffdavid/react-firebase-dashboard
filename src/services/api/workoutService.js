@@ -1,5 +1,6 @@
 import { collection, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
+import { useWorkoutContext } from "../../context/workouts/WorkoutContext";
 
 
 export const getWorkouts = async (userId) => {
@@ -26,3 +27,4 @@ export const getWorkouts = async (userId) => {
         return [];
     }
 };
+

@@ -10,7 +10,7 @@ import { PRIMARY } from '../general/Constants';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../firebase';
 import { AuthContext } from '../../context/AuthContext';
-import DeleteAlert from './DeletedAlert';
+import Alert from '../general/alert/Alert';
 export default function DeleteWorkoutModal({ open, handleClose, workout }) {
     const {currentUser } = React.useContext(AuthContext);
     const [showDeleteAlert, setShowDeleteAlert] = React.useState(false);
@@ -58,7 +58,7 @@ export default function DeleteWorkoutModal({ open, handleClose, workout }) {
       </Dialog>
     </React.Fragment>
     {showDeleteAlert && (
-        <DeleteAlert type={"Workout deleted"}/>
+       <Alert type={"Workout deleted"} severity={"error"} />
     )}
     </div>
     

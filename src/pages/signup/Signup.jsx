@@ -21,8 +21,8 @@ import {
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { PRIMARY } from "../../components/general/Constants";
 import "../../components/general/Reusable.scss";
-import AddSuccess from "../../components/add/AddSuccess";
 import InputError from "../../components/general/InputError";
+import Alertt from "../../components/general/alert/Alert";
 const Signup = ({ inputs }) => {
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
@@ -167,7 +167,7 @@ const Signup = ({ inputs }) => {
           {error && (
             <InputError title={error} /> )}
           {success && (
-            <AddSuccess type={"Your account has been created! You will be redirected to Login"}/>
+            <Alertt  severity={"success"} type={"Your account has been created! You will be redirected to Login"} />
           )}
           
             <Typography variant="body2" sx={{textAlign:'center'}}>

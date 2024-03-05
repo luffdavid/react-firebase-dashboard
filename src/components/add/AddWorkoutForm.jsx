@@ -9,7 +9,6 @@ import {
 } from "firebase/firestore";
 import {  db } from "../../firebase";
 import InputError from "../../components/general/InputError";
-import AddSuccess from "../../components/add/AddSuccess";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
@@ -17,6 +16,7 @@ import dayjs from "dayjs";
 import { DatePicker } from "@mui/x-date-pickers";
 import PageHeaderMain from "../../components/general/heading/PageHeaderMain";
 import { useNavigate } from "react-router-dom";
+import Alert from "../general/alert/Alert";
 
 
 const AddWorkoutForm = () => {
@@ -65,7 +65,8 @@ const AddWorkoutForm = () => {
           setSuccess(true);
           setTimeout(() => {
             setSuccess(false);
-            navigate("/progress/workouts");
+            // navigate("/progress/workouts");
+            window.location.reload()
           }, 3000)
         
         
@@ -184,7 +185,7 @@ const AddWorkoutForm = () => {
           </Grid>
       </Box>
       {success && (
-        <AddSuccess type={"Workout saved!"} />
+        <Alert type={"Workout saved"} severity={"success"} />
       )}
     </div>
   );

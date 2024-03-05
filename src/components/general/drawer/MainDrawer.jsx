@@ -32,7 +32,7 @@ const Puller = styled('div')(({ theme }) => ({
 }));
 
 
-function Drawer({drawerTitle, drawerContent, drawerOpenButton}) {
+function MainDrawer({drawerTitle, drawerContent, drawerOpenButton}) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen) => () => {
@@ -90,8 +90,8 @@ function Drawer({drawerTitle, drawerContent, drawerOpenButton}) {
     );
   }
   
-  Drawer.propTypes = {
+  MainDrawer.propTypes = {
     window: PropTypes.func,
   };
   
-  export default Drawer;
+  export default MainDrawer;

@@ -1,75 +1,70 @@
-import "./widget.scss";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
-import AccountBalanceWalletOutlinedIcon from "@mui/icons-material/AccountBalanceWalletOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import MonetizationOnOutlinedIcon from "@mui/icons-material/MonetizationOnOutlined";
+import { Link } from "react-router-dom";
+import { useWorkoutContext } from "../../../context/workouts/WorkoutContext";
+import { useContext, useEffect, useState } from "react";
+import { getWorkouts } from "../../../services/api/workoutService";
+import { AuthContext } from "../../../context/AuthContext";
+import { FitnessCenterTwoTone } from '@mui/icons-material';
+import { PRIMARY } from "../Constants";
+import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 
-const Widget = ({ type }) => {
-  let data;
+const Widget = ({ type, workouts, workoutsThisMonth}) => {
+ 
 
-  //temporary
-  const amount = 100;
-  const diff = 20;
+  let data = {}; // Definieren Sie ein leeres Objekt als Standardwert für data
 
   switch (type) {
-    case "user":
+    case "ALL_WORKOUTS":
       data = {
         title: "ALL WORKOUTS",
-        isMoney: false,
-        link: "See workout history",
+        isCounter: true,
+        count: workouts.length,
+        link: <Link style={{color:PRIMARY}} to="/progress/workouts">View all workouts</Link>,
         icon: (
-          <PersonOutlinedIcon
+          <FitnessCenterTwoTone
             className="icon"
-            style={{
-              color: "crimson",
-              backgroundColor: "rgba(255, 0, 0, 0.2)",
-            }}
+            sx={{color:PRIMARY}}
           />
         ),
       };
       break;
-    case "order":
+    case "LAST_WORKOUT":
       data = {
         title: "LAST WORKOUT",
-        isMoney: false,
-        link: "View last workout",
+        isCounter: false,
+        content: workouts.length > 0 ? workouts[0].title : "No workout available",
+        link: <Link style={{color:PRIMARY}}  to="/progress/workouts">View last workout</Link>,
         icon: (
-          <ShoppingCartOutlinedIcon
+          <FitnessCenterTwoTone
             className="icon"
-            style={{
-              backgroundColor: "rgba(218, 165, 32, 0.2)",
-              color: "goldenrod",
-            }}
+            sx={{color:PRIMARY}}
           />
         ),
       };
       break;
-    case "earning":
+    case "WORKOUTS_THIS_MONTH":
       data = {
         title: "WORKOUTS THIS MONTH",
-        isMoney: true,
-        link: "View workouts this month",
+        isCounter: true,
+        count: workoutsThisMonth.length,
+        link: <Link style={{color:PRIMARY}} to="/progress/workouts">View workouts this month</Link>,
         icon: (
-          <MonetizationOnOutlinedIcon
+          <FitnessCenterTwoTone
             className="icon"
-            style={{ backgroundColor: "rgba(0, 128, 0, 0.2)", color: "green" }}
+            sx={{color:PRIMARY}}
           />
         ),
       };
       break;
-    case "balance":
+    case "CURRENT_WEIGHT":
       data = {
         title: "CURRENT WEIGHT",
-        isMoney: true,
-        link: "See details",
+        isCounter: true,
+        count: 80,
+        link: <Link style={{color:PRIMARY}} to="/">View details</Link>,
         icon: (
-          <AccountBalanceWalletOutlinedIcon
+          <MonitorWeightIcon
             className="icon"
-            style={{
-              backgroundColor: "rgba(128, 0, 128, 0.2)",
-              color: "purple",
-            }}
+            sx={{color:PRIMARY}}
           />
         ),
       };
@@ -83,17 +78,15 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{data.title}</span>
         <span className="counter">
-          {data.isMoney && "$"} {amount}
+          {data.isCounter && data.count}
         </span>
-        <span className="link">{data.link}</span>
+        {!data.isCounter && data.content}
+        <span className="link">
+          {data.link} 
+        </span>
       </div>
-      <div className="right">
-        <div className="percentage positive">
-          <KeyboardArrowUpIcon />
-          {diff} %
-        </div>
-        {data.icon}
-      </div>
+      <div className="percentage positive"></div> 
+      {data.icon}
     </div>
   );
 };
