@@ -47,7 +47,7 @@ const Home = ({ profileData }) => {
         <div className="page">
           <div className="home">
             <div className="homeContainer">
-              <div className="widgets">
+              <div className="charts">
                 <Widget workouts={workouts} workoutsThisMonth={workoutsThisMonth} type="ALL_WORKOUTS" />
                 <Widget workouts={workouts} workoutsThisMonth={workoutsThisMonth} type="LAST_WORKOUT" />
                 <Widget workouts={workouts} workoutsThisMonth={workoutsThisMonth} type="WORKOUTS_THIS_MONTH" />
@@ -56,7 +56,7 @@ const Home = ({ profileData }) => {
               <div className="charts">
                 {/* <Featured /> */}
                 <WorkoutCalender workouts={workouts}/>
-                <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} />
+                {/* <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} /> */}
               </div>
               <div className="listContainer">
                 <div className="listTitle">Latest 5 Workouts</div>

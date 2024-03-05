@@ -79,11 +79,12 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
         <span className="title">{data.title}</span>
         <span className="counter">
           {data.isCounter && data.count}
+         
         </span>
         {!data.isCounter && data.content}
-        <span className="link">
+        {/* <span className="link">
           {data.link} 
-        </span>
+        </span> */}
       </div>
       <div className="percentage positive"></div> 
       {data.icon}
