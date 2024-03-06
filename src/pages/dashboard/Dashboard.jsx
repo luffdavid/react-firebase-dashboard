@@ -10,6 +10,7 @@ import { getWorkouts } from "../../services/api/workoutService";
 import { AuthContext } from "../../context/AuthContext";
 import { useContext, useEffect, useState } from "react";
 import { useWorkoutContext } from "../../context/workouts/WorkoutContext";
+import PageHeaderMain from "../../components/general/heading/PageHeaderMain";
 
 const Home = ({ profileData }) => {
   const isTabletOrBigger = useMediaQuery('(min-width: 768px)');
@@ -45,13 +46,14 @@ const Home = ({ profileData }) => {
     <div> 
       {/* {isTabletOrBigger && ( */}
         <div className="page">
+        <PageHeaderMain pageName={"Dashboard"} />
           <div className="home">
             <div className="homeContainer">
               <div className="charts">
                 <Widget workouts={workouts} workoutsThisMonth={workoutsThisMonth} type="ALL_WORKOUTS" />
-                <Widget workouts={workouts} workoutsThisMonth={workoutsThisMonth} type="LAST_WORKOUT" />
                 <Widget workouts={workouts} workoutsThisMonth={workoutsThisMonth} type="WORKOUTS_THIS_MONTH" />
                 <Widget workouts={workouts} workoutsThisMonth={workoutsThisMonth} type="CURRENT_WEIGHT" />
+                <Widget workouts={workouts} workoutsThisMonth={workoutsThisMonth} type="LAST_WORKOUT" />
               </div>
               <div className="charts">
                 {/* <Featured /> */}
@@ -59,7 +61,7 @@ const Home = ({ profileData }) => {
                 {/* <Chart title="Last 6 Months (Revenue)" aspect={2 / 1} /> */}
               </div>
               <div className="listContainer">
-                <div className="listTitle">Latest 5 Workouts</div>
+                <span style={{fontWeight:'bold'}}>YOUR LATEST WORKOUTS</span>
                 <Table workouts={workouts}/>
               </div>
             </div>

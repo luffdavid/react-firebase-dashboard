@@ -17,7 +17,7 @@ export default function WorkoutCalender({workouts}) {
 
     return (
     <div className="chart">
-        <span className="title">WORKOUT CALENDER</span>
+        <span style={{fontWeight:'bold'}}>WORKOUT CALENDER</span>
     <DayPicker
       mode="single"
       showOutsideDays

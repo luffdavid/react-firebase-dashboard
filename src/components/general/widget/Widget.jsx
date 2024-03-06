@@ -4,8 +4,9 @@ import { useContext, useEffect, useState } from "react";
 import { getWorkouts } from "../../../services/api/workoutService";
 import { AuthContext } from "../../../context/AuthContext";
 import { FitnessCenterTwoTone } from '@mui/icons-material';
-import { PRIMARY } from "../Constants";
+import { PRIMARY, SECONDARYTEXT } from "../Constants";
 import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
+import { Typography } from "@mui/material";
 
 const Widget = ({ type, workouts, workoutsThisMonth}) => {
  
@@ -76,12 +77,12 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
   return (
     <div className="widget">
       <div className="left">
-        <span className="title">{data.title}</span>
-        <span className="counter">
+        <span style={{fontWeight:'bold'}}>{data.title}</span>
+        <Typography className="counter" color="secondary">
           {data.isCounter && data.count}
-         
-        </span>
-        {!data.isCounter && data.content}
+          {!data.isCounter && data.content}
+        </Typography>
+       
         {/* <span className="link">
           {data.link} 
         </span> */}

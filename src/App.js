@@ -15,6 +15,7 @@ import Signup from "./pages/signup/Signup";
 import { userInputs } from "./formSource";
 import ResponsiveNavigation from "./components/general/sidebar/ResponsiveNavigation";
 import Navbar from "./components/general/navbar/Navbar";
+import { grey } from "@mui/material/colors";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -25,6 +26,9 @@ function App() {
           mode: darkMode ? 'dark' : 'light',
           primary: {
             main: darkMode ? '#815eff' : "#6439FF",
+          },
+          secondary: {
+            main: darkMode ? grey[500]: grey[600], 
           },
           type: 'light',
           background: {
