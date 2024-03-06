@@ -10,7 +10,8 @@ import { FitnessCenterTwoTone } from '@mui/icons-material';
 import WorkoutEditModal from '../progress/WorkoutEditModal';
 import DeleteWorkoutModal from './DeleteWorkoutModal';
 import MainDrawer from '../general/drawer/MainDrawer';
-
+import Add from "../../assets/NotFound.svg"
+import InputError from '../general/InputError';
 
 const WorkoutList = ({ workouts }) => {
   const [open, setOpen] = React.useState(false);
@@ -38,13 +39,11 @@ const handleDeleteClose = () =>{
 };
 
   // Sort workouts 
-  const sortedWorkouts = workouts.sort((a, b) => {
-    return new Date(b.date) - new Date(a.date);
-  });
+
 
   // Group workouts by month
   const groupedWorkoutsByMonth = {};
-  sortedWorkouts.forEach((workout) => {
+  workouts.forEach((workout) => {
     const monthYear = dayjs(workout.date).format('MMMM YYYY');
     if (!groupedWorkoutsByMonth[monthYear]) {
       groupedWorkoutsByMonth[monthYear] = [];
@@ -54,6 +53,14 @@ const handleDeleteClose = () =>{
 
   return (
     <div>
+      {workouts.length == 0 ? (
+        <div style={{ textAlign:'center'}}>
+          <img src={Add}  alt="Add" height={"200vh"} /> <br />
+           You didn't add a workout yet
+        </div>
+      ) : (
+
+      
       <Grid item xs={12} md={6}>
         {Object.keys(groupedWorkoutsByMonth).map((monthYear) => (
           <div key={monthYear}>
@@ -114,6 +121,7 @@ const handleDeleteClose = () =>{
           </div>
         ))}
       </Grid>
+      )}
       {/* MODAL */}
       <div>
         <WorkoutModall  open={open} handleClose={handleClose} workout={workout} />

@@ -53,6 +53,7 @@
   .page {
     height: 100vh;
     max-width: 100%;
+    margin-bottom: 20%;
     // = isTabletOrBigger
     @media (min-width: 768px) {
       height: auto;

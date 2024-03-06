@@ -21,7 +21,7 @@ const ProfileDataList = ({profileData}) => {
   return (
     <div>
         <List
-        sx={{borderTopLeftRadius:'15px',borderTopRightRadius:'15px',width: '80%', bgcolor: 'background.paper' }}
+        sx={{borderTopLeftRadius:'15px',borderTopRightRadius:'15px', bgcolor: 'background.paper' }}
                     >
                           <ListSubheader sx={{borderRadius:'15px'}}>Personal Information</ListSubheader>
                         <ListItem>
@@ -70,7 +70,7 @@ const ProfileDataList = ({profileData}) => {
                     </List>
 
                     <List
-                        sx={{ borderBottomLeftRadius:'15px',borderBottomRightRadius:'15px',width: '80%', bgcolor: 'background.paper' }}
+                        sx={{ borderBottomLeftRadius:'15px',borderBottomRightRadius:'15px', bgcolor: 'background.paper' }}
                         >
                        <ListSubheader sx={{borderRadius:'15px'}}>App Settings</ListSubheader>
 

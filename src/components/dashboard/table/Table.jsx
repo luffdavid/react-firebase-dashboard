@@ -6,14 +6,22 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import { PRIMARY } from "../general/Constants";
+import { PRIMARY } from "../../general/Constants";
 import { FitnessCenterTwoTone } from "@mui/icons-material";
+import Add from "../../../assets/NotFound.svg"
 
 const WorkoutList = ({ workouts, monthYear }) => {
 
   const last5workouts =workouts.length >= 5 ? workouts.slice(0,5) : workouts.slice(0, workouts.length)
   return (
-    <List sx={{width:'88%'}}>
+    <div>
+    {workouts.length == 0 ? (
+      <div style={{ textAlign:'center'}}>
+        <img src={Add}  alt="Add" height={"200vh"} /> <br />
+         You didn't add a workout yet
+      </div>
+    ) : (
+      <List sx={{width:'88%'}}>
       {last5workouts.map((workout) => (
         <ListItem key={workout.id}>
           <ListItemAvatar>
@@ -43,6 +51,8 @@ const WorkoutList = ({ workouts, monthYear }) => {
         </ListItem>
       ))}
     </List>
+    )}
+  </div>
   );
 };
 

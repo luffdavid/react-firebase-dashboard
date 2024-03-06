@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { getWorkouts } from "../../../services/api/workoutService";
 import { AuthContext } from "../../../context/AuthContext";
 import { FitnessCenterTwoTone } from '@mui/icons-material';
-import { PRIMARY, SECONDARYTEXT } from "../Constants";
+import { PRIMARY, SECONDARYTEXT } from "../../general/Constants";
 import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import { Typography } from "@mui/material";
 

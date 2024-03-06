@@ -4,7 +4,7 @@ import { auth } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
 import { Typography, TextField, Button, Container, Box, Link as MuiLink, CircularProgress } from "@mui/material";
-import "../../components/general/widget/widget.scss"
+import "../../components/dashboard/widget/widget.scss"
 import "../../components/general/Reusable.scss"
 import { PRIMARY } from "../../components/general/Constants";
 import InputError from "../../components/general/InputError";

@@ -16,68 +16,138 @@ import { userInputs } from "./formSource";
 import ResponsiveNavigation from "./components/general/sidebar/ResponsiveNavigation";
 import Navbar from "./components/general/navbar/Navbar";
 import { grey } from "@mui/material/colors";
+import { useWorkoutContext } from "./context/workouts/WorkoutContext";
+import { getWorkouts } from "./services/api/workoutService";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
-  const {currentUser } = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [profileData, setProfileData] = useState(null);
-  const theme = React.useMemo(() => createTheme({
-          palette: {
-          mode: darkMode ? 'dark' : 'light',
+  const { workouts, setWorkouts } = useWorkoutContext();
+  const theme = React.useMemo(
+    () =>
+      createTheme({
+        palette: {
+          mode: darkMode ? "dark" : "light",
           primary: {
-            main: darkMode ? '#815eff' : "#6439FF",
+            main: darkMode ? "#815eff" : "#6439FF",
           },
           secondary: {
-            main: darkMode ? grey[500]: grey[600], 
+            main: darkMode ? grey[500] : grey[600],
           },
-          type: 'light',
+          type: "light",
           background: {
-            default: darkMode ? '#131313' : 'rgb(242,241,246);',
+            default: darkMode ? "#131313" : "rgb(242,241,246);",
           },
         },
-      }),[darkMode],);
+      }),
+    [darkMode]
+  );
+
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
-  
+
   useEffect(() => {
     const getProfileDetails = async () => {
-        const docRef = doc(db, "users", currentUser.uid);
-        const docSnap = await getDoc(docRef);
+      const docRef = doc(db, "users", currentUser.uid);
+      const docSnap = await getDoc(docRef);
 
-        if (docSnap.exists()) {
-            setProfileData(docSnap.data()); 
-        } else {
-            console.log("No such document!");
-        }
+      if (docSnap.exists()) {
+        setProfileData(docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
     };
-
     if (currentUser) {
-        getProfileDetails();
+      getProfileDetails();
     }
     return () => {
-        // Cleanup: DO NOT DELETE THIS
+      // Cleanup: DO NOT DELETE THIS
     };
-    }, [currentUser]);
+  }, [currentUser]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const workoutsData = await getWorkouts(currentUser.uid);
+        const sortedWorkouts = workoutsData.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        setWorkouts(sortedWorkouts);
+      } catch (error) {
+        console.error("Error fetching workouts:", error);
+      }
+    };
+
+    fetchData();
+  }, [currentUser.uid, setWorkouts]);
 
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className={darkMode ? "app dark" : "app"}>
         <BrowserRouter>
-        <div className="">
-             {currentUser ? <ResponsiveNavigation  /> : <></>} 
-              <div className="homeContainer">
-                {currentUser ? <Navbar  profileData={profileData} isDarkMode={darkMode}/>  : <></>}
-                <Routes>
-                  <Route path="/login"  element={!currentUser ? <Login/> : <Navigate to="/" />} />
-                  <Route path="/signup" element={!currentUser ? <Signup inputs={userInputs} /> : <Navigate to="/" />} />
-                  <Route path="/" element={<RequireAuth><Dashboard profileData={profileData}/></RequireAuth>} />
-                  <Route path="/profile" element={<RequireAuth><Profile   profileData={profileData} /></RequireAuth>} />
-                  <Route path="/add/workout" element={<RequireAuth><AddWorkout /></RequireAuth>} />
-                  <Route path="/progress/workouts" element={<RequireAuth><WorkoutLog /></RequireAuth>} />
-                </Routes>
-              </div>
+          <div className="">
+            {currentUser ? <ResponsiveNavigation /> : <></>}
+            <div className="homeContainer">
+              {currentUser ? (
+                <Navbar profileData={profileData} isDarkMode={darkMode} />
+              ) : (
+                <></>
+              )}
+              <Routes>
+                <Route
+                  path="/login"
+                  element={!currentUser ? <Login /> : <Navigate to="/" />}
+                />
+                <Route
+                  path="/signup"
+                  element={
+                    !currentUser ? (
+                      <Signup inputs={userInputs} />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                <Route
+                  path="/"
+                  element={
+                    <RequireAuth>
+                      <Dashboard
+                        profileData={profileData}
+                        workouts={workouts}
+                      />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <RequireAuth>
+                      <Profile profileData={profileData} />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/add/workout"
+                  element={
+                    <RequireAuth>
+                      <AddWorkout />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/progress/workouts"
+                  element={
+                    <RequireAuth>
+                      <WorkoutLog />
+                    </RequireAuth>
+                  }
+                />
+              </Routes>
+            </div>
           </div>
         </BrowserRouter>
       </div>

@@ -5,7 +5,10 @@ const Profile = ({ profileData }) => {
     return (
         <div className="page">
             <PageHeaderMain pageName={"Profile and Settings"} />
+          <div>
             <ProfileList profileData={profileData} />
+            </div>
+          
         </div>
     );
 };
