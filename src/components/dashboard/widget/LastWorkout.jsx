@@ -1,3 +1,4 @@
+import { IconButton } from "@mui/material";
 import MainDrawer from "../../general/drawer/MainDrawer";
 import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 
@@ -14,7 +15,10 @@ export default function LastWorkout({ workout }) {
   return (
     <div>
         {workout.title}
-        <MainDrawer drawerTitle={"Your last Workout"} drawerContent={drawerContent} drawerOpenButton={<OpenInNewRoundedIcon />} />
+        <div>
+        <MainDrawer drawerTitle={"Your last Workout"}  drawerContent={drawerContent} drawerOpenButton={<IconButton><OpenInNewRoundedIcon /></IconButton>} />
+        </div>
+       
     </div>
   );
 }
