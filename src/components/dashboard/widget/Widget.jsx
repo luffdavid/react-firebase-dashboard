@@ -7,6 +7,7 @@ import { FitnessCenterTwoTone } from '@mui/icons-material';
 import { PRIMARY, SECONDARYTEXT } from "../../general/Constants";
 import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import { Typography } from "@mui/material";
+import LastWorkout from "./LastWorkout";
 
 const Widget = ({ type, workouts, workoutsThisMonth}) => {
  
@@ -32,7 +33,7 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "LAST WORKOUT",
         isCounter: false,
-        content: workouts.length > 0 ? workouts[0].title : "No workout available",
+        content: workouts.length > 0 ? <LastWorkout workout={workouts[0]}/>: "No workout available",
         link: <Link style={{color:PRIMARY}}  to="/progress/workouts">View last workout</Link>,
         icon: (
           <FitnessCenterTwoTone
