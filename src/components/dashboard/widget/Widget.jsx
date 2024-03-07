@@ -8,6 +8,7 @@ import { PRIMARY, SECONDARYTEXT } from "../../general/Constants";
 import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import { Typography } from "@mui/material";
 import LastWorkout from "./LastWorkout";
+import WorkoutsThisMonth from "./WorkoutsThisMonth";
 
 const Widget = ({ type, workouts, workoutsThisMonth}) => {
  
@@ -47,7 +48,8 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "WORKOUTS THIS MONTH",
         isCounter: true,
-        count: workoutsThisMonth.length,
+        // count: workoutsThisMonth.length,
+        count: workoutsThisMonth.length > 0 ?<WorkoutsThisMonth workouts={workoutsThisMonth} /> : "No workouts this month",
         link: <Link style={{color:PRIMARY}} to="/progress/workouts">View workouts this month</Link>,
         icon: (
           <FitnessCenterTwoTone

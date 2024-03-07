@@ -22,17 +22,9 @@ export default function WorkoutCalender({ workouts }) {
   const workoutDates = workouts.map((w) => new Date(w.date));
   return (
     <div className="chart">
+      <div style={{display:'flex', justifyContent:'space-between'}}>
       <span style={{ fontWeight: "bold" }}>WORKOUT CALENDER</span>
-      <DayPicker
-        mode="single"
-        showOutsideDays
-        defaultMonth={Date.now()}
-        modifiers={{ booked: workoutDates }}
-        modifiersStyles={{ booked: bookedStyle }}
-        onDayClick={handleDayClick}
-      />
-     
-        <MainDrawer drawerTitle={"Workout Calender"} drawerOpenButton={ <IconButton><OpenInNewRoundedIcon /></IconButton>} drawerContent={
+      <MainDrawer drawerTitle={"Workout Calender"} drawerOpenButton={ <OpenInNewRoundedIcon color={"secondary"} />} buttonVariant={"text"} drawerContent={
           <div>
             <DayPicker
         mode="single"
@@ -49,7 +41,17 @@ export default function WorkoutCalender({ workouts }) {
       )}
             </div>
         }/>
+      </div>
+     
       
+      <DayPicker
+        mode="single"
+        showOutsideDays
+        defaultMonth={Date.now()}
+        modifiers={{ booked: workoutDates }}
+        modifiersStyles={{ booked: bookedStyle }}
+        onDayClick={handleDayClick}
+      />
     </div>
   );
 }

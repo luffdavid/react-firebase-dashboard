@@ -5,7 +5,7 @@ import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
 
 export default function LastWorkout({ workout }) { 
     const drawerContent = 
-        <div style={{marginTop:'3%'}}>
+        <div>
             Workout: {workout.title} <br />
             Date: {workout.date} <br />
             Exercises: {workout.exercisesAndWeight}
@@ -16,7 +16,7 @@ export default function LastWorkout({ workout }) {
     <div>
         {workout.title}
         <div>
-        <MainDrawer drawerTitle={"Your last Workout"}  drawerContent={drawerContent} drawerOpenButton={<IconButton><OpenInNewRoundedIcon /></IconButton>} />
+        <MainDrawer drawerTitle={"Your last Workout"}  drawerContent={drawerContent} buttonVariant={"text"} drawerOpenButton={<OpenInNewRoundedIcon color="secondary" />} />
         </div>
        
     </div>

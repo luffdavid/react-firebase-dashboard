@@ -11,14 +11,17 @@ import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 
-const drawerBleeding = 56;
+const drawerBleeding = 0;
 
 const Root = styled('div')(({ theme }) => ({
- 
+  //  backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[900],
+   bgcolor: 'background.paper'
 }));
 
 const StyledBox = styled('div')(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[900],
+  //  backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[900],
+  // bgcolor: 'background.paper'
+  bgcolor: 'background.paper'
 }));
 
 const Puller = styled('div')(({ theme }) => ({
@@ -32,7 +35,7 @@ const Puller = styled('div')(({ theme }) => ({
 }));
 
 
-function MainDrawer({drawerTitle, drawerContent, drawerOpenButton}) {
+function MainDrawer({drawerTitle, drawerContent, drawerOpenButton, buttonVariant}) {
     const [open, setOpen] = React.useState(false);
 
     const toggleDrawer = (newOpen) => () => {
@@ -40,6 +43,7 @@ function MainDrawer({drawerTitle, drawerContent, drawerOpenButton}) {
     };
   
     return (
+      <div>
       <Root>
         <CssBaseline />
         <Global
@@ -51,35 +55,38 @@ function MainDrawer({drawerTitle, drawerContent, drawerOpenButton}) {
           }}
         />
         <Box>
-          <Button variant="contained" onClick={toggleDrawer(true)}>{drawerOpenButton}</Button>
+          <Button variant={buttonVariant}  onClick={toggleDrawer(true)}>{drawerOpenButton}</Button>
         </Box>
         <SwipeableDrawer
           anchor="bottom"
           open={open}
           onClose={toggleDrawer(false)}
           allowSwipeInChildren="true"
+          swipeAreaWidth={drawerBleeding}
         >
           <StyledBox
             sx={{
               position: 'absolute',
               top: -drawerBleeding,
-              borderTopLeftRadius: 8,
-              borderTopRightRadius: 8,
+              borderTopLeftRadius: 25,
+              borderTopRightRadius:25 ,
               visibility: 'visible',
               right: 0,
               left: 0,
             }}
           >
             <Puller />
-            <Typography variant='h4' sx={{ p: 2, color: 'text.primary'}}>
+            <Typography variant='h4' sx={{ p: 3, color: 'text.primary'}}>
                 {drawerTitle}
             </Typography>
+
           </StyledBox>
           <StyledBox
             sx={{
               px: 2,
               pb: 2,
               height: '100%',
+              marginTop:'15vh',
               overflow: 'auto',
             }}
           >
@@ -87,6 +94,7 @@ function MainDrawer({drawerTitle, drawerContent, drawerOpenButton}) {
           </StyledBox>
         </SwipeableDrawer>
       </Root>
+      </div>
     );
   }
   

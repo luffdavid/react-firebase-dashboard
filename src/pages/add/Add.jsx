@@ -8,7 +8,7 @@ const Add = () => {
   return (
     <div className="page">
       <PageHeaderMain pageName={"Add"} />
-         <MainDrawer drawerTitle={"Add a new workout"} drawerContent={<AddWorkoutForm />} drawerOpenButton={"Add a new workout"} />
+         <MainDrawer drawerTitle={"Add a new workout"} drawerContent={<AddWorkoutForm />} buttonVariant={"contained"} drawerOpenButton={"Add a new workout"} />
     
     </div>
   )
