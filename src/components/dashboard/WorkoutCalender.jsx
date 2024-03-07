@@ -24,7 +24,7 @@ export default function WorkoutCalender({ workouts }) {
     <div className="chart">
       <div style={{display:'flex', justifyContent:'space-between'}}>
       <span style={{ fontWeight: "bold" }}>WORKOUT CALENDER</span>
-      <MainDrawer drawerTitle={"Workout Calender"} drawerOpenButton={ <OpenInNewRoundedIcon color={"secondary"} />} buttonVariant={"text"} drawerContent={
+      <MainDrawer drawerTitle={"Workout Calender"} drawerOpenButton={ <OpenInNewRoundedIcon color={"primary"} />} buttonVariant={"text"} drawerContent={
           <div>
             <DayPicker
         mode="single"

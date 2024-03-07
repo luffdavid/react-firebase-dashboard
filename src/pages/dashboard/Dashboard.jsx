@@ -56,7 +56,7 @@ const Dashboard = ({ workouts }) => {
                 <WorkoutCalender workouts={workouts} />
               </div>
               <div className="listContainer">
-                <span style={{ fontWeight: "bold" }}>YOUR LATEST WORKOUTS</span>
+                <span style={{ fontWeight: "bold" }}>YOUR LATEST WORKOUTS </span>
                 <Table workouts={workouts} />
               </div>
             </div>

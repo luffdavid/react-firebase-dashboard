@@ -13,7 +13,7 @@ export default function WorkoutsThisMonth({ workouts }) {
   return (
     <div>
         <div>
-        <MainDrawer drawerTitle={"Workouts this month"}  drawerContent={drawerContent} buttonVariant={"text"} drawerOpenButton={<OpenInNewRoundedIcon color="primary" />} />
+        <MainDrawer drawerTitle={"All Workouts"}  drawerContent={drawerContent} buttonVariant={"text"} drawerOpenButton={<OpenInNewRoundedIcon color="primary" />} />
         </div>
        
     </div>

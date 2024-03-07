@@ -21,7 +21,7 @@ const WorkoutList = ({ workouts, monthYear }) => {
          You didn't add a workout yet
       </div>
     ) : (
-      <List sx={{width:'88%'}}>
+      <List sx={{width:'88%', marginBottom:'20vh'}}>
       {last5workouts.map((workout) => (
         <ListItem key={workout.id}>
           <ListItemAvatar>

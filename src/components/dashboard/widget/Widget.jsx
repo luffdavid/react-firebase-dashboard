@@ -8,8 +8,9 @@ import { PRIMARY, SECONDARYTEXT } from "../../general/Constants";
 import MonitorWeightIcon from '@mui/icons-material/MonitorWeight';
 import { Typography } from "@mui/material";
 import LastWorkout from "./LastWorkout";
+import AllWorkouts from "./AllWorkouts";
 import WorkoutsThisMonth from "./WorkoutsThisMonth";
-
+import CurrentWeight from "./CurrentWeight"
 const Widget = ({ type, workouts, workoutsThisMonth}) => {
  
 
@@ -20,13 +21,10 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "ALL WORKOUTS",
         isCounter: true,
-        count: workouts.length,
+        count: workouts.length > 0 ?  workouts.length : "0",
         link: <Link style={{color:PRIMARY}} to="/progress/workouts">View all workouts</Link>,
         icon: (
-          <FitnessCenterTwoTone
-            className="icon"
-            sx={{color:PRIMARY}}
-          />
+          <AllWorkouts workouts={workouts} />
         ),
       };
       break;
@@ -34,13 +32,10 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "LAST WORKOUT",
         isCounter: false,
-        content: workouts.length > 0 ? <LastWorkout workout={workouts[0]}/>: "No workout available",
+        content: workouts.length > 0 ? workouts[0].title : "No workout added",
         link: <Link style={{color:PRIMARY}}  to="/progress/workouts">View last workout</Link>,
         icon: (
-          <FitnessCenterTwoTone
-            className="icon"
-            sx={{color:PRIMARY}}
-          />
+          <LastWorkout workout={workouts[0]} />
         ),
       };
       break;
@@ -48,14 +43,10 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "WORKOUTS THIS MONTH",
         isCounter: true,
-        // count: workoutsThisMonth.length,
-        count: workoutsThisMonth.length > 0 ?<WorkoutsThisMonth workouts={workoutsThisMonth} /> : "No workouts this month",
+        count: workoutsThisMonth.length > 0 ? workoutsThisMonth.length : "No workouts this month",
         link: <Link style={{color:PRIMARY}} to="/progress/workouts">View workouts this month</Link>,
         icon: (
-          <FitnessCenterTwoTone
-            className="icon"
-            sx={{color:PRIMARY}}
-          />
+          <WorkoutsThisMonth workouts={workoutsThisMonth} />
         ),
       };
       break;
@@ -66,10 +57,7 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
         count: 80,
         link: <Link style={{color:PRIMARY}} to="/">View details</Link>,
         icon: (
-          <MonitorWeightIcon
-            className="icon"
-            sx={{color:PRIMARY}}
-          />
+          <CurrentWeight />
         ),
       };
       break;

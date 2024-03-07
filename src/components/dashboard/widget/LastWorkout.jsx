@@ -1,22 +1,46 @@
-import { IconButton } from "@mui/material";
+import { Avatar, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography } from "@mui/material";
 import MainDrawer from "../../general/drawer/MainDrawer";
 import OpenInNewRoundedIcon from '@mui/icons-material/OpenInNewRounded';
+import { PRIMARY } from "../../general/Constants";
+import { FitnessCenterTwoTone } from "@mui/icons-material";
 
 
 export default function LastWorkout({ workout }) { 
     const drawerContent = 
-        <div>
-            Workout: {workout.title} <br />
-            Date: {workout.date} <br />
-            Exercises: {workout.exercisesAndWeight}
-            Notes: {workout.notes}
-        </div>
+    <List>
+  <ListItem key={workout.id}>
+    <ListItemAvatar>
+      <Avatar sx={{backgroundColor: PRIMARY}}>
+        <FitnessCenterTwoTone  />
+      </Avatar>
+    </ListItemAvatar>
+    <ListItemText
+      primary={
+        <>
+          <Typography variant='h6'>{workout.title}</Typography>
+        </>
+      }
+      secondary={
+        <>
+          <Typography
+            sx={{ display: 'inline' }}
+            component="span"
+            variant="body2"
+          > 
+          {workout.date} <br />
+           from {workout.start} to {workout.end} <br />
+          </Typography>
+        </>
+      }
+    />
+  </ListItem>
+</List>
+        
     
   return (
     <div>
-        {workout.title}
         <div>
-        <MainDrawer drawerTitle={"Your last Workout"}  drawerContent={drawerContent} buttonVariant={"text"} drawerOpenButton={<OpenInNewRoundedIcon color="secondary" />} />
+        <MainDrawer drawerTitle={"Your last Workout"}  drawerContent={drawerContent} buttonVariant={"text"} drawerOpenButton={<OpenInNewRoundedIcon color="primary" />} />
         </div>
        
     </div>

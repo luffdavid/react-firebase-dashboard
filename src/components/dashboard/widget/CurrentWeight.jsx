@@ -8,12 +8,12 @@ import ReusableWorkoutList from "../../general/workouts/ReusableWorkoutList";
 
 
 export default function WorkoutsThisMonth({ workouts }) { 
-    const drawerContent = <ReusableWorkoutList workouts={workouts} />
+    const drawerContent = "COming soon"
          
   return (
     <div>
         <div>
-        <MainDrawer drawerTitle={"Workouts this month"}  drawerContent={drawerContent} buttonVariant={"text"} drawerOpenButton={<OpenInNewRoundedIcon color="primary" />} />
+        <MainDrawer drawerTitle={"Your current Weight"}  drawerContent={drawerContent} buttonVariant={"text"} drawerOpenButton={<OpenInNewRoundedIcon color="primary" />} />
         </div>
        
     </div>
