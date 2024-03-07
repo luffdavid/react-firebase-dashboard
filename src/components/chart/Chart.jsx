@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import "./chart.scss";
 import {
   AreaChart,
@@ -7,45 +8,37 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import { useMemo } from "react";
+
+const monthNames = [];
+const currentDate = dayjs();
+for (let i = 5; i >= 0; i--) {
+    const monthName = currentDate.subtract(i, 'month').format('MMMM');
+    monthNames.push(monthName);
+}
 
 const Chart = ({ aspect, title, workouts }) => {
-  // Funktion zum Vorbereiten der Daten für alle Workouts nach Monat
-  const prepareChartData = (workouts) => {
-    // Map zur Zählung der Workouts für jeden Monat
-    const workoutCountByMonth = new Map();
-
-    // Iteriere über alle Workouts
-    workouts.forEach(workout => {
-      const workoutDate = new Date(workout.date);
-      const monthYearKey = `${workoutDate.getMonth() + 1}/${workoutDate.getFullYear()}`;
-
-      // Wenn der Monat bereits in der Map vorhanden ist, erhöhe die Anzahl der Workouts
-      if (workoutCountByMonth.has(monthYearKey)) {
-        workoutCountByMonth.set(monthYearKey, workoutCountByMonth.get(monthYearKey) + 1);
-      } else {
-        // Wenn der Monat noch nicht in der Map vorhanden ist, setze die Anzahl der Workouts auf 1
-        workoutCountByMonth.set(monthYearKey, 1);
-      }
-    });
-
-    // Konvertiere die Map in ein Array von Objekten für die Chart-Daten
-    const chartData = Array.from(workoutCountByMonth, ([name, Total]) => ({ name, Total }));
-
-    return chartData;
+  // Funktion zur Berechnung der Anzahl der Workouts für jeden Monat
+  const getWorkoutsCountForMonth = (workouts, monthName) => {
+    if (!workouts || workouts.length === 0) return 0; // Überprüfen, ob workouts null oder leer ist
+    return workouts.filter(workout => {
+      return dayjs(workout.date).format('MMMM') === monthName;
+    }).length;
   };
 
-  // Memoisiere die vorbereiteten Chart-Daten
-  const chartData = useMemo(() => prepareChartData(workouts), [workouts]);
+  // Daten für die Chart
+  const data = monthNames.map(monthName => ({
+    name: monthName,
+    Total: getWorkoutsCountForMonth(workouts, monthName)
+  }));
 
   return (
     <div className="chart">
-      <div className="title">{title}</div>
+       <span style={{ fontWeight: "bold" }}>6 MONTH WORKOUT CHART</span>
       <ResponsiveContainer width="100%" aspect={aspect}>
         <AreaChart
           width={730}
           height={250}
-          data={chartData}
+          data={data}
           margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
         >
           <defs>
