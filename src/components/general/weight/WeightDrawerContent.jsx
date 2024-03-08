@@ -9,6 +9,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import * as React from 'react';
 import { PRIMARY } from '../Constants';
+import { EventOutlined } from '@mui/icons-material';
 
 export default function WeightDrawerContent({weight}) {
   return (
@@ -24,7 +25,7 @@ export default function WeightDrawerContent({weight}) {
       <ListItem>
         <ListItemAvatar>
           <Avatar sx={{backgroundColor:PRIMARY, color:'white'}}>
-           <CalendarMonthRoundedIcon />
+          <EventOutlined />
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary="Date" secondary={weight.date + " at  " + weight.time} />
