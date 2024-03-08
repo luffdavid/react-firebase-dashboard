@@ -52,7 +52,7 @@ function App() {
 
   useEffect(() => {
     const getProfileDetails = async () => {
-      const docRef = doc(db, "users", currentUser.uid);
+      const docRef = doc(db, "users", currentUser?.uid);
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
@@ -72,7 +72,7 @@ function App() {
   useEffect(() => {
     const fetchWorkoutData = async () => {
       try {
-        const weightsData = await getWeightMeasurements(currentUser.uid);
+        const weightsData = await getWeightMeasurements(currentUser?.uid);
         const sortedWeights = weightsData.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         );
@@ -83,12 +83,12 @@ function App() {
     };
 
     fetchWorkoutData();
-  }, [currentUser.uid, setWeights]);
+  }, [currentUser?.uid, setWeights]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const workoutsData = await getWorkouts(currentUser.uid);
+        const workoutsData = await getWorkouts(currentUser?.uid);
         const sortedWorkouts = workoutsData.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         );
@@ -99,7 +99,7 @@ function App() {
     };
 
     fetchData();
-  }, [currentUser.uid, setWorkouts]);
+  }, [currentUser?.uid, setWorkouts]);
 
   return (
     <ThemeProvider theme={theme}>

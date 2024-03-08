@@ -10,41 +10,47 @@ import * as React from 'react';
 import { PRIMARY } from '../Constants';
 import { EventOutlined } from '@mui/icons-material';
 
-export default function WeightDrawerContent({weight}) {
+export default function WeightDrawerContent({ weight }) {
   return (
-    <List className="widget-reusable" sx={{ width: '100%'}}>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar sx={{backgroundColor:PRIMARY, color:'white'}}>
-            <MonitorWeightRoundedIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Current Weight" secondary={weight.weight} />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar sx={{backgroundColor:PRIMARY, color:'white'}}>
-          <EventOutlined />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Date" secondary={weight.date + " at  " + weight.time} />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar sx={{backgroundColor:PRIMARY, color:'white'}}>
-           <FlagRoundedIcon />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Your goal" secondary={weight.target} />
-      </ListItem>
-      <ListItem>
-        <ListItemAvatar>
-          <Avatar sx={{backgroundColor:PRIMARY, color:'white'}} >
-            <DescriptionRoundedIcon  />
-          </Avatar>
-        </ListItemAvatar>
-        <ListItemText primary="Notes" secondary={weight.notes ? weight.notes : "No notes provided"} />
-      </ListItem>
-    </List>
+    <>
+      {weight ? (
+        <List className="widget-reusable" sx={{ width: '100%' }}>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ backgroundColor: PRIMARY, color: 'white' }}>
+                <MonitorWeightRoundedIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Current Weight" secondary={weight.weight} />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ backgroundColor: PRIMARY, color: 'white' }}>
+                <EventOutlined />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Date" secondary={`${weight.date} at ${weight.time}`} />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ backgroundColor: PRIMARY, color: 'white' }}>
+                <FlagRoundedIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Your goal" secondary={weight.target} />
+          </ListItem>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar sx={{ backgroundColor: PRIMARY, color: 'white' }}>
+                <DescriptionRoundedIcon />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Notes" secondary={weight.notes ? weight.notes : "No notes provided"} />
+          </ListItem>
+        </List>
+      ) : 
+      <div></div>
+      }
+    </>
   );
 }
