@@ -34,7 +34,7 @@ const Sidebar = () => {
               </Link>
 
           <p className="title">PROGRESS</p>
-              <Link  to="/progress/workouts" style={{ textDecoration: "none" }}>
+              <Link  to="/progress" style={{ textDecoration: "none" }}>
                   <li>
                     <FitnessCenterIcon  className="icon" />
                     <span>Your Progress</span>
@@ -42,7 +42,7 @@ const Sidebar = () => {
               </Link>
           
           <p className="title">ADD</p>
-              <Link  to="/add/workout" style={{ textDecoration: "none" }}>
+              <Link  to="/add" style={{ textDecoration: "none" }}>
                   <li>
                     <AddCircleOutlineOutlinedIcon className="icon" />
                     <span>Workouts</span>

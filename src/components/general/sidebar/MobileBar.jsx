@@ -40,14 +40,14 @@ export default function Navbar() {
         />
              <BottomNavigationAction
                 component={Link}
-                to="/progress/workouts"
+                to="/progress"
                 label="Progress"
                 value="Progress"
                 icon={<FitnessCenterIcon />}
         />
             <BottomNavigationAction
                 component={Link}
-                to="/add/workout"
+                to="/add"
                 label="Add"
                 value="Add"
                 icon={<AddCircleOutlineOutlinedIcon />}

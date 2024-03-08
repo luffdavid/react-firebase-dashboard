@@ -4,7 +4,7 @@ import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/AuthContext";
 import Profile from "./pages/profile/Profile";
 import AddWorkout from "./pages/add/Add";
-import WorkoutLog from "./pages/progress/WorkoutLog";
+import Progress from "./pages/progress/Progress";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Login from "./pages/login/Login";
 import "./style/dark.scss";
@@ -150,7 +150,7 @@ function App() {
                   }
                 />
                 <Route
-                  path="/add/workout"
+                  path="/add"
                   element={
                     <RequireAuth>
                       <AddWorkout />
@@ -158,10 +158,10 @@ function App() {
                   }
                 />
                 <Route
-                  path="/progress/workouts"
+                  path="/progress"
                   element={
                     <RequireAuth>
-                      <WorkoutLog />
+                      <Progress workouts={workouts} weights={weights}/>
                     </RequireAuth>
                   }
                 />

@@ -125,7 +125,7 @@ const handleDeleteClose = () =>{
       {/* MODAL */}
       <div>
         <WorkoutModall  open={open} handleClose={handleClose} workout={workout} />
-        <DeleteWorkoutModal open={deleteOpen} handleClose={handleDeleteClose} workout={workout} />
+        <DeleteWorkoutModal open={deleteOpen} handleClose={handleDeleteClose} type={"workout"} data={workout} />
     </div>
     </div>
   );

@@ -1,29 +1,18 @@
 import "./dashboard.scss";
 
 import { useMediaQuery } from "@mui/material";
-import WorkoutCalender from "../../components/dashboard/WorkoutCalender";
 import { useEffect, useState } from "react";
-import PageHeaderMain from "../../components/general/heading/PageHeaderMain";
-import Widget from "../../components/dashboard/widget/Widget";
-import Table from "../../components/dashboard/table/Table";
 import Chart from "../../components/chart/Chart";
- import WorkoutList from '../../components/progress/WorkoutList'
+import WorkoutCalender from "../../components/dashboard/WorkoutCalender";
+import Table from "../../components/dashboard/table/Table";
+import Widget from "../../components/dashboard/widget/Widget";
+import PageHeaderMain from "../../components/general/heading/PageHeaderMain";
+import { getWorkoutsThisMonth } from "../../services/api/workoutService";
 const Dashboard = ({ workouts, weights }) => {
-  const isTabletOrBigger = useMediaQuery("(min-width: 768px)");
   const [workoutsThisMonth, setWorkoutsThisMonth] = useState([]);
-
   useEffect(() => {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const currentYear = currentDate.getFullYear();
-    const filteredWorkouts = workouts.filter((workout) => {
-      const workoutDate = new Date(workout.date);
-      return (
-        workoutDate.getMonth() === currentMonth &&
-        workoutDate.getFullYear() === currentYear
-      );
-    });
-    setWorkoutsThisMonth(filteredWorkouts);
+    const workoutsThisMonth = getWorkoutsThisMonth(workouts);
+    setWorkoutsThisMonth(workoutsThisMonth);
   }, [workouts]);
 
   return (
@@ -55,7 +44,7 @@ const Dashboard = ({ workouts, weights }) => {
                 type="LAST_WORKOUT"
               />
             </div>
-            <div  className="workoutAndChart">
+            <div className="workoutAndChart">
               <WorkoutCalender workouts={workouts} />
               <Chart
                 aspect={3 / 1}
@@ -63,13 +52,7 @@ const Dashboard = ({ workouts, weights }) => {
                 workouts={workouts}
               />
             </div>
-            {/* <div className="listContainer">
-              <Chart
-                aspect={3 / 1}
-                title="Workouts( Last 6 Months)"
-                workouts={workouts}
-              />
-            </div> */}
+            </div>
             <div className="listContainer">
               <span style={{ fontWeight: "bold" }}>YOUR LATEST WORKOUTS </span>
               <Table workouts={workouts} />
@@ -77,7 +60,6 @@ const Dashboard = ({ workouts, weights }) => {
           </div>
         </div>
       </div>
-    </div>
   );
 };
 
