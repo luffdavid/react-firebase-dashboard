@@ -11,7 +11,7 @@ import LastWorkout from "./LastWorkout";
 import AllWorkouts from "./AllWorkouts";
 import WorkoutsThisMonth from "./WorkoutsThisMonth";
 import CurrentWeight from "./CurrentWeight"
-const Widget = ({ type, workouts, workoutsThisMonth}) => {
+const Widget = ({ type, workouts, workoutsThisMonth, weights}) => {
  
 
   let data = {}; // Definieren Sie ein leeres Objekt als Standardwert für data
@@ -21,7 +21,7 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "ALL WORKOUTS",
         isCounter: true,
-        count: workouts.length > 0 ?  workouts.length : "0",
+        count: workouts?.length > 0 ?  workouts.length : "0",
         link: <Link style={{color:PRIMARY}} to="/progress/workouts">View all workouts</Link>,
         icon: (
           <AllWorkouts workouts={workouts} />
@@ -32,7 +32,7 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "LAST WORKOUT",
         isCounter: false,
-        content: workouts.length > 0 ? workouts[0].title : "No workout added",
+        content: workouts?.length > 0 ? workouts[0].title : "No workout added",
         link: <Link style={{color:PRIMARY}}  to="/progress/workouts">View last workout</Link>,
         icon: (
           <LastWorkout workout={workouts[0]} />
@@ -43,7 +43,7 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "WORKOUTS THIS MONTH",
         isCounter: true,
-        count: workoutsThisMonth.length > 0 ? workoutsThisMonth.length : "No workouts this month",
+        count: workoutsThisMonth?.length > 0 ? workoutsThisMonth.length : "No workouts this month",
         link: <Link style={{color:PRIMARY}} to="/progress/workouts">View workouts this month</Link>,
         icon: (
           <WorkoutsThisMonth workouts={workoutsThisMonth} />
@@ -54,10 +54,10 @@ const Widget = ({ type, workouts, workoutsThisMonth}) => {
       data = {
         title: "CURRENT WEIGHT",
         isCounter: true,
-        count: 80,
+        count: weights?.length > 0 ? weights[0].weight : "No weight added yet",
         link: <Link style={{color:PRIMARY}} to="/">View details</Link>,
         icon: (
-          <CurrentWeight />
+          <CurrentWeight weights={weights}/>
         ),
       };
       break;

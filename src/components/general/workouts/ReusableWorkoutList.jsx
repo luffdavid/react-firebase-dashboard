@@ -6,7 +6,7 @@ import { PRIMARY } from '../Constants';
 const ReusableWorkoutList = ({ workouts }) => {
   return (
     <div>
-      <List>
+      <List className="widget-reusable">
         {workouts && workouts.map((workout) => (
           <ListItem key={workout.id}>
             <ListItemAvatar>

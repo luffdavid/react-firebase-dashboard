@@ -5,10 +5,17 @@ import { PRIMARY } from "../../general/Constants";
 import { FitnessCenterTwoTone } from "@mui/icons-material";
 import dayjs from "dayjs";
 import ReusableWorkoutList from "../../general/workouts/ReusableWorkoutList";
+import WeightDrawerContent from "../../general/weight/WeightDrawerContent";
 
 
-export default function WorkoutsThisMonth({ workouts }) { 
-    const drawerContent = "COming soon"
+export default function CurrentWeight({ weights }) { 
+    const drawerContent = 
+    weights ? (
+     <WeightDrawerContent weight={weights[0]} />
+    ) : (
+      <>
+      No weight measurements available</>
+    )
          
   return (
     <div>

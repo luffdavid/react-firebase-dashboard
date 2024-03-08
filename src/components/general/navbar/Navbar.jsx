@@ -55,13 +55,19 @@ const Navbar = ({profileData, isDarkMode}) => {
             <ListOutlinedIcon className="icon" />
           </div> */}
           <div className="item">
-            <Avatar
+            {/* <Avatar
               className="avatar"
-            >{profileData?.displayName.charAt(0).toUpperCase()}</Avatar>
+            >{profileData?.displayName.charAt(0).toUpperCase()}</Avatar> */}
+           <Avatar
+              className="avatar"
+            ><img src={profileData?.img} />
+            </Avatar>
           </div>
+          </div>
+
         </div>
       </div>
-    </div>
+    // </div>
   );
 };
 

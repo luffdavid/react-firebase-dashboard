@@ -18,12 +18,14 @@ import Navbar from "./components/general/navbar/Navbar";
 import { grey } from "@mui/material/colors";
 import { useWorkoutContext } from "./context/workouts/WorkoutContext";
 import { getWorkouts } from "./services/api/workoutService";
+import { getWeightMeasurements } from "./services/api/weightService";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
   const [profileData, setProfileData] = useState(null);
   const { workouts, setWorkouts } = useWorkoutContext();
+  const [weights, setWeights] = useState(null);
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -66,6 +68,22 @@ function App() {
       // Cleanup: DO NOT DELETE THIS
     };
   }, [currentUser]);
+
+  useEffect(() => {
+    const fetchWorkoutData = async () => {
+      try {
+        const weightsData = await getWeightMeasurements(currentUser.uid);
+        const sortedWeights = weightsData.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        setWeights(sortedWeights);
+      } catch (error) {
+        console.error("Error fetching weights:", error);
+      }
+    };
+
+    fetchWorkoutData();
+  }, [currentUser.uid, setWeights]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -118,6 +136,7 @@ function App() {
                       <Dashboard
                         profileData={profileData}
                         workouts={workouts}
+                        weights={weights}
                       />
                     </RequireAuth>
                   }

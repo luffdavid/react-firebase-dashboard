@@ -7,7 +7,8 @@ import PageHeaderMain from "../../components/general/heading/PageHeaderMain";
 import Widget from "../../components/dashboard/widget/Widget";
 import Table from "../../components/dashboard/table/Table";
 import Chart from "../../components/chart/Chart";
-const Dashboard = ({ workouts }) => {
+ import WorkoutList from '../../components/progress/WorkoutList'
+const Dashboard = ({ workouts, weights }) => {
   const isTabletOrBigger = useMediaQuery("(min-width: 768px)");
   const [workoutsThisMonth, setWorkoutsThisMonth] = useState([]);
 
@@ -45,6 +46,7 @@ const Dashboard = ({ workouts }) => {
               <Widget
                 workouts={workouts}
                 workoutsThisMonth={workoutsThisMonth}
+                weights={weights}
                 type="CURRENT_WEIGHT"
               />
               <Widget
@@ -53,16 +55,21 @@ const Dashboard = ({ workouts }) => {
                 type="LAST_WORKOUT"
               />
             </div>
-            <div className="listContainer">
+            <div  className="workoutAndChart">
               <WorkoutCalender workouts={workouts} />
-            </div>
-            <div className="listContainer">
               <Chart
                 aspect={3 / 1}
                 title="Workouts( Last 6 Months)"
                 workouts={workouts}
               />
             </div>
+            {/* <div className="listContainer">
+              <Chart
+                aspect={3 / 1}
+                title="Workouts( Last 6 Months)"
+                workouts={workouts}
+              />
+            </div> */}
             <div className="listContainer">
               <span style={{ fontWeight: "bold" }}>YOUR LATEST WORKOUTS </span>
               <Table workouts={workouts} />

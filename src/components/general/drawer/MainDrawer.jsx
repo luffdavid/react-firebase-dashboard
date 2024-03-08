@@ -1,61 +1,69 @@
-import * as React from 'react';
-import PropTypes from 'prop-types';
-import { Global } from '@emotion/react';
-import { styled } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { grey } from '@mui/material/colors';
-import Button from '@mui/material/Button';
-import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
-import Typography from '@mui/material/Typography';
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-
+import * as React from "react";
+import PropTypes from "prop-types";
+import { Global } from "@emotion/react";
+import { styled } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { grey } from "@mui/material/colors";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
+import Typography from "@mui/material/Typography";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
 
 const drawerBleeding = 0;
 
-const Root = styled('div')(({ theme }) => ({
+const Root = styled("div")(({ theme }) => ({
   //  backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[900],
-   bgcolor: 'background.paper'
+  bgcolor: "background.paper",
 }));
 
-const StyledBox = styled('div')(({ theme }) => ({
+const StyledBox = styled("div")(({ theme }) => ({
   //  backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[900],
   // bgcolor: 'background.paper'
-  bgcolor: 'background.paper'
+  bgcolor: "background.paper",
 }));
 
-const Puller = styled('div')(({ theme }) => ({
+const Puller = styled("div")(({ theme }) => ({
   width: 30,
   height: 6,
-  backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[700],
+  backgroundColor: theme.palette.mode === "light" ? grey[300] : grey[700],
   borderRadius: 3,
-  position: 'absolute',
+  position: "absolute",
   top: 8,
-  left: 'calc(50% - 15px)',
+  left: "calc(50% - 15px)",
 }));
 
+function MainDrawer({
+  drawerTitle,
+  drawerContent,
+  drawerOpenButton,
+  startAdorment,
+  buttonVariant,
+}) {
+  const [open, setOpen] = React.useState(false);
 
-function MainDrawer({drawerTitle, drawerContent, drawerOpenButton, buttonVariant}) {
-    const [open, setOpen] = React.useState(false);
+  const toggleDrawer = (newOpen) => () => {
+    setOpen(newOpen);
+  };
 
-    const toggleDrawer = (newOpen) => () => {
-      setOpen(newOpen);
-    };
-  
-    return (
-      <div>
+  return (
+    <div>
       <Root>
         <CssBaseline />
         <Global
           styles={{
             '.MuiDrawer-root > .MuiPaper-root': {
               height: '70%',
-              overflow: open ? 'visible' : 'hidden'
+              overflow: open ? 'visible' : 'hidden',
+              borderTopLeftRadius: 25,
+              borderTopRightRadius: 25
             },
           }}
         />
         <Box>
-          <Button variant={buttonVariant}  onClick={toggleDrawer(true)}>{drawerOpenButton}</Button>
+          <Button variant={buttonVariant} onClick={toggleDrawer(true)} startIcon={startAdorment}>
+            {drawerOpenButton}
+          </Button>
         </Box>
         <SwipeableDrawer
           anchor="bottom"
@@ -66,40 +74,39 @@ function MainDrawer({drawerTitle, drawerContent, drawerOpenButton, buttonVariant
         >
           <StyledBox
             sx={{
-              position: 'absolute',
+              position: "absolute",
               top: -drawerBleeding,
               borderTopLeftRadius: 25,
-              borderTopRightRadius:25 ,
-              visibility: 'visible',
+              borderTopRightRadius: 25,
+              visibility: "visible",
               right: 0,
-              left: 0,
+              left: 0
             }}
           >
             <Puller />
-            <Typography variant='h4' sx={{ p: 3, color: 'text.primary'}}>
-                {drawerTitle}
+            <Typography variant="h4" sx={{ p: 3, color: "text.primary", }}>
+              {drawerTitle}
             </Typography>
-
           </StyledBox>
           <StyledBox
             sx={{
               px: 2,
               pb: 2,
-              height: '100%',
-              marginTop:'15vh',
+              height: "100%",
+              marginTop: "15vh",
               overflow: 'auto',
             }}
           >
-          {drawerContent}
+            {drawerContent}
           </StyledBox>
         </SwipeableDrawer>
       </Root>
-      </div>
-    );
-  }
-  
-  MainDrawer.propTypes = {
-    window: PropTypes.func,
-  };
-  
-  export default MainDrawer;
+    </div>
+  );
+}
+
+MainDrawer.propTypes = {
+  window: PropTypes.func,
+};
+
+export default MainDrawer;
