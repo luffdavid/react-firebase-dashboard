@@ -1,4 +1,3 @@
-import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
 import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
 import FlagRoundedIcon from '@mui/icons-material/FlagRounded';
 import MonitorWeightRoundedIcon from '@mui/icons-material/MonitorWeightRounded';
@@ -13,7 +12,7 @@ import { EventOutlined } from '@mui/icons-material';
 
 export default function WeightDrawerContent({weight}) {
   return (
-    <List className="widget-reusable" sx={{ width: '100%', maxWidth: 360}}>
+    <List className="widget-reusable" sx={{ width: '100%'}}>
       <ListItem>
         <ListItemAvatar>
           <Avatar sx={{backgroundColor:PRIMARY, color:'white'}}>
