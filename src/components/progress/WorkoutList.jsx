@@ -12,6 +12,8 @@ import DeleteWorkoutModal from './DeleteWorkoutModal';
 import MainDrawer from '../general/drawer/MainDrawer';
 import Add from "../../assets/NotFound.svg"
 import InputError from '../general/InputError';
+import LastWorkout from '../dashboard/widget/SingleWorkout';
+import SingleWorkout from '../dashboard/widget/SingleWorkout';
 
 const WorkoutList = ({ workouts }) => {
   const [open, setOpen] = React.useState(false);
@@ -73,10 +75,11 @@ const handleDeleteClose = () =>{
                   secondaryAction={
                     <>
                       <IconButton>
-                        <OpenInNewOutlinedIcon 
+                        {/* <OpenInNewOutlinedIcon 
                             sx={{ cursor: 'pointer' }}
                             onClick= {()=> handleClickOpen(workout)}
-                             />
+                             /> */}
+                             <MainDrawer drawerTitle={"Details for your workout"} drawerContent={<SingleWorkout workout={workout} showOnlyContent={true}/>} drawerOpenButton={<OpenInNewOutlinedIcon  />} buttonVariant={""} />
                       </IconButton>
                       <IconButton>
                         <DeleteIcon 
@@ -124,7 +127,7 @@ const handleDeleteClose = () =>{
       )}
       {/* MODAL */}
       <div>
-        <WorkoutModall  open={open} handleClose={handleClose} workout={workout} />
+        {/* <WorkoutModall  open={open} handleClose={handleClose} workout={workout} /> */}
         <DeleteWorkoutModal open={deleteOpen} handleClose={handleDeleteClose} type={"workout"} data={workout} />
     </div>
     </div>

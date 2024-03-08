@@ -14,7 +14,7 @@ import {
 import { PRIMARY } from "../../general/Constants";
 import MainDrawer from "../../general/drawer/MainDrawer";
 import TitleIcon from '@mui/icons-material/Title';
-export default function LastWorkout({ workout }) {
+export default function SingleWorkout({ workout, showOnlyContent }) {
   const drawerContent = workout && (
     <List className="widget-reusable" sx={{ width: "100%" }}>
       <ListItem>
@@ -81,15 +81,19 @@ export default function LastWorkout({ workout }) {
   );
 
   return (
-    <div>
-      <div>
-        <MainDrawer
-          drawerTitle={"Your last Workout"}
-          drawerContent={drawerContent}
-          buttonVariant={"text"}
-          drawerOpenButton={<OpenInNewRoundedIcon color="primary" />}
-        />
-      </div>
-    </div>
+    <>
+      {showOnlyContent ? (
+        drawerContent
+      ) : (
+        <div>
+          <MainDrawer
+            drawerTitle={"Your last Workout"}
+            drawerContent={drawerContent}
+            buttonVariant={"text"}
+            drawerOpenButton={<OpenInNewRoundedIcon color="primary" />}
+          />
+        </div>
+      )}
+    </>
   );
 }

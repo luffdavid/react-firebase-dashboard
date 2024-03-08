@@ -143,16 +143,16 @@ import {
             </Grid>
             <Grid item xs={12}>
             <FormControl>
-  <FormLabel id="demo-controlled-radio-buttons-group">What's your aim for the next measurement?</FormLabel>
+  <FormLabel id="demo-controlled-radio-buttons-group">What's your target for the future?</FormLabel>
   <RadioGroup
     aria-labelledby="demo-controlled-radio-buttons-group"
     name="controlled-radio-buttons-group"
     value={value}
     onChange={handleChange}
   >
-    <FormControlLabel value="More" control={<Radio />} label="More"/>
-    <FormControlLabel value="That's my dream weight" control={<Radio />} label="That's my dream weight" />
-    <FormControlLabel value="Less" control={<Radio />} label="Less"/>
+    <FormControlLabel value="Gain weight" control={<Radio />} label="Gain weight"/>
+    <FormControlLabel value="Remain the same weight" control={<Radio />} label="Remain the same weight" />
+    <FormControlLabel value="Lose weight" control={<Radio />} label="Lose weight"/>
   </RadioGroup>
 </FormControl>
             </Grid>

@@ -26,8 +26,8 @@ const Progress = ({workouts, weights}) => {
           onChange={handleChange}
           aria-label="Change view"
         >
-          <ToggleButton value="workouts">Workouts</ToggleButton>
-          <ToggleButton value="weightmeasurements">
+          <ToggleButton sx={{borderTopLeftRadius:'24px', borderBottomLeftRadius:'24px'}} value="workouts">Workouts</ToggleButton>
+          <ToggleButton sx={{borderTopRightRadius:'24px', borderBottomRightRadius:'24px'}} value="weightmeasurements">
             Weight measurements
           </ToggleButton>
         </ToggleButtonGroup>

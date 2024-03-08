@@ -13,7 +13,7 @@ const Dashboard = ({ workouts, weights }) => {
   useEffect(() => {
     const workoutsThisMonth = getWorkoutsThisMonth(workouts);
     setWorkoutsThisMonth(workoutsThisMonth);
-  }, [workouts]);
+  }, [workoutsThisMonth]);
 
   return (
     <div>
@@ -52,11 +52,12 @@ const Dashboard = ({ workouts, weights }) => {
                 workouts={workouts}
               />
             </div>
-            </div>
             <div className="listContainer">
               <span style={{ fontWeight: "bold" }}>YOUR LATEST WORKOUTS </span>
               <Table workouts={workouts} />
             </div>
+            </div>
+            
           </div>
         </div>
       </div>

@@ -1,9 +1,10 @@
 import { Typography } from "@mui/material";
 import AllWorkouts from "./AllWorkouts";
 import CurrentWeight from "./CurrentWeight";
-import LastWorkout from "./LastWorkout";
+import LastWorkout from "./SingleWorkout";
 import WorkoutsThisMonth from "./WorkoutsThisMonth";
 import AddImg from "../../../assets/NotFound.svg";
+import SingleWorkout from "./SingleWorkout";
 const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
   let data = {};
   switch (type) {
@@ -20,7 +21,7 @@ const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
         title: "LAST WORKOUT",
         isCounter: false,
         content: workouts?.length > 0 ? workouts[0].title : "No workout added",
-        icon: <LastWorkout workout={workouts[0]} />,
+        icon: <SingleWorkout workout={workouts[0]} showOnlyContent={false} />,
       };
       break;
     case "WORKOUTS_THIS_MONTH":
