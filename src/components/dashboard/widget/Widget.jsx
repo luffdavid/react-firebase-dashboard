@@ -1,9 +1,9 @@
-import { Typography } from "@mui/material";
+import { Skeleton, Typography } from "@mui/material";
 import AllWorkouts from "./AllWorkouts";
 import CurrentWeight from "./CurrentWeight";
 import LastWorkout from "./SingleWorkout";
 import WorkoutsThisMonth from "./WorkoutsThisMonth";
-import AddImg from "../../../assets/NotFound.svg";
+import AddImg from "../../../assets/Add.svg";
 import SingleWorkout from "./SingleWorkout";
 const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
   let data = {};
@@ -52,7 +52,21 @@ const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
   }
 
   return (
-    <div className="widget">
+    <div>
+      {!workouts ? (
+        <div>
+          <div className="widget">
+      <div className="left">
+        <span style={{ fontWeight: "bold" }}>{data.title}</span>
+        <Typography className="counter" color="secondary">
+          <Skeleton />
+        </Typography>
+      </div>
+      {data.icon}
+    </div>
+        </div>
+      ) : (
+<div className="widget">
       <div className="left">
         <span style={{ fontWeight: "bold" }}>{data.title}</span>
         <Typography className="counter" color="secondary">
@@ -62,6 +76,10 @@ const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
       </div>
       {data.icon}
     </div>
+      )}
+      
+    </div>
+    
   );
 };
 

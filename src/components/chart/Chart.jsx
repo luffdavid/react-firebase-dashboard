@@ -8,6 +8,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { Skeleton } from "@mui/material";
 
 const monthNames = [];
 const currentDate = dayjs();
@@ -35,7 +36,12 @@ const Chart = ({ aspect, title, workouts }) => {
     <div className="chart">
        <span style={{ fontWeight: "bold" }}>6 MONTH WORKOUT CHART</span>
       <ResponsiveContainer width="100%" aspect={aspect}>
-        <AreaChart
+        {!workouts ? (
+          <>
+          <Skeleton variant="rounded" height={"20vh"} />
+          </>
+        ) : (
+          <AreaChart
           width={730}
           height={250}
           data={data}
@@ -58,6 +64,8 @@ const Chart = ({ aspect, title, workouts }) => {
             fill="url(#total)"
           />
         </AreaChart>
+        )}
+        
       </ResponsiveContainer>
     </div>
   );

@@ -19,9 +19,6 @@ const ProfileListSkeleton = () => {
             <Skeleton variant="circular" width={40} height={40} />
         </ListItemIcon>
         <ListItemText primary={<Skeleton variant="text" />} />
-        <IconButton edge="end">
-            <Skeleton variant="circular" width={40} height={40} />
-        </IconButton>
         
     </ListItem>
     <ListItem>
@@ -29,18 +26,14 @@ const ProfileListSkeleton = () => {
             <Skeleton variant="circular" width={40} height={40} />
         </ListItemIcon>
         <ListItemText primary={<Skeleton variant="text" />} />
-        <IconButton edge="end">
-            <Skeleton variant="circular" width={40} height={40} />
-        </IconButton>
+        
     </ListItem>
     <ListItem>
         <ListItemIcon>
             <Skeleton variant="circular" width={40} height={40} />
         </ListItemIcon>
         <ListItemText primary={<Skeleton variant="text" />} />
-        <IconButton edge="end">
-            <Skeleton variant="circular" width={40} height={40} />
-        </IconButton>
+        
     </ListItem>
 </List>
 
@@ -49,38 +42,26 @@ const ProfileListSkeleton = () => {
     subheader={<ListSubheader>App Settings</ListSubheader>}
 >
 
-    <ListItem>
+<ListItem>
         <ListItemIcon>
             <Skeleton variant="circular" width={40} height={40} />
         </ListItemIcon>
-        <ListItemText>
-            <Skeleton variant="text" width={120} />
-        </ListItemText>
-        <IconButton edge="end">
-            <Skeleton variant="circular" width={40} height={40} />
-        </IconButton>
+        <ListItemText primary={<Skeleton variant="text" />} />
+        
     </ListItem>
     <ListItem>
         <ListItemIcon>
             <Skeleton variant="circular" width={40} height={40} />
         </ListItemIcon>
-        <ListItemText>
-            <Skeleton variant="text" width={120} />
-        </ListItemText>
-        <IconButton edge="end">
-            <Skeleton variant="circular" width={40} height={40} />
-        </IconButton>
+        <ListItemText primary={<Skeleton variant="text" />} />
+        
     </ListItem>
     <ListItem>
         <ListItemIcon>
             <Skeleton variant="circular" width={40} height={40} />
         </ListItemIcon>
-        <ListItemText>
-            <Skeleton variant="text" width={120} />
-        </ListItemText>
-        <IconButton edge="end">
-            <Skeleton variant="circular" width={40} height={40} />
-        </IconButton>
+        <ListItemText primary={<Skeleton variant="text" />} />
+
     </ListItem>
 </List>
 </div>

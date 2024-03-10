@@ -6,7 +6,7 @@ import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
 import MonitorWeightOutlinedIcon from '@mui/icons-material/MonitorWeightOutlined';
 import dayjs from 'dayjs';
 import DeleteWorkoutModal from './DeleteWorkoutModal';
-import Add from "../../assets/NotFound.svg";
+import Add from "../../assets/Add.svg";
 
 const WeightMeasurementList = ({ weights }) => {
   const [deleteOpen, setDeleteOpen] = React.useState(false);
@@ -24,6 +24,7 @@ const WeightMeasurementList = ({ weights }) => {
 
   return (
     <div>
+      
       {weights !== null && Array.isArray(weights) && weights.length === 0 ? (
         <div style={{ textAlign: 'center' }}>
           <img src={Add} alt="Add" height={"200vh"} /> <br />

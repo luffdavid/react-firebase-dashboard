@@ -3,7 +3,7 @@ import { DayPicker } from "react-day-picker";
 import "react-day-picker/dist/style.css";
 import { PRIMARY } from "../general/Constants";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
-import { IconButton } from "@mui/material";
+import { IconButton, Skeleton } from "@mui/material";
 import MainDrawer from "../general/drawer/MainDrawer";
 
 export default function WorkoutCalender({ workouts }) {
@@ -32,7 +32,11 @@ export default function WorkoutCalender({ workouts }) {
           buttonVariant={"text"}
           drawerContent={
             <div>
-              <DayPicker
+              {!workouts ? (
+                    <Skeleton height={"20vh"} variant="rounded"/>
+              ) : (
+                <div>
+                <DayPicker
                 mode="single"
                 numberOfMonths={3}
                 showOutsideDays
@@ -40,21 +44,38 @@ export default function WorkoutCalender({ workouts }) {
                 modifiers={{ booked: workoutDates }}
                 modifiersStyles={{ booked: bookedStyle }}
                 onDayClick={handleDayClick}
-                
+
               />
-              {currentWorkout && <>{currentWorkout.title}</>}
+              {currentWorkout && 
+                (
+                  <>
+                  {currentWorkout.title}
+                  </>)}
+              </div>              
+              )}
             </div>
           }
         />
       </div>
-      <DayPicker
-        mode="single"
-        showOutsideDays
-        defaultMonth={Date.now()}
-        modifiers={{ booked: workoutDates }}
-        modifiersStyles={{ booked: bookedStyle }}
-        onDayClick={handleDayClick}
-      />
+      
+      <div>
+        {!workouts ? (
+          <>
+          <Skeleton height={"20vh"} variant="rounded"/>
+          </>
+        ) : (
+          <DayPicker
+          mode="single"
+          showOutsideDays
+          defaultMonth={Date.now()}
+          modifiers={{ booked: workoutDates }}
+          modifiersStyles={{ booked: bookedStyle }}
+          onDayClick={handleDayClick}
+        />
+        )}
+    
+      </div>
+      
     </div>
   );
 }
