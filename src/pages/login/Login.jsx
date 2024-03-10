@@ -41,7 +41,7 @@ const Login = ({darkmode}) => {
       <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <Box className="widget-reusable" component="form" onSubmit={handleLogin} sx={{ mt: 1}}>
         <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>
-          Sign in to <span style={{color:PRIMARY}}>workoutTracker</span>
+          Sign in to <span style={{color:PRIMARY}}>workoutGuru</span>
         </Typography>
           <TextField
             margin="normal"

@@ -114,7 +114,7 @@ const Signup = ({ inputs }) => {
       <Box sx={{ marginTop: 8, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <Box className="widget-reusable" component="form" onSubmit={handleAdd} sx={{ mt: 1, mb:10}}>
         <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>
-          Create a new account for <span style={{color:PRIMARY}}>workoutTracker</span>
+          Create a new account for <span style={{color:PRIMARY}}>workoutGuru</span>
         </Typography>
           {inputs.map((input) => (
             <TextField

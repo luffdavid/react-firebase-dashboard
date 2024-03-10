@@ -31,7 +31,7 @@ const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
         count:
           workoutsThisMonth?.length > 0
             ? workoutsThisMonth.length
-            : "No workouts this month",
+            : "0",
         icon: <WorkoutsThisMonth workouts={workoutsThisMonth} />,
       };
       break;
@@ -41,7 +41,7 @@ const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
         isCounter: true,
         count: weights?.length > 0 ? weights[0].weight + " kg" : (
           <>
-             No weight added yet <img src={AddImg} width={"60px"} alt="Weight" />
+             No weight added yet
           </>
         ),
         icon: <CurrentWeight weights={weights} />,

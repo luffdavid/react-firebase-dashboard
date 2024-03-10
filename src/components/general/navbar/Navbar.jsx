@@ -60,7 +60,7 @@ const Navbar = ({profileData, isDarkMode}) => {
             >{profileData?.displayName.charAt(0).toUpperCase()}</Avatar> */}
            <Avatar
               className="avatar"
-            ><img src={profileData?.img} />
+            ><img src={profileData?.img} style={{ zoom:'20%'}} />
             </Avatar>
           </div>
           </div>
