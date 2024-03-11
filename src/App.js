@@ -3,6 +3,7 @@ import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { grey } from "@mui/material/colors";
 import React, { useContext, useEffect, useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import StartingApp from "./components/general/StartingApp/StartingApp";
 import Navbar from "./components/general/navbar/Navbar";
 import ResponsiveNavigation from "./components/general/sidebar/ResponsiveNavigation";
 import { AuthContext } from "./context/AuthContext";
@@ -21,6 +22,7 @@ import { getWorkouts } from "./services/api/workoutService";
 import "./style/dark.scss";
 
 function App() {
+  const [showLogo, setShowLogo] = useState(true);
   const { darkMode } = useContext(DarkModeContext);
   const { currentUser } = useContext(AuthContext);
   const [profileData, setProfileData] = useState(null);
@@ -50,6 +52,13 @@ function App() {
   const RequireAuth = ({ children }) => {
     return currentUser ? children : <Navigate to="/login" />;
   };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setShowLogo(false);
+    }, 1500);
+    return () => clearTimeout(timeout);
+  }, []);
 
   useEffect(() => {
     const getProfileDetails = async () => {
@@ -106,80 +115,91 @@ function App() {
   }, [currentUser?.uid, setWorkouts]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <div className={darkMode ? "app dark" : "app"}>
-        <BrowserRouter>
-          <div className="">
-            {currentUser ? <ResponsiveNavigation /> : <></>}
-            <div className="homeContainer">
-              {currentUser ? (
-                <Navbar profileData={profileData} isDarkMode={darkMode} />
-              ) : (
-                <></>
-              )}
-              <Routes>
-                <Route
-                  path="/login"
-                  element={!currentUser ? <Login /> : <Navigate to="/" />}
-                />
-                <Route
-                  path="/signup"
-                  element={
-                    !currentUser ? (
-                      <Signup inputs={userInputs} />
-                    ) : (
-                      <Navigate to="/" />
-                    )
-                  }
-                />
-                <Route
-                  path="/"
-                  element={
-                    <RequireAuth>
-                      <Dashboard
-                        profileData={profileData}
-                        workouts={workouts}
-                        weights={weights}
-                        workoutsLoading={workoutsLoading}
-                      />
-                    </RequireAuth>
-                  }
-                />
-                <Route
-                  path="/profile"
-                  element={
-                    <RequireAuth>
-                      <Profile profileData={profileData} />
-                    </RequireAuth>
-                  }
-                />
-                <Route
-                  path="/add"
-                  element={
-                    <RequireAuth>
-                      <AddWorkout />
-                    </RequireAuth>
-                  }
-                />
-                <Route
-                  path="/progress"
-                  element={
-                    <RequireAuth>
-                      <Progress
-                        workouts={workouts}
-                        weights={weights}
-                        workoutsLoading={workoutsLoading}
-                      />
-                    </RequireAuth>
-                  }
-                />
-              </Routes>
-            </div>
+    <div>
+      {showLogo ? (
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <div style={{ height: "100vh" }}>
+            <StartingApp />
           </div>
-        </BrowserRouter>
-      </div>
-    </ThemeProvider>
+        </ThemeProvider>
+      ) : (
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <div className={darkMode ? "app dark" : "app"}>
+            <BrowserRouter>
+              <div className="">
+                {currentUser ? <ResponsiveNavigation /> : <></>}
+                <div className="homeContainer">
+                  {currentUser ? (
+                    <Navbar profileData={profileData} isDarkMode={darkMode} />
+                  ) : (
+                    <></>
+                  )}
+                  <Routes>
+                    <Route
+                      path="/login"
+                      element={!currentUser ? <Login /> : <Navigate to="/" />}
+                    />
+                    <Route
+                      path="/signup"
+                      element={
+                        !currentUser ? (
+                          <Signup inputs={userInputs} />
+                        ) : (
+                          <Navigate to="/" />
+                        )
+                      }
+                    />
+                    <Route
+                      path="/"
+                      element={
+                        <RequireAuth>
+                          <Dashboard
+                            profileData={profileData}
+                            workouts={workouts}
+                            weights={weights}
+                            workoutsLoading={workoutsLoading}
+                          />
+                        </RequireAuth>
+                      }
+                    />
+                    <Route
+                      path="/profile"
+                      element={
+                        <RequireAuth>
+                          <Profile profileData={profileData} />
+                        </RequireAuth>
+                      }
+                    />
+                    <Route
+                      path="/add"
+                      element={
+                        <RequireAuth>
+                          <AddWorkout />
+                        </RequireAuth>
+                      }
+                    />
+                    <Route
+                      path="/progress"
+                      element={
+                        <RequireAuth>
+                          <Progress
+                            workouts={workouts}
+                            weights={weights}
+                            workoutsLoading={workoutsLoading}
+                          />
+                        </RequireAuth>
+                      }
+                    />
+                  </Routes>
+                </div>
+              </div>
+            </BrowserRouter>
+          </div>
+        </ThemeProvider>
+      )}
+    </div>
   );
 }
 
