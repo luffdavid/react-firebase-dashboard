@@ -1,6 +1,5 @@
 import { FitnessCenterTwoTone } from "@mui/icons-material";
 import React, { useEffect, useState } from "react";
-import { usePrimary } from "../Constants";
 import "./StartingApp.scss";
 
 function StartingApp() {
@@ -19,7 +18,6 @@ function StartingApp() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "20vh",
       }}
     >
       <div class="wrapper ten">
@@ -27,7 +25,7 @@ function StartingApp() {
           <div className="icon ten">
             <FitnessCenterTwoTone
               sx={{
-                color: usePrimary,
+                color: "#6439FF",
                 fontSize: "3rem",
               }}
             />

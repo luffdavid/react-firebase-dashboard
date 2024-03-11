@@ -21,17 +21,17 @@
       }
 }
 .bounce {
-    font-size: 4rem;
+    font-size: 3rem;
     width: 100%;
     margin: 3rem auto;
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     // -webkit-box-reflect: below -20px linear-gradient(transparent, #6439FF);
 }
 .bounce span {
     display: inline-flex;
     color: #6439FF;
-    font-family: "Play", sans-serif;
+    // font-family: "Play", sans-serif;
     animation: bounce 2s infinite;
 }
 @keyframes bounce {
