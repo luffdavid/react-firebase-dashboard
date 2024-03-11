@@ -12,12 +12,12 @@ import Add from "../../../assets/Add.svg"
 import { ListItemIcon } from "@mui/material";
 import { Skeleton } from "@mui/material"; // Added import for Skeleton
 
-const WorkoutList = ({ workouts, monthYear }) => {
+const WorkoutList = ({ workouts, workoutsLoading}) => {
 
   const last5workouts =workouts.length >= 5 ? workouts.slice(0,5) : workouts.slice(0, workouts.length)
   return (
     <div>
-     {!workouts ? (
+     {workoutsLoading ? (
         <List>
         <ListItem>
           <ListItemIcon>

@@ -17,7 +17,7 @@ for (let i = 5; i >= 0; i--) {
     monthNames.push(monthName);
 }
 
-const Chart = ({ aspect, title, workouts }) => {
+const Chart = ({ aspect, title, workouts, workoutsLoading }) => {
   // Funktion zur Berechnung der Anzahl der Workouts für jeden Monat
   const getWorkoutsCountForMonth = (workouts, monthName) => {
     if (!workouts || workouts.length === 0) return 0; // Überprüfen, ob workouts null oder leer ist
@@ -36,7 +36,7 @@ const Chart = ({ aspect, title, workouts }) => {
     <div className="chart">
        <span style={{ fontWeight: "bold" }}>6 MONTH WORKOUT CHART</span>
       <ResponsiveContainer width="100%" aspect={aspect}>
-        {!workouts ? (
+        {workoutsLoading ? (
           <>
           <Skeleton variant="rounded" height={"20vh"} />
           </>

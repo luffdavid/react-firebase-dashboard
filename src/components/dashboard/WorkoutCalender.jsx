@@ -6,7 +6,7 @@ import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 import { IconButton, Skeleton } from "@mui/material";
 import MainDrawer from "../general/drawer/MainDrawer";
 
-export default function WorkoutCalender({ workouts }) {
+export default function WorkoutCalender({ workouts, workoutsLoading }) {
   const bookedStyle = { border: "1px solid" + PRIMARY, margin: "2px" };
   const [currentWorkout, setCurrentWorkout] = useState(null);
 
@@ -32,7 +32,7 @@ export default function WorkoutCalender({ workouts }) {
           buttonVariant={"text"}
           drawerContent={
             <div>
-              {!workouts ? (
+              {workoutsLoading ? (
                     <Skeleton height={"20vh"} variant="rounded"/>
               ) : (
                 <div>
@@ -59,7 +59,7 @@ export default function WorkoutCalender({ workouts }) {
       </div>
       
       <div>
-        {!workouts ? (
+        {workoutsLoading ? (
           <>
           <Skeleton height={"20vh"} variant="rounded"/>
           </>

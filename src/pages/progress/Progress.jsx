@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import WeightMeasurementList from "../../components/progress/WeightMeasurementList";
 
-const Progress = ({workouts, weights}) => {
+const Progress = ({workouts, weights, workoutsLoading}) => {
   const [currentView, setCurrentView] = useState(() => localStorage.getItem("progressView")); // Use useState with a callback to retrieve initial value
 
   const handleChange = (event, newView) => {
@@ -32,7 +32,7 @@ const Progress = ({workouts, weights}) => {
           </ToggleButton>
         </ToggleButtonGroup>
         {currentView === "workouts" ? (
-          <WorkoutList workouts={workouts} />
+          <WorkoutList workouts={workouts} workoutsLoading={workoutsLoading}/>
         ) : (
           <WeightMeasurementList weights={weights} />
         )}

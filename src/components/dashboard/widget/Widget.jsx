@@ -5,14 +5,18 @@ import LastWorkout from "./SingleWorkout";
 import WorkoutsThisMonth from "./WorkoutsThisMonth";
 import AddImg from "../../../assets/Add.svg";
 import SingleWorkout from "./SingleWorkout";
-const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
+const Widget = ({ type, workouts, workoutsThisMonth, weights, workoutsLoading }) => {
   let data = {};
+
   switch (type) {
     case "ALL_WORKOUTS":
       data = {
         title: "ALL WORKOUTS",
         isCounter: true,
-        count: workouts?.length > 0 ? workouts.length : "0",
+        count: workouts !== undefined ?
+        (workouts.length > 0 ? workouts.length : "0") : (
+          <Skeleton />
+        ),
         icon: <AllWorkouts workouts={workouts} />,
       };
       break;
@@ -41,7 +45,7 @@ const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
         isCounter: true,
         count: weights?.length > 0 ? weights[0].weight + " kg" : (
           <>
-             No weight added yet
+             -
           </>
         ),
         icon: <CurrentWeight weights={weights} />,
@@ -53,18 +57,19 @@ const Widget = ({ type, workouts, workoutsThisMonth, weights }) => {
 
   return (
     <div>
-      {!workouts ? (
-        <div>
-          <div className="widget">
-      <div className="left">
-        <span style={{ fontWeight: "bold" }}>{data.title}</span>
-        <Typography className="counter" color="secondary">
-          <Skeleton />
-        </Typography>
-      </div>
-      {data.icon}
-    </div>
+      {workoutsLoading ? (
+            <div>
+            <div className="widget">
+        <div className="left">
+          <span style={{ fontWeight: "bold" }}>{data.title}</span>
+          <Typography className="counter" color="secondary">
+            <Skeleton />
+          </Typography>
         </div>
+        {data.icon}
+      </div>
+          </div>
+  
       ) : (
 <div className="widget">
       <div className="left">

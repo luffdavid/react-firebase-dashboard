@@ -26,6 +26,7 @@ function App() {
   const [profileData, setProfileData] = useState(null);
   const { workouts, setWorkouts } = useWorkoutContext();
   const [weights, setWeights] = useState(null);
+  const [workoutsLoading, setWorkoutsLoading] = useState(false);
   const theme = React.useMemo(
     () =>
       createTheme({
@@ -88,13 +89,16 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setWorkoutsLoading(true);
         const workoutsData = await getWorkouts(currentUser?.uid);
         const sortedWorkouts = workoutsData.sort(
           (a, b) => new Date(b.date) - new Date(a.date)
         );
         setWorkouts(sortedWorkouts);
+        setWorkoutsLoading(false);
       } catch (error) {
         console.error("Error fetching workouts:", error);
+        setWorkoutsLoading(false);
       }
     };
 
@@ -137,6 +141,7 @@ function App() {
                         profileData={profileData}
                         workouts={workouts}
                         weights={weights}
+                        workoutsLoading={workoutsLoading}
                       />
                     </RequireAuth>
                   }
@@ -161,7 +166,7 @@ function App() {
                   path="/progress"
                   element={
                     <RequireAuth>
-                      <Progress workouts={workouts} weights={weights}/>
+                      <Progress workouts={workouts} weights={weights} workoutsLoading={workoutsLoading}/>
                     </RequireAuth>
                   }
                 />

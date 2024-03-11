@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import { PRIMARY } from '../general/Constants';
 import DeleteIcon from '@mui/icons-material/Delete';
 import OpenInNewOutlinedIcon from '@mui/icons-material/OpenInNewOutlined';
-import { IconButton, Grid } from '@mui/material'; // Import für IconButton und Grid hinzugefügt
+import { IconButton, Grid, ListItemIcon } from '@mui/material'; // Import für IconButton und Grid hinzugefügt
 import MainDrawer from '../general/drawer/MainDrawer';
 import Add from "../../assets/Add.svg"
 import { Skeleton } from '@mui/material'; // Import für Skeleton hinzugefügt
@@ -17,7 +17,7 @@ import SingleWorkout from '../dashboard/widget/SingleWorkout';
 import { FitnessCenterTwoTone } from '@mui/icons-material';
 import DeleteWorkoutModal from './DeleteWorkoutModal';
 
-const WorkoutList = ({ workouts }) => {
+const WorkoutList = ({ workouts , workoutsLoading}) => {
   const [open, setOpen] = React.useState(false);
   const [deleteOpen, setDeleteOpen] = React.useState(false);
   const [workout, setWorkout] = React.useState(null);
@@ -56,21 +56,27 @@ const WorkoutList = ({ workouts }) => {
 
   return (
     <div>
-      {!workouts ? (
-        <List>
+      {workoutsLoading ? (
+          <List>
           <ListItem>
-            <Skeleton variant="circular" width={40} height={40} />
+            <ListItemIcon>
+              <Skeleton variant="circular" width={40} height={40} />
+            </ListItemIcon>
             <ListItemText primary={<Skeleton variant="text" />} />
           </ListItem>
           <ListItem>
-            <Skeleton variant="circular" width={40} height={40} />
+            <ListItemIcon>
+              <Skeleton variant="circular" width={40} height={40} />
+            </ListItemIcon>
             <ListItemText primary={<Skeleton variant="text" />} />
           </ListItem>
           <ListItem>
-            <Skeleton variant="circular" width={40} height={40} />
+            <ListItemIcon>
+              <Skeleton variant="circular" width={40} height={40} />
+            </ListItemIcon>
             <ListItemText primary={<Skeleton variant="text" />} />
           </ListItem>
-        </List>
+          </List>
       ) : (
         <>
           {workouts.length === 0 ? (
