@@ -3,31 +3,31 @@ import EventOutlinedIcon from "@mui/icons-material/EventOutlined";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import NotesOutlinedIcon from "@mui/icons-material/NotesOutlined";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
+import TitleIcon from "@mui/icons-material/Title";
 import {
   Avatar,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Typography,
 } from "@mui/material";
-import { PRIMARY } from "../../general/Constants";
+import { usePrimary } from "../../general/Constants";
 import MainDrawer from "../../general/drawer/MainDrawer";
-import TitleIcon from '@mui/icons-material/Title';
 export default function SingleWorkout({ workout, showOnlyContent }) {
+  const PRIMARY = usePrimary();
   const drawerContent = workout && (
     <List className="widget-reusable" sx={{ width: "100%" }}>
       <ListItem>
         <ListItemAvatar>
-          <Avatar sx={{ backgroundColor: PRIMARY, color:'white' }}>
-         <TitleIcon />
+          <Avatar sx={{ backgroundColor: PRIMARY, color: "white" }}>
+            <TitleIcon />
           </Avatar>
         </ListItemAvatar>
         <ListItemText primary="Title" secondary={workout.title} />
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar sx={{ backgroundColor: PRIMARY, color:'white' }}>
+          <Avatar sx={{ backgroundColor: PRIMARY, color: "white" }}>
             <EventOutlinedIcon />
           </Avatar>
         </ListItemAvatar>
@@ -38,7 +38,7 @@ export default function SingleWorkout({ workout, showOnlyContent }) {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar sx={{ backgroundColor: PRIMARY, color:'white' }}>
+          <Avatar sx={{ backgroundColor: PRIMARY, color: "white" }}>
             <LocationOnOutlinedIcon />
           </Avatar>
         </ListItemAvatar>
@@ -51,7 +51,7 @@ export default function SingleWorkout({ workout, showOnlyContent }) {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar sx={{ backgroundColor: PRIMARY, color:'white' }}>
+          <Avatar sx={{ backgroundColor: PRIMARY, color: "white" }}>
             <FitnessCenterTwoTone />
           </Avatar>
         </ListItemAvatar>
@@ -68,7 +68,7 @@ export default function SingleWorkout({ workout, showOnlyContent }) {
       </ListItem>
       <ListItem>
         <ListItemAvatar>
-          <Avatar sx={{ backgroundColor: PRIMARY, color:'white' }}>
+          <Avatar sx={{ backgroundColor: PRIMARY, color: "white" }}>
             <NotesOutlinedIcon />
           </Avatar>
         </ListItemAvatar>

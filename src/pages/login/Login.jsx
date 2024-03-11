@@ -1,14 +1,23 @@
-import { useState, useContext } from "react";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Link as MuiLink,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import { Typography, TextField, Button, Container, Box, Link as MuiLink, CircularProgress } from "@mui/material";
-import "../../components/dashboard/widget/widget.scss"
-import "../../components/general/Reusable.scss"
-import { PRIMARY } from "../../components/general/Constants";
+import "../../components/dashboard/widget/widget.scss";
+import { usePrimary } from "../../components/general/Constants";
 import InputError from "../../components/general/InputError";
-const Login = ({darkmode}) => {
+import "../../components/general/Reusable.scss";
+import { AuthContext } from "../../context/AuthContext";
+import { auth } from "../../firebase";
+const Login = ({ darkmode }) => {
+  const PRIMARY = usePrimary();
   const [error, setError] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,62 +45,75 @@ const Login = ({darkmode}) => {
   };
 
   return (
-    <div style={{height:'100vh'}}>
-       <Container>
-      <Box sx={{ marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Box className="widget-reusable" component="form" onSubmit={handleLogin} sx={{ mt: 1}}>
-        <Typography component="h1" variant="h5" sx={{textAlign:'center'}}>
-          Sign in to <span style={{color:PRIMARY}}>workoutGuru</span>
-        </Typography>
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            color="primary"
-            disabled={isLoading} 
+    <div style={{ height: "100vh" }}>
+      <Container>
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Box
+            className="widget-reusable"
+            component="form"
+            onSubmit={handleLogin}
+            sx={{ mt: 1 }}
           >
-            {isLoading ? <CircularProgress size={24} /> : "Sign in"}
-          </Button>
-          {error && 
-          <InputError title={"Wrong email or password"} /> }
+            <Typography
+              component="h1"
+              variant="h5"
+              sx={{ textAlign: "center" }}
+            >
+              Sign in to <span style={{ color: PRIMARY }}>workoutGuru</span>
+            </Typography>
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              color="primary"
+              disabled={isLoading}
+            >
+              {isLoading ? <CircularProgress size={24} /> : "Sign in"}
+            </Button>
+            {error && <InputError title={"Wrong email or password"} />}
 
-          <Typography variant="body2" sx={{ mt: 2, textAlign:'center'}}>
-          {"Don't have an account? "}
-          <MuiLink component={Link} to="/signup" variant="body2">
-            Sign Up
-          </MuiLink>
-        </Typography>
+            <Typography variant="body2" sx={{ mt: 2, textAlign: "center" }}>
+              {"Don't have an account? "}
+              <MuiLink component={Link} to="/signup" variant="body2">
+                Sign Up
+              </MuiLink>
+            </Typography>
+          </Box>
         </Box>
-        
-      </Box>
-    </Container>
+      </Container>
     </div>
-   
   );
 };
 

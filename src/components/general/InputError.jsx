@@ -1,14 +1,12 @@
-import { Alert } from '@mui/material'
-import React from 'react'
+import { Alert } from "@mui/material";
+import React from "react";
 
-const InputError = ({title }) => {
+const InputError = ({ title }) => {
   return (
     <div>
-        <Alert severity="error">
-            {title}
-        </Alert>
+      <Alert severity="error">{title}</Alert>
     </div>
-  )
-}
+  );
+};
 
-export default InputError
+export default InputError;

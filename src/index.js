@@ -15,5 +15,5 @@ ReactDOM.render(
       </AuthContextProvider>
     </DarkModeContextProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );

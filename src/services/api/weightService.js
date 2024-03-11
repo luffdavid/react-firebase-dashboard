@@ -1,7 +1,6 @@
 import { collection, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
-
 export const getWeightMeasurements = async (userId) => {
   try {
     const userDocRef = doc(db, "users", userId);
@@ -19,7 +18,7 @@ export const getWeightMeasurements = async (userId) => {
       return weightsData;
     } else {
       console.log(
-        "Benutzerdokument nicht gefunden oder Weights-Subsammlung existiert nicht."
+        "Benutzerdokument nicht gefunden oder Weights-Subsammlung existiert nicht.",
       );
       return [];
     }

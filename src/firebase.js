@@ -1,8 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import {getAuth} from "firebase/auth";
-import {getFirestore} from "firebase/firestore"
-import {getStorage} from "firebase/storage"
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCDGHA2s5uNfLZaUkUOuSWwDGynbmeSbUI",
@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "tutorial-react-admin-51220",
   storageBucket: "tutorial-react-admin-51220.appspot.com",
   messagingSenderId: "395844745190",
-  appId: "1:395844745190:web:cbe898b165702705840827"
+  appId: "1:395844745190:web:cbe898b165702705840827",
 };
 
 // Initialize Firebase

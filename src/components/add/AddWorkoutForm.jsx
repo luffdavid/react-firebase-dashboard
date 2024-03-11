@@ -25,7 +25,7 @@ const AddWorkoutForm = () => {
   const [titleInput, setTitleInput] = useState("");
   const [dateInput, setDateInput] = useState(dayjs());
   const [startTimeInput, setStartTimeInput] = useState(
-    dayjs().subtract(1, "hour")
+    dayjs().subtract(1, "hour"),
   );
   const [endTimeInput, setEndTimeInput] = useState(dayjs());
   const [exercisesAndWeightInput, setExercisesAndWeightInput] = useState("");
@@ -56,7 +56,7 @@ const AddWorkoutForm = () => {
         const userDocRef = doc(db, "users", currentUser.uid);
         const workoutDocRef = await addDoc(
           collection(userDocRef, "workouts"),
-          workoutData
+          workoutData,
         );
         // Set the inputs to INITIAL and show successMsg
         setTitleInput("");

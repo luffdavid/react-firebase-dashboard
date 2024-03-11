@@ -1,18 +1,18 @@
-import ProfileListSkeleton from './ProfileListSkeleton';
-import ProfileDataList from './ProfileDataList';
+import ProfileListSkeleton from "./ProfileListSkeleton";
+import ProfileDataList from "./ProfileDataList";
 
 export default function ProfileList({ profileData }) {
-    return (
+  return (
+    <div>
+      {!profileData ? (
         <div>
-            {!profileData ? (
-                <div>
-                    <ProfileListSkeleton />
-                </div>
-            ) : (
-                <div>
-                    <ProfileDataList profileData={profileData}/>
-                </div>
-            )}
+          <ProfileListSkeleton />
         </div>
-    );
+      ) : (
+        <div>
+          <ProfileDataList profileData={profileData} />
+        </div>
+      )}
+    </div>
+  );
 }

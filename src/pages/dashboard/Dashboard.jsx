@@ -49,7 +49,10 @@ const Dashboard = ({ workouts, weights, workoutsLoading }) => {
               />
             </div>
             <div className="workoutAndChart">
-              <WorkoutCalender workouts={workouts} workoutsLoading={workoutsLoading}/>
+              <WorkoutCalender
+                workouts={workouts}
+                workoutsLoading={workoutsLoading}
+              />
               <Chart
                 aspect={3 / 1}
                 title="Workouts( Last 6 Months)"
@@ -59,14 +62,12 @@ const Dashboard = ({ workouts, weights, workoutsLoading }) => {
             </div>
             <div className="listContainer">
               <span style={{ fontWeight: "bold" }}>YOUR LATEST WORKOUTS </span>
-              <Table workouts={workouts} 
-              workoutsLoading={workoutsLoading} />
+              <Table workouts={workouts} workoutsLoading={workoutsLoading} />
             </div>
-            </div>
-            
           </div>
         </div>
       </div>
+    </div>
   );
 };
 

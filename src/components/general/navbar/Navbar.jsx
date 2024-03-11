@@ -1,17 +1,13 @@
-import "./navbar.scss";
-import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import FullscreenExitOutlinedIcon from "@mui/icons-material/FullscreenExitOutlined";
-import NotificationsNoneOutlinedIcon from "@mui/icons-material/NotificationsNoneOutlined";
-import ChatBubbleOutlineOutlinedIcon from "@mui/icons-material/ChatBubbleOutlineOutlined";
-import ListOutlinedIcon from "@mui/icons-material/ListOutlined";
-import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
-import { useContext } from "react";
+import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import { Avatar } from "@mui/material";
+import { useContext } from "react";
 import { DarkModeContext } from "../../../context/darkModeContext";
+import { usePrimary } from "../Constants";
+import "./navbar.scss";
 
-const Navbar = ({profileData, isDarkMode}) => {
+const Navbar = ({ profileData, isDarkMode }) => {
+  const PRIMARY = usePrimary();
   const { dispatch } = useContext(DarkModeContext);
   return (
     <div className="navbar">
@@ -28,17 +24,15 @@ const Navbar = ({profileData, isDarkMode}) => {
           <div className="item">
             {!isDarkMode ? (
               <DarkModeOutlinedIcon
-              className="icon"
-              onClick={() => dispatch({ type: "TOGGLE" })}
-            />
+                className="icon"
+                onClick={() => dispatch({ type: "TOGGLE" })}
+              />
             ) : (
               <LightModeOutlinedIcon
-              className="icon"
-              onClick={() => dispatch({ type: "TOGGLE" })}
+                className="icon"
+                onClick={() => dispatch({ type: "TOGGLE" })}
               />
-
             )}
-            
           </div>
           {/* <div className="item">
             <FullscreenExitOutlinedIcon className="icon" />
@@ -58,15 +52,13 @@ const Navbar = ({profileData, isDarkMode}) => {
             {/* <Avatar
               className="avatar"
             >{profileData?.displayName.charAt(0).toUpperCase()}</Avatar> */}
-           <Avatar
-              className="avatar"
-            ><img src={profileData?.img} style={{ zoom:'3%'}} />
+            <Avatar className="avatar" sx={{ backgroundColor: PRIMARY }}>
+              <>{profileData?.displayName.charAt(0).toUpperCase()}</>
             </Avatar>
           </div>
-          </div>
-
         </div>
       </div>
+    </div>
     // </div>
   );
 };

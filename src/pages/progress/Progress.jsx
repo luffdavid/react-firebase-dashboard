@@ -7,8 +7,10 @@ import { AuthContext } from "../../context/AuthContext";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import WeightMeasurementList from "../../components/progress/WeightMeasurementList";
 
-const Progress = ({workouts, weights, workoutsLoading}) => {
-  const [currentView, setCurrentView] = useState(() => localStorage.getItem("progressView")); // Use useState with a callback to retrieve initial value
+const Progress = ({ workouts, weights, workoutsLoading }) => {
+  const [currentView, setCurrentView] = useState(() =>
+    localStorage.getItem("progressView"),
+  ); // Use useState with a callback to retrieve initial value
 
   const handleChange = (event, newView) => {
     setCurrentView(newView);
@@ -26,13 +28,24 @@ const Progress = ({workouts, weights, workoutsLoading}) => {
           onChange={handleChange}
           aria-label="Change view"
         >
-          <ToggleButton sx={{borderTopLeftRadius:'24px', borderBottomLeftRadius:'24px'}} value="workouts">Workouts</ToggleButton>
-          <ToggleButton sx={{borderTopRightRadius:'24px', borderBottomRightRadius:'24px'}} value="weightmeasurements">
+          <ToggleButton
+            sx={{ borderTopLeftRadius: "24px", borderBottomLeftRadius: "24px" }}
+            value="workouts"
+          >
+            Workouts
+          </ToggleButton>
+          <ToggleButton
+            sx={{
+              borderTopRightRadius: "24px",
+              borderBottomRightRadius: "24px",
+            }}
+            value="weightmeasurements"
+          >
             Weight measurements
           </ToggleButton>
         </ToggleButtonGroup>
         {currentView === "workouts" ? (
-          <WorkoutList workouts={workouts} workoutsLoading={workoutsLoading}/>
+          <WorkoutList workouts={workouts} workoutsLoading={workoutsLoading} />
         ) : (
           <WeightMeasurementList weights={weights} />
         )}

@@ -1,12 +1,13 @@
-import React from 'react'
-import { PRIMARY } from '../Constants'
+import React from "react";
+import { usePrimary } from "../Constants";
 
-const MainLoader = ({isDarkMode}) => {
+const MainLoader = ({ isDarkMode }) => {
+  const PRIMARY = usePrimary();
   return (
     <div>
-        <span style={{color:PRIMARY}}>workoutGuru</span>
+      <span style={{ color: PRIMARY }}>workoutGuru</span>
     </div>
-  )
-}
+  );
+};
 
-export default MainLoader
+export default MainLoader;

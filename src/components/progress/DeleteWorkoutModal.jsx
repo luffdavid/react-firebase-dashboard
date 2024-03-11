@@ -1,19 +1,19 @@
-import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Typography } from "@mui/material";
-import { PRIMARY } from "../general/Constants";
 import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../../firebase";
+import * as React from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { db } from "../../firebase";
+import { usePrimary } from "../general/Constants";
 import Alert from "../general/alert/Alert";
 export default function DeleteWorkoutModal({ open, handleClose, type, data }) {
   const { currentUser } = React.useContext(AuthContext);
   const [showDeleteAlert, setShowDeleteAlert] = React.useState(false);
+  const PRIMARY = usePrimary();
   const handleDelete = async () => {
     try {
       type === "workout"
@@ -72,7 +72,7 @@ export default function DeleteWorkoutModal({ open, handleClose, type, data }) {
           </DialogActions>
         </Dialog>
       </React.Fragment>
-      {showDeleteAlert && <Alert type={type +  " deleted"} severity={"error"} />}
+      {showDeleteAlert && <Alert type={type + " deleted"} severity={"error"} />}
     </div>
   );
 }

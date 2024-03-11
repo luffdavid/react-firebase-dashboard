@@ -43,7 +43,7 @@ const Datatable = () => {
       },
       (error) => {
         console.log(error);
-      }
+      },
     );
 
     return () => {

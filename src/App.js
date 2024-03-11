@@ -1,24 +1,24 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { doc, getDoc } from "@firebase/firestore";
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import { grey } from "@mui/material/colors";
 import React, { useContext, useEffect, useState } from "react";
-import { DarkModeContext } from "./context/darkModeContext";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import Navbar from "./components/general/navbar/Navbar";
+import ResponsiveNavigation from "./components/general/sidebar/ResponsiveNavigation";
 import { AuthContext } from "./context/AuthContext";
-import Profile from "./pages/profile/Profile";
+import { DarkModeContext } from "./context/darkModeContext";
+import { useWorkoutContext } from "./context/workouts/WorkoutContext";
+import { db } from "./firebase";
+import { userInputs } from "./formSource";
 import AddWorkout from "./pages/add/Add";
-import Progress from "./pages/progress/Progress";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Login from "./pages/login/Login";
-import "./style/dark.scss";
-import { doc, getDoc } from "@firebase/firestore";
-import { db } from "./firebase";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+import Profile from "./pages/profile/Profile";
+import Progress from "./pages/progress/Progress";
 import Signup from "./pages/signup/Signup";
-import { userInputs } from "./formSource";
-import ResponsiveNavigation from "./components/general/sidebar/ResponsiveNavigation";
-import Navbar from "./components/general/navbar/Navbar";
-import { grey } from "@mui/material/colors";
-import { useWorkoutContext } from "./context/workouts/WorkoutContext";
-import { getWorkouts } from "./services/api/workoutService";
 import { getWeightMeasurements } from "./services/api/weightService";
+import { getWorkouts } from "./services/api/workoutService";
+import "./style/dark.scss";
 
 function App() {
   const { darkMode } = useContext(DarkModeContext);
@@ -166,7 +166,11 @@ function App() {
                   path="/progress"
                   element={
                     <RequireAuth>
-                      <Progress workouts={workouts} weights={weights} workoutsLoading={workoutsLoading}/>
+                      <Progress
+                        workouts={workouts}
+                        weights={weights}
+                        workoutsLoading={workoutsLoading}
+                      />
                     </RequireAuth>
                   }
                 />

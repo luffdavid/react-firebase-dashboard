@@ -4,12 +4,12 @@ import { DarkModeContext } from "../../context/darkModeContext";
 import { useNavigate } from "react-router-dom";
 
 export const useLogout = () => {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { dispatch } = useContext(DarkModeContext);
   const auth = getAuth();
 
   const logout = () => {
-    dispatch({type:"LOGOUT"});
+    dispatch({ type: "LOGOUT" });
     signOut(auth)
       .then(() => {
         localStorage.removeItem("user");
@@ -20,6 +20,6 @@ export const useLogout = () => {
       });
 
     window.location.reload();
-  }
+  };
   return logout;
-}
+};

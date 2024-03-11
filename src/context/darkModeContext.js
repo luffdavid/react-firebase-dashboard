@@ -8,18 +8,26 @@ const INITIAL_STATE = {
 export const DarkModeContext = createContext(INITIAL_STATE);
 
 export const DarkModeContextProvider = ({ children }) => {
-  const prefersDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [state, dispatch] = useReducer(DarkModeReducer, { darkMode: prefersDarkMode });
+  const prefersDarkMode =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const [state, dispatch] = useReducer(DarkModeReducer, {
+    darkMode: prefersDarkMode,
+  });
 
   useEffect(() => {
     const handleThemeChange = (e) => {
       dispatch({ type: "TOGGLE" });
     };
 
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', handleThemeChange);
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", handleThemeChange);
 
     return () => {
-      window.matchMedia('(prefers-color-scheme: dark)').removeEventListener('change', handleThemeChange);
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", handleThemeChange);
     };
   }, []);
 

@@ -40,10 +40,10 @@
 //           sx={{
 //           "& .MuiDialog-paper": {
 //             borderRadius: "1y0px",
-//             backgroundColor: darkMode ? 'black' : 'white' 
+//             backgroundColor: darkMode ? 'black' : 'white'
 //         },
 //         }}
-         
+
 //         >
 //           <DialogTitle id="scroll-dialog-title">
 //           <Typography variant='h4'>
@@ -75,8 +75,8 @@
 //           </>
 //         ) : (
 //           <>Not provided</>
-//         )} 
-     
+//         )}
+
 //       </ListItem>
 //       <ListItem>
 //         <ListItemAvatar>
@@ -95,7 +95,7 @@
 //         "Not provided"
 //       )
 //     )}
-  
+
 //     />
 //     </>
 //       </ListItem>
@@ -111,7 +111,7 @@
 //     </>
 //   ) : (
 //     <>Not provided</>
-//   )} />     
+//   )} />
 //       </ListItem>
 //       <ListItem>
 //         <ListItemAvatar>
@@ -125,7 +125,7 @@
 //     </>
 //   ) : (
 //     <>Not provided</>
-//   )} />     
+//   )} />
 //       </ListItem>
 //     </List>
 // </Typography>
@@ -138,7 +138,7 @@
 //       </React.Fragment>
 //     )}
 //     </>
-    
+
 //   );
 // }
-// export default WorkoutEditModal; 
+// export default WorkoutEditModal;

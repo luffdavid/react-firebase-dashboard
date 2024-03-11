@@ -1,3 +1,8 @@
-export const PRIMARY = "#6439FF";
-export const SUCCESS  = "#66bb6a"
-export const ERROR ="#CF6679"
+import { useContext } from "react";
+import { DarkModeContext } from "../../context/darkModeContext";
+
+export function usePrimary() {
+  const { darkMode } = useContext(DarkModeContext);
+
+  return darkMode ? "#815eff" : "#6439FF";
+}

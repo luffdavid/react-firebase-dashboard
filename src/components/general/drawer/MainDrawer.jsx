@@ -52,16 +52,20 @@ function MainDrawer({
         <CssBaseline />
         <Global
           styles={{
-            '.MuiDrawer-root > .MuiPaper-root': {
-              height: '70%',
-              overflow: open ? 'visible' : 'hidden',
+            ".MuiDrawer-root > .MuiPaper-root": {
+              height: "70%",
+              overflow: open ? "visible" : "hidden",
               borderTopLeftRadius: 25,
-              borderTopRightRadius: 25
+              borderTopRightRadius: 25,
             },
           }}
         />
         <Box>
-          <Button variant={buttonVariant} onClick={toggleDrawer(true)} startIcon={startAdorment}>
+          <Button
+            variant={buttonVariant}
+            onClick={toggleDrawer(true)}
+            startIcon={startAdorment}
+          >
             {drawerOpenButton}
           </Button>
         </Box>
@@ -80,11 +84,11 @@ function MainDrawer({
               borderTopRightRadius: 25,
               visibility: "visible",
               right: 0,
-              left: 0
+              left: 0,
             }}
           >
             <Puller />
-            <Typography variant="h4" sx={{ p: 3, color: "text.primary", }}>
+            <Typography variant="h4" sx={{ p: 3, color: "text.primary" }}>
               {drawerTitle}
             </Typography>
           </StyledBox>
@@ -94,7 +98,7 @@ function MainDrawer({
               pb: 2,
               height: "100%",
               marginTop: "15vh",
-              overflow: 'auto',
+              overflow: "auto",
             }}
           >
             {drawerContent}
