@@ -1,6 +1,5 @@
-import { collection, getDocs, doc, getDoc, addDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import { db } from "../../firebase";
-import { useWorkoutContext } from "../../context/workouts/WorkoutContext";
 
 export const getWorkouts = async (userId) => {
   try {
@@ -19,7 +18,7 @@ export const getWorkouts = async (userId) => {
       return workoutsData;
     } else {
       console.log(
-        "Benutzerdokument nicht gefunden oder workouts-Subsammlung existiert nicht.",
+        "Benutzerdokument nicht gefunden oder workouts-Subsammlung existiert nicht."
       );
       return [];
     }
@@ -35,9 +34,11 @@ export const getWorkoutsThisMonth = (workouts) => {
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
     const workoutDate = new Date(workout.date);
-    return (
-      workoutDate.getMonth() === currentMonth &&
-      workoutDate.getFullYear() === currentYear
-    );
   });
+  return filteredWorkouts;
 };
+// return (
+//   workoutDate.getMonth() === currentMonth &&
+//   workoutDate.getFullYear() === currentYear
+// );
+// });

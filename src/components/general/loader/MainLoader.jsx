@@ -5,7 +5,7 @@ const MainLoader = ({ isDarkMode }) => {
   const PRIMARY = usePrimary();
   return (
     <div>
-      <span style={{ color: PRIMARY }}>workoutGuru</span>
+      <span style={{ color: PRIMARY }}>gymTracker</span>
     </div>
   );
 };

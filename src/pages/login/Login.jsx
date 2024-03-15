@@ -66,7 +66,7 @@ const Login = ({ darkmode }) => {
               variant="h5"
               sx={{ textAlign: "center" }}
             >
-              Sign in to <span style={{ color: PRIMARY }}>workoutGuru</span>
+              Sign in to <span style={{ color: PRIMARY }}>gymTracker</span>
             </Typography>
             <TextField
               margin="normal"

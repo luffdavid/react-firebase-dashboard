@@ -31,17 +31,16 @@ function StartingApp() {
             />
           </div>
           <h3 class="bounce">
-            <span>w</span>
-            <span>o</span>
-            <span>r</span>
-            <span>k</span>
-            <span>o</span>
-            <span>u</span>
+            <span>g</span>
+            <span>y</span>
+            <span>m</span>
             <span>t</span>
-            <span>G</span>
-            <span>u</span>
             <span>r</span>
-            <span>u</span>
+            <span>a</span>
+            <span>c</span>
+            <span>k</span>
+            <span>e</span>
+            <span>r</span>
           </h3>
         </div>
       </div>

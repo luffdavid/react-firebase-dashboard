@@ -125,7 +125,7 @@ const Signup = ({ inputs }) => {
         >
           <Typography component="h1" variant="h5" sx={{ textAlign: "center" }}>
             Create a new account for{" "}
-            <span style={{ color: PRIMARY }}>workoutGuru</span>
+            <span style={{ color: PRIMARY }}>gymTracker</span>
           </Typography>
           {inputs.map((input) => (
             <TextField
