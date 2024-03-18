@@ -29,16 +29,17 @@ export const getWorkouts = async (userId) => {
 };
 
 export const getWorkoutsThisMonth = (workouts) => {
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth();
+  const currentYear = currentDate.getFullYear();
+
   const filteredWorkouts = workouts.filter((workout) => {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const currentYear = currentDate.getFullYear();
     const workoutDate = new Date(workout.date);
+    return (
+      workoutDate.getMonth() === currentMonth &&
+      workoutDate.getFullYear() === currentYear
+    );
   });
+
   return filteredWorkouts;
 };
-// return (
-//   workoutDate.getMonth() === currentMonth &&
-//   workoutDate.getFullYear() === currentYear
-// );
-// });

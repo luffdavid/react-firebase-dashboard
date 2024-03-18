@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
 import { Alert, Snackbar } from "@mui/material";
+import React, { useEffect, useState } from "react";
 
 const Alertt = ({ type, severity }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,7 +19,7 @@ const Alertt = ({ type, severity }) => {
       open={isVisible}
       autoHideDuration={10000}
       onClose={() => setIsVisible(false)}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
     >
       <Alert
         severity={severity}
