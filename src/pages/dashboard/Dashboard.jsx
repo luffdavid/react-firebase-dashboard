@@ -1,6 +1,5 @@
 import "./dashboard.scss";
 
-import { useMediaQuery } from "@mui/material";
 import { useEffect, useState } from "react";
 import Chart from "../../components/chart/Chart";
 import WorkoutCalender from "../../components/dashboard/WorkoutCalender";
