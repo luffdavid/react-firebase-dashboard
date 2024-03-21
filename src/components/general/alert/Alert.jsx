@@ -16,17 +16,17 @@ const Alertt = ({ type, severity }) => {
 
   return (
     <Snackbar
-      sx={{ zIndex: "10", marginTop: 0 }}
+      sx={{ zIndex: "1999", marginTop: 0 }}
       open={isVisible}
       autoHideDuration={10000}
       onClose={() => setIsVisible(false)}
-      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      anchorOrigin={{ vertical: "top", horizontal: "center" }}
     >
       <Alert
         severity={severity}
         onClose={() => setIsVisible(false)}
         variant="filled"
-        sx={{ zIndex: "10" }}
+        sx={{ zIndex: "1999", marginTop: 0 }}
       >
         {type}
       </Alert>
