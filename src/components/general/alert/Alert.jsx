@@ -20,7 +20,7 @@ const Alertt = ({ type, severity }) => {
       open={isVisible}
       autoHideDuration={10000}
       onClose={() => setIsVisible(false)}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
     >
       <Alert
         severity={severity}
