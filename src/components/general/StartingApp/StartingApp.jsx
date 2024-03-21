@@ -1,4 +1,5 @@
 import { FitnessCenterTwoTone } from "@mui/icons-material";
+import { LinearProgress, Stack } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import "./StartingApp.scss";
 
@@ -42,6 +43,9 @@ function StartingApp() {
             <span>e</span>
             <span>r</span>
           </h3>
+          <Stack sx={{ width: "100%", color: "grey.500" }} spacing={2}>
+            <LinearProgress color="primary" />
+          </Stack>
         </div>
       </div>
     </div>

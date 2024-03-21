@@ -20,13 +20,13 @@ const Alertt = ({ type, severity }) => {
       open={isVisible}
       autoHideDuration={10000}
       onClose={() => setIsVisible(false)}
-      anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
     >
       <Alert
         severity={severity}
         onClose={() => setIsVisible(false)}
         variant="filled"
-        sx={{ width: "100%", zIndex: "10" }}
+        sx={{ zIndex: "10" }}
       >
         {type}
       </Alert>

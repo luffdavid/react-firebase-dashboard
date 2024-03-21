@@ -1,23 +1,23 @@
 import {
-  TextField,
-  Button,
-  Typography,
-  Grid,
   Box,
+  Button,
   CircularProgress,
+  Grid,
+  TextField,
+  Typography,
 } from "@mui/material";
-import "../../components/general/Reusable.scss";
-import { useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
-import { addDoc, collection, doc } from "firebase/firestore";
-import { db } from "../../firebase";
-import InputError from "../../components/general/InputError";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import dayjs from "dayjs";
-import { DatePicker } from "@mui/x-date-pickers";
+import { addDoc, collection, doc } from "firebase/firestore";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import InputError from "../../components/general/InputError";
+import "../../components/general/Reusable.scss";
+import { AuthContext } from "../../context/AuthContext";
+import { db } from "../../firebase";
 import Alert from "../general/alert/Alert";
 
 const AddWorkoutForm = () => {
@@ -25,7 +25,7 @@ const AddWorkoutForm = () => {
   const [titleInput, setTitleInput] = useState("");
   const [dateInput, setDateInput] = useState(dayjs());
   const [startTimeInput, setStartTimeInput] = useState(
-    dayjs().subtract(1, "hour"),
+    dayjs().subtract(1, "hour")
   );
   const [endTimeInput, setEndTimeInput] = useState(dayjs());
   const [exercisesAndWeightInput, setExercisesAndWeightInput] = useState("");
@@ -56,7 +56,7 @@ const AddWorkoutForm = () => {
         const userDocRef = doc(db, "users", currentUser.uid);
         const workoutDocRef = await addDoc(
           collection(userDocRef, "workouts"),
-          workoutData,
+          workoutData
         );
         // Set the inputs to INITIAL and show successMsg
         setTitleInput("");
