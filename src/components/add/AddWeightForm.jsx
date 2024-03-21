@@ -18,6 +18,7 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import dayjs from "dayjs";
 import { addDoc, collection, doc } from "firebase/firestore";
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import InputError from "../../components/general/InputError";
 import "../../components/general/Reusable.scss";
 import { AuthContext } from "../../context/AuthContext";
@@ -34,7 +35,7 @@ const AddWeightForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [value, setValue] = useState("less");
-
+  const navigate = useNavigate();
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -67,10 +68,12 @@ const AddWeightForm = () => {
         setError(null);
         setIsLoading(false);
         setSuccess(true);
+        localStorage.setItem("progressView", "weightmeasurements");
         setTimeout(() => {
           setSuccess(false);
-          // navigate("/progress/workouts");
-        }, 3000);
+          navigate("/progress");
+          window.location.reload();
+        }, 1500);
       } catch (error) {
         setError("Error adding weight: " + error.message);
         setIsLoading(false);

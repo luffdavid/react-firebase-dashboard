@@ -69,11 +69,12 @@ const AddWorkoutForm = () => {
         setError(null);
         setIsLoading(false);
         setSuccess(true);
+        localStorage.setItem("progressView", "workouts");
         setTimeout(() => {
           setSuccess(false);
-          // navigate("/progress/workouts");
+          navigate("/progress");
           window.location.reload();
-        }, 3000);
+        }, 1500);
       } catch (error) {
         setError("Error adding workout: " + error.message);
         setIsLoading(false);
